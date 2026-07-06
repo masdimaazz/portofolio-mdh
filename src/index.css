@@ -1,10 +1,93 @@
 @import "tailwindcss";
 
-/* Any global overrides can go here */
+@theme {
+  --font-display: "Syne", sans-serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-mono: "Fira Code", monospace;
+}
+
 @layer base {
+  :root {
+    --bg: 0 0% 99%;
+    --fg: 240 10% 8%;
+    --muted: 240 4% 46%;
+    --card: 0 0% 100%;
+    --border: 240 6% 90%;
+    --accent: 252 100% 65%;
+  }
+
+  .dark {
+    --bg: 240 10% 4%;
+    --fg: 0 0% 98%;
+    --muted: 240 5% 60%;
+    --card: 240 8% 8%;
+    --border: 240 5% 16%;
+    --accent: 252 100% 72%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    background-color: hsl(var(--bg));
+    color: hsl(var(--fg));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.5s ease, color 0.5s ease;
   }
+
+  ::selection {
+    background: hsl(var(--accent));
+    color: white;
+  }
+}
+
+@layer utilities {
+  .text-muted { color: hsl(var(--muted)); }
+  .bg-card { background-color: hsl(var(--card)); }
+  .border-base { border-color: hsl(var(--border)); }
+  .accent { color: hsl(var(--accent)); }
+  .bg-accent { background-color: hsl(var(--accent)); }
+
+  /* Reveal animasi dasar saat scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-shown {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .marquee-track { animation: marquee 28s linear infinite; }
+  .spin-slow { animation: spin 16s linear infinite; }
+  .float { animation: float 6s ease-in-out infinite; }
+  .gradient-text {
+    background: linear-gradient(120deg, hsl(var(--accent)), #ff7eb3 55%, #ffb347);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
