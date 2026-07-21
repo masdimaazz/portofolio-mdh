@@ -20,6 +20,12 @@ const NAME: Record<string, string> = {
   Pr: 'Adobe Premiere Pro', Id: 'Adobe InDesign', Fig: 'Figma', Bl: 'Blender', Cv: 'Canva',
 };
 
+// Nama produk pendek untuk label kartu tools.
+const SHORT: Record<string, string> = {
+  Ps: 'Photoshop', Ai: 'Illustrator', Ae: 'After Effects', Pr: 'Premiere Pro',
+  Id: 'InDesign', Fig: 'Figma', Bl: 'Blender', Cv: 'Canva',
+};
+
 // Logo tertentu perlu padding ekstra agar ukuran optisnya seragam.
 // Figma portrait (tinggi) → dikecilkan supaya tak mendominasi.
 const PAD: Record<string, string> = { Fig: 'p-[15px]' };
@@ -54,30 +60,38 @@ export default function Skills() {
             </h2>
           </SectionHead>
 
-          {/* Deret logo software — tile & padding seragam agar konsisten */}
-          <div className="mt-10 flex flex-wrap gap-3">
+          {/* Grid tools: kartu logo + nama (gaya tech-stack) */}
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {SOFTWARE.map((s) => {
               const logo = LOGO[s.label];
               const name = NAME[s.label] || s.label;
-              return logo ? (
-                <span
+              const short = SHORT[s.label] || s.label;
+              return (
+                <div
                   key={s.label}
                   title={name}
-                  className={`grid h-12 w-12 place-items-center overflow-hidden rounded-lg bg-white ring-1 ring-black/10 transition-transform hover:-translate-y-0.5 ${
-                    PAD[s.label] || 'p-2.5'
-                  }`}
+                  className="flex items-center gap-3 rounded-lg border border-current/12 bg-current/[0.02] p-3 transition-colors hover:border-current/30"
                 >
-                  <img src={logo} alt={name} loading="lazy" className="max-h-full max-w-full object-contain" />
-                </span>
-              ) : (
-                <span
-                  key={s.label}
-                  className="grid h-12 w-12 place-items-center rounded-lg font-head text-sm font-black text-white"
-                  style={{ background: s.color }}
-                  title={s.label}
-                >
-                  {s.label}
-                </span>
+                  {logo ? (
+                    <span
+                      className={`grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-md bg-white ring-1 ring-black/10 ${
+                        PAD[s.label] || 'p-2'
+                      }`}
+                    >
+                      <img src={logo} alt="" loading="lazy" className="max-h-full max-w-full object-contain" />
+                    </span>
+                  ) : (
+                    <span
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-md font-head text-xs font-black text-white"
+                      style={{ background: s.color }}
+                    >
+                      {s.label}
+                    </span>
+                  )}
+                  <span className="min-w-0 truncate font-head text-sm font-bold uppercase tracking-tight">
+                    {short}
+                  </span>
+                </div>
               );
             })}
           </div>

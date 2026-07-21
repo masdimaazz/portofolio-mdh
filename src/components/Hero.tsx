@@ -1,4 +1,5 @@
 import { useContent } from '@/data/ContentContext';
+import RotatingRole from './RotatingRole';
 
 export default function Hero() {
   const { profile } = useContent();
@@ -46,6 +47,10 @@ export default function Hero() {
 
         {/* Konten tengah */}
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 py-24 text-center text-white">
+          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-1.5 text-xs font-medium tracking-wide text-white/80">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_3px_rgba(52,211,153,0.25)]" />
+            Available for work
+          </span>
           <p className="type-eyebrow text-white/70">
             <span className="hl">•</span> Hi, I'm
           </p>
@@ -60,8 +65,9 @@ export default function Hero() {
               </span>
             ))}
           </h1>
-          <p className="mt-6 font-mono text-sm uppercase tracking-widest text-white/70 sm:text-base">
-            {profile.tagline}
+          <p className="mt-6 flex items-center justify-center gap-2 font-mono text-sm uppercase tracking-widest text-white/70 sm:text-base">
+            <span className="text-white/45">I'm a</span>
+            <RotatingRole roles={profile.roles} />
           </p>
 
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
