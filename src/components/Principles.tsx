@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import Reveal from './Reveal';
-import Badge from './Badge';
+import SectionHead from './SectionHead';
 import Panel from './Panel';
 import { useContent } from '@/data/ContentContext';
 
@@ -15,15 +15,13 @@ export default function Principles() {
       <Panel variant="cream" ghost="Approach">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal className="mb-10">
-            <div className="flex items-center justify-between">
-              <Badge label="core principles" />
-              <span className="type-eyebrow opacity-60">[ ** ]</span>
-            </div>
-            <h2 className="type-h1 mt-6">
+            <SectionHead label="core principles">
+              <h2 className="type-h1">
               Principles of
               <br />
               <span className="hl">approach</span>
-            </h2>
+              </h2>
+            </SectionHead>
           </Reveal>
 
           <div className="border-t border-current/15">

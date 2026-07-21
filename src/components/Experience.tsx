@@ -1,5 +1,5 @@
 import Reveal from './Reveal';
-import Badge from './Badge';
+import SectionHead from './SectionHead';
 import Panel from './Panel';import { useContent } from '@/data/ContentContext';
 import { companyLogo } from '@/lib/companyLogos';
 
@@ -10,12 +10,13 @@ export default function Experience() {
     <Panel variant="cream" ghost="Journey">
     <div className="mx-auto max-w-4xl p-6 sm:p-9 md:p-14">
       <Reveal className="mb-14">
-        <Badge num="03" label="career path" />
-        <h2 className="type-h1 mt-6">
+        <SectionHead num="03" label="career path">
+          <h2 className="type-h1">
           The <span className="hl">experience</span>
           <br />
           behind the work
-        </h2>
+          </h2>
+        </SectionHead>
       </Reveal>
 
       <div className="relative">

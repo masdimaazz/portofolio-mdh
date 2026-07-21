@@ -1,5 +1,5 @@
 import Panel from './Panel';
-import Badge from './Badge';
+import SectionHead from './SectionHead';
 import { useContent } from '@/data/ContentContext';
 
 export default function Stats() {
@@ -9,8 +9,8 @@ export default function Stats() {
     <div id="stats" className="py-4 md:py-6">
       <Panel variant="accent">
         <div className="p-6 sm:p-9 md:p-14">
-          <Badge label="my experience" />
-          <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-4">
+          <SectionHead label="my experience" className="mb-8" />
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {STATS.map((s) => (
               <div key={s.label}>
                 <div

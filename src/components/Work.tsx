@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import Reveal from './Reveal';
-import Badge from './Badge';
+import SectionHead from './SectionHead';
 import Panel from './Panel';import ProjectModal from './ProjectModal';
 import { useContent } from '@/data/ContentContext';
 import { companyLogo } from '@/lib/companyLogos';
@@ -19,8 +19,8 @@ export default function Work() {
       <Panel variant="cream" ghost="Selected">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal className="mb-12">
-            <Badge num="01" label="selected work" />
-            <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
+            <SectionHead num="01" label="selected work">
+              <div className="flex flex-wrap items-end justify-between gap-6">
               <h2 className="type-h1">
                 Work, grouped
                 <br />
@@ -32,7 +32,8 @@ export default function Work() {
               >
                 Work with me <ArrowUpRight className="h-4 w-4" />
               </a>
-            </div>
+              </div>
+            </SectionHead>
           </Reveal>
 
           {/* Satu blok per perusahaan */}

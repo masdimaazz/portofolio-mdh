@@ -1,4 +1,4 @@
-import Badge from './Badge';
+import SectionHead from './SectionHead';
 import Panel from './Panel';
 import { useContent } from '@/data/ContentContext';
 import photoshop from '@/assets/logos/photoshop.svg';
@@ -46,12 +46,13 @@ export default function Skills() {
     <div id="skills" className="py-4 md:py-6">
       <Panel variant="cream" ghost="Toolkit">
         <div className="p-6 sm:p-9 md:p-14">
-          <Badge label="skills & software" />
-          <h2 className="type-h1 mt-6">
+          <SectionHead label="skills & software">
+          <h2 className="type-h1">
             The <span className="hl">tools</span> behind
             <br />
             every project
           </h2>
+          </SectionHead>
 
           {/* Deret logo software */}
           <div className="mt-10 flex flex-wrap gap-3">

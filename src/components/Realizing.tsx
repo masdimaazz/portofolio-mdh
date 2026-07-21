@@ -1,5 +1,5 @@
 import Reveal from './Reveal';
-import Badge from './Badge';
+import SectionHead from './SectionHead';
 import Panel from './Panel';import delsRamadhan from '@/assets/work/dels-ramadhan.webp';
 import delsStand from '@/assets/work/dels-stand.webp';
 import firstpage from '@/assets/work/firstpage.webp';
@@ -23,16 +23,13 @@ export default function Realizing() {
       <Panel variant="cream" ghost="Realizing">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal>
-            <div className="flex items-start justify-between gap-6">
-              <Badge label="dimas project" />
-              <div className="text-right">
-                <h2 className="type-h1">
-                  The art of
-                  <br />
-                  <span className="hl">realizing</span>
-                </h2>
-              </div>
-            </div>
+            <SectionHead label="dimas project">
+              <h2 className="type-h1">
+                The art of
+                <br />
+                <span className="hl">realizing</span>
+              </h2>
+            </SectionHead>
           </Reveal>
 
           {/* Kolase */}

@@ -1,5 +1,5 @@
 import Reveal from './Reveal';
-import Badge from './Badge';
+import SectionHead from './SectionHead';
 import Panel from './Panel';import { useContent } from '@/data/ContentContext';
 
 export default function Services() {
@@ -9,12 +9,13 @@ export default function Services() {
       <Panel variant="accent" ghost="Not Just">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal>
-            <Badge label="dimas services" />
-            <h2 className="type-h1 mt-6">
+            <SectionHead label="dimas services">
+            <h2 className="type-h1">
               Services that
               <br />
               drive <span className="text-white">brands</span>
             </h2>
+            </SectionHead>
           </Reveal>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,5 +1,5 @@
 import Reveal from './Reveal';
-import Badge from './Badge';
+import SectionHead from './SectionHead';
 import Panel from './Panel';import { useContent } from '@/data/ContentContext';
 
 const WHAT_I_DO = [
@@ -16,11 +16,12 @@ export default function About() {
       <Panel variant="cream" ghost="Creating">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal>
-            <Badge label="about dimas" />
-            <h2 className="type-h1 mt-6 max-w-4xl">
+            <SectionHead label="about dimas">
+            <h2 className="type-h1 max-w-4xl">
               Creative direction for{' '}
               <span className="hl">bold, memorable</span> brands
             </h2>
+            </SectionHead>
           </Reveal>
 
           <div className="mt-12 grid items-start gap-12 md:grid-cols-2 md:gap-16">
