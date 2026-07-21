@@ -3,6 +3,7 @@ import { ContentProvider } from '@/data/ContentContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
+import ScrollToTop from '@/components/ScrollToTop';
 
 import Hero from '@/components/Hero';
 import Marquee from '@/components/Marquee';
@@ -90,6 +91,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
     </ContentProvider>
   );
