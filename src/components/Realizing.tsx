@@ -1,8 +1,6 @@
 import Reveal from './Reveal';
 import Badge from './Badge';
-import Panel from './Panel';
-import Starburst from './Starburst';
-import delsRamadhan from '@/assets/work/dels-ramadhan.webp';
+import Panel from './Panel';import delsRamadhan from '@/assets/work/dels-ramadhan.webp';
 import delsStand from '@/assets/work/dels-stand.webp';
 import firstpage from '@/assets/work/firstpage.webp';
 import kemensos from '@/assets/work/kemensos.webp';
@@ -66,7 +64,7 @@ export default function Realizing() {
               >
                 <span className="hl">Bold</span> desire
               </h3>
-              <Starburst size={40} className="mb-4" />
+
             </div>
           </Reveal>
         </div>

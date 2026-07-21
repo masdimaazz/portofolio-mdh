@@ -1,8 +1,6 @@
 import Reveal from './Reveal';
 import Badge from './Badge';
-import Panel from './Panel';
-import Starburst from './Starburst';
-import { useContent } from '@/data/ContentContext';
+import Panel from './Panel';import { useContent } from '@/data/ContentContext';
 
 export default function Services() {
   const { services: SERVICES } = useContent();
@@ -37,10 +35,7 @@ export default function Services() {
                       <span className="hl">{s.rest}</span>
                     </h3>
                     <div className="flex flex-col items-end gap-3">
-                      <Starburst
-                        size={22}
-                        className="transition-transform duration-500 group-hover:rotate-180"
-                      />
+
                       <span className="type-eyebrow text-soft">
                         [{String(i + 1).padStart(2, '0')}]
                       </span>

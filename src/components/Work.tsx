@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import Reveal from './Reveal';
 import Badge from './Badge';
-import Panel from './Panel';
-import Starburst from './Starburst';
-import ProjectModal from './ProjectModal';
+import Panel from './Panel';import ProjectModal from './ProjectModal';
 import { useContent } from '@/data/ContentContext';
 import { companyLogo } from '@/lib/companyLogos';
 
@@ -21,10 +19,7 @@ export default function Work() {
       <Panel variant="cream" ghost="Selected">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal className="mb-12">
-            <div className="flex items-center justify-between">
-              <Badge num="01" label="selected work" />
-              <Starburst size={26} />
-            </div>
+            <Badge num="01" label="selected work" />
             <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
               <h2 className="type-h1">
                 Work, grouped

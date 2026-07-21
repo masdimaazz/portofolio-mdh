@@ -17,16 +17,24 @@ export default function Hero() {
           fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover object-center opacity-40 mix-blend-luminosity"
         />
-        {/* Overlay navy + glow biru */}
+        {/* Overlay navy — vignette halus, tanpa glow-blob */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(120% 90% at 50% 0%, rgba(59,130,246,0.45), rgba(10,16,36,0.92) 60%)',
+              'linear-gradient(180deg, rgba(10,16,36,0.72) 0%, rgba(10,16,36,0.88) 100%)',
           }}
         />
-        <div className="pointer-events-none absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-[#3b82f6]/30 blur-[120px]" />
-        <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-[#2563eb]/25 blur-[120px]" />
+        {/* Garis grid tipis untuk tekstur editorial */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)',
+            backgroundSize: '80px 80px',
+          }}
+        />
 
         {/* Watermark raksasa */}
         <span

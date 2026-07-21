@@ -1,8 +1,6 @@
 import Reveal from './Reveal';
 import Badge from './Badge';
-import Panel from './Panel';
-import Starburst from './Starburst';
-import { useContent } from '@/data/ContentContext';
+import Panel from './Panel';import { useContent } from '@/data/ContentContext';
 
 const WHAT_I_DO = [
   'Branding & logo design',
@@ -18,10 +16,7 @@ export default function About() {
       <Panel variant="cream" ghost="Creating">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal>
-            <div className="flex items-center justify-between">
-              <Badge label="about dimas" />
-              <Starburst size={26} />
-            </div>
+            <Badge label="about dimas" />
             <h2 className="type-h1 mt-6 max-w-4xl">
               Creative direction for{' '}
               <span className="hl">bold, memorable</span> brands
@@ -39,7 +34,7 @@ export default function About() {
               <ul className="divide-y divide-current/15 border-y border-current/15">
                 {WHAT_I_DO.map((s) => (
                   <li key={s} className="type-h3 flex items-center gap-3 py-3.5">
-                    <Starburst size={16} />
+
                     {s}
                   </li>
                 ))}

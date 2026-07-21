@@ -1,7 +1,5 @@
 import { ArrowUpRight, Mail } from 'lucide-react';
-import Panel from './Panel';
-import Starburst from './Starburst';
-
+import Panel from './Panel';
 const SOCIALS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/muhammad-dimas-hadiyanto-a53b37331/' },
   { label: 'WhatsApp', href: 'https://wa.me/6288215990350' },
@@ -13,8 +11,8 @@ export default function Contact() {
     <div id="contact" className="py-6 md:py-10">
       <Panel variant="accent">
         <div className="relative px-6 py-20 text-center sm:px-9 md:px-16 md:py-28">
-          <Starburst size={54} className="absolute left-[12%] top-[18%] hidden sm:block" />
-          <Starburst size={44} className="absolute right-[14%] bottom-[20%] hidden sm:block" />
+
+
 
           <p className="type-eyebrow text-soft">[ 05 · let's work together ]</p>
           <h2 className="type-mega mt-6">
