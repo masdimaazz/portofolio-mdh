@@ -59,9 +59,9 @@ export default function Skills() {
                 <span
                   key={s.label}
                   title={name}
-                  className="grid h-12 w-12 place-items-center rounded-lg bg-white p-2.5 ring-1 ring-black/10 transition-transform hover:-translate-y-0.5"
+                  className="grid h-12 w-12 place-items-center overflow-hidden rounded-lg bg-white p-2.5 ring-1 ring-black/10 transition-transform hover:-translate-y-0.5"
                 >
-                  <img src={logo} alt={name} loading="lazy" className="h-full w-full object-contain" />
+                  <img src={logo} alt={name} loading="lazy" className="max-h-full max-w-full object-contain" />
                 </span>
               ) : (
                 <span
@@ -86,8 +86,8 @@ export default function Skills() {
                   className="flex items-center gap-3 border-b border-current/12 py-3.5"
                 >
                   {logo && (
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded bg-white p-1 ring-1 ring-black/10">
-                      <img src={logo} alt="" loading="lazy" className="h-full w-full object-contain" />
+                    <span className="grid h-6 w-6 shrink-0 place-items-center overflow-hidden rounded bg-white p-1 ring-1 ring-black/10">
+                      <img src={logo} alt="" loading="lazy" className="max-h-full max-w-full object-contain" />
                     </span>
                   )}
                   <dt className="font-head text-base font-bold uppercase tracking-tight">{s.name}</dt>
