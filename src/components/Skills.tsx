@@ -27,10 +27,6 @@ const SKILL_LOGO: Record<string, string> = {
   blender, indesign, figma,
 };
 
-// Logo "mark" (transparan) → padding lebih kecil biar seimbang dgn app-icon Adobe.
-const MARK = new Set(['Fig', 'Bl', 'Cv']);
-const markByLogo = new Set([figma, blender, canva]);
-
 // Angka % diterjemahkan jadi level — lebih jujur & editorial ketimbang progress bar.
 function level(pct: number): string {
   if (pct >= 90) return 'Expert';
@@ -47,14 +43,14 @@ export default function Skills() {
       <Panel variant="cream" ghost="Toolkit">
         <div className="px-6 py-16 sm:px-9 sm:py-20 md:px-14 md:py-24">
           <SectionHead label="skills & software">
-          <h2 className="type-h1">
-            The <span className="hl">tools</span> behind
-            <br />
-            every project
-          </h2>
+            <h2 className="type-h1">
+              The <span className="hl">tools</span> behind
+              <br />
+              every project
+            </h2>
           </SectionHead>
 
-          {/* Deret logo software */}
+          {/* Deret logo software — tile & padding seragam agar konsisten */}
           <div className="mt-10 flex flex-wrap gap-3">
             {SOFTWARE.map((s) => {
               const logo = LOGO[s.label];
@@ -63,9 +59,7 @@ export default function Skills() {
                 <span
                   key={s.label}
                   title={name}
-                  className={`grid h-12 w-12 place-items-center rounded-lg bg-white ring-1 ring-black/10 transition-transform hover:-translate-y-0.5 ${
-                    MARK.has(s.label) ? 'p-1.5' : 'p-2.5'
-                  }`}
+                  className="grid h-12 w-12 place-items-center rounded-lg bg-white p-2.5 ring-1 ring-black/10 transition-transform hover:-translate-y-0.5"
                 >
                   <img src={logo} alt={name} loading="lazy" className="h-full w-full object-contain" />
                 </span>
@@ -92,11 +86,7 @@ export default function Skills() {
                   className="flex items-center gap-3 border-b border-current/12 py-3.5"
                 >
                   {logo && (
-                    <span
-                      className={`grid h-6 w-6 shrink-0 place-items-center rounded bg-white ring-1 ring-black/10 ${
-                        markByLogo.has(logo) ? 'p-0.5' : 'p-1'
-                      }`}
-                    >
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded bg-white p-1 ring-1 ring-black/10">
                       <img src={logo} alt="" loading="lazy" className="h-full w-full object-contain" />
                     </span>
                   )}
