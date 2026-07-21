@@ -6,6 +6,7 @@ import Panel from './Panel';
 import Starburst from './Starburst';
 import ProjectModal from './ProjectModal';
 import { useContent } from '@/data/ContentContext';
+import { companyLogo } from '@/lib/companyLogos';
 
 export default function Work() {
   // Proyek & perusahaan dari Supabase (fallback ke default)
@@ -50,8 +51,18 @@ export default function Work() {
                 <Reveal key={co.name}>
                   <div>
                     {/* Header perusahaan */}
-                    <div className="mb-7 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-current/15 pb-4">
-                      <div className="flex items-baseline gap-4">
+                    <div className="mb-7 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-current/15 pb-4">
+                      <div className="flex items-center gap-4">
+                        {companyLogo(co.name) && (
+                          <span className="grid h-12 w-20 shrink-0 place-items-center rounded-lg bg-white p-2 shadow-sm ring-1 ring-black/5">
+                            <img
+                              src={companyLogo(co.name)}
+                              alt={co.name}
+                              loading="lazy"
+                              className="max-h-full max-w-full object-contain"
+                            />
+                          </span>
+                        )}
                         <span className="type-list text-2xl hl md:text-3xl">
                           {String(ci + 1).padStart(2, '0')}
                         </span>

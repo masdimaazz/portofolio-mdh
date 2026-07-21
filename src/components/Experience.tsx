@@ -3,6 +3,7 @@ import Badge from './Badge';
 import Panel from './Panel';
 import Starburst from './Starburst';
 import { useContent } from '@/data/ContentContext';
+import { companyLogo } from '@/lib/companyLogos';
 
 export default function Experience() {
   const { experience: TIMELINE, education } = useContent();
@@ -47,7 +48,19 @@ export default function Experience() {
                   <h3 className="type-h3">{item.role}</h3>
                   <span className="text-xs font-mono text-soft">{item.period}</span>
                 </div>
-                <p className="hl font-semibold text-sm mt-0.5">{item.org}</p>
+                <div className="mt-0.5 flex items-center gap-2">
+                  {companyLogo(item.org) && (
+                    <span className="grid h-6 w-10 shrink-0 place-items-center rounded bg-white p-1 ring-1 ring-black/5">
+                      <img
+                        src={companyLogo(item.org)}
+                        alt=""
+                        loading="lazy"
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </span>
+                  )}
+                  <p className="hl text-sm font-semibold">{item.org}</p>
+                </div>
                 <ul className="mt-3 space-y-1.5">
                   {item.points.map((p) => (
                     <li key={p} className="text-sm text-soft leading-relaxed flex gap-2.5">
