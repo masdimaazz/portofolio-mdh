@@ -8,7 +8,7 @@ export default function Stats() {
   return (
     <div id="stats">
       <Panel variant="accent">
-        <div className="p-6 sm:p-9 md:p-14">
+        <div className="px-6 py-16 sm:px-9 sm:py-20 md:px-14 md:py-24">
           <SectionHead label="my experience" className="mb-8" />
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {STATS.map((s) => (

@@ -20,12 +20,12 @@ export default function Panel({
   return (
     <section
       id={id}
-      className={`relative w-full overflow-hidden border-t border-current/12 ${
+      className={`relative w-full overflow-hidden border-t border-current/20 ${
         variant === 'accent' ? 'panel-accent' : 'panel-cream'
       } ${className}`}
     >
       {ghost && (
-        <span className="ghost absolute left-1/2 top-1/2 -z-0 -translate-x-1/2 -translate-y-1/2 text-[26vw]">
+        <span className="ghost absolute left-1/2 top-1/2 -z-0 -translate-x-1/2 -translate-y-1/2 text-[14vw]">
           {ghost}
         </span>
       )}

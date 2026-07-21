@@ -8,7 +8,7 @@ export default function Experience() {
   return (
     <div id="experience">
     <Panel variant="cream" ghost="Journey">
-    <div className="mx-auto max-w-4xl p-6 sm:p-9 md:p-14">
+    <div className="mx-auto max-w-4xl px-6 py-16 sm:px-9 sm:py-20 md:px-14 md:py-24">
       <Reveal className="mb-14">
         <SectionHead num="03" label="career path">
           <h2 className="type-h1">

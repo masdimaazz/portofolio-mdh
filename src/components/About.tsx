@@ -14,7 +14,7 @@ export default function About() {
   return (
     <div id="about">
       <Panel variant="cream" ghost="Creating">
-        <div className="p-6 sm:p-9 md:p-14">
+        <div className="px-6 py-16 sm:px-9 sm:py-20 md:px-14 md:py-24">
           <Reveal>
             <SectionHead label="about dimas">
             <h2 className="type-h1 max-w-4xl">

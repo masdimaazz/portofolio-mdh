@@ -151,7 +151,7 @@
     text-transform: uppercase;
     line-height: 0.82;
     letter-spacing: -0.02em;
-    color: hsl(var(--ghost) / 0.14);
+    color: hsl(var(--ghost) / 0.08);
     white-space: nowrap;
     user-select: none;
     pointer-events: none;

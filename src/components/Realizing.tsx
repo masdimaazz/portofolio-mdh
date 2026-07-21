@@ -21,7 +21,7 @@ export default function Realizing() {
   return (
     <div id="realizing">
       <Panel variant="cream" ghost="Realizing">
-        <div className="p-6 sm:p-9 md:p-14">
+        <div className="px-6 py-16 sm:px-9 sm:py-20 md:px-14 md:py-24">
           <Reveal>
             <SectionHead label="dimas project">
               <h2 className="type-h1">

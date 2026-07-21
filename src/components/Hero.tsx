@@ -7,7 +7,7 @@ export default function Hero() {
 
   return (
     <section id="top">
-      <div className="relative flex min-h-screen flex-col overflow-hidden bg-[#0a1024]">
+      <div className="relative flex min-h-[80vh] flex-col overflow-hidden bg-[#0a1024]">
         {/* Foto subjek + duotone biru */}
         <img
           src={profile.avatarUrl}
