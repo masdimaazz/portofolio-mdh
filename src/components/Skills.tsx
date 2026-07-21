@@ -3,6 +3,24 @@ import Panel from './Panel';
 import Starburst from './Starburst';
 import { useReveal } from '@/hooks/useReveal';
 import { useContent } from '@/data/ContentContext';
+import photoshop from '@/assets/logos/photoshop.svg';
+import illustrator from '@/assets/logos/illustrator.svg';
+import afterEffects from '@/assets/logos/after-effects.svg';
+import premiere from '@/assets/logos/premiere.svg';
+import indesign from '@/assets/logos/indesign.svg';
+import figma from '@/assets/logos/figma.svg';
+import blender from '@/assets/logos/blender.svg';
+import canva from '@/assets/logos/canva.svg';
+
+// Peta label software (dari DB) → logo brand asli + nama lengkap (alt/title).
+const LOGO: Record<string, string> = {
+  Ps: photoshop, Ai: illustrator, Ae: afterEffects, Pr: premiere,
+  Id: indesign, Fig: figma, Bl: blender, Cv: canva,
+};
+const NAME: Record<string, string> = {
+  Ps: 'Adobe Photoshop', Ai: 'Adobe Illustrator', Ae: 'Adobe After Effects',
+  Pr: 'Adobe Premiere Pro', Id: 'Adobe InDesign', Fig: 'Figma', Bl: 'Blender', Cv: 'Canva',
+};
 
 export default function Skills() {
   const { skills: SKILLS, software: SOFTWARE } = useContent();
@@ -23,18 +41,36 @@ export default function Skills() {
             every project
           </h2>
 
-          {/* Deret ikon software */}
+          {/* Deret logo software */}
           <div className="mt-10 flex flex-wrap gap-3">
-            {SOFTWARE.map((s) => (
-              <span
-                key={s.label}
-                className="grid h-12 w-12 place-items-center rounded-xl font-head text-sm font-black text-white shadow-lg"
-                style={{ background: s.color }}
-                title={s.label}
-              >
-                {s.label}
-              </span>
-            ))}
+            {SOFTWARE.map((s) => {
+              const logo = LOGO[s.label];
+              const name = NAME[s.label] || s.label;
+              return logo ? (
+                <span
+                  key={s.label}
+                  title={name}
+                  className="grid h-12 w-12 place-items-center rounded-xl bg-white p-2 shadow-lg ring-1 ring-black/5 transition-transform hover:-translate-y-1"
+                >
+                  <img
+                    src={logo}
+                    alt={name}
+                    loading="lazy"
+                    className="h-full w-full object-contain"
+                  />
+                </span>
+              ) : (
+                // Fallback: chip warna teks (kalau ada label tanpa logo)
+                <span
+                  key={s.label}
+                  className="grid h-12 w-12 place-items-center rounded-xl font-head text-sm font-black text-white shadow-lg"
+                  style={{ background: s.color }}
+                  title={s.label}
+                >
+                  {s.label}
+                </span>
+              );
+            })}
           </div>
 
           {/* Progress bar skill */}
