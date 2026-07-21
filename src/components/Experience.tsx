@@ -6,7 +6,7 @@ import { companyLogo } from '@/lib/companyLogos';
 export default function Experience() {
   const { experience: TIMELINE, education } = useContent();
   return (
-    <div id="experience" className="py-6 md:py-10">
+    <div id="experience" className="py-4 md:py-6">
     <Panel variant="cream" ghost="Journey">
     <div className="mx-auto max-w-4xl p-6 sm:p-9 md:p-14">
       <Reveal className="mb-14">
@@ -72,7 +72,7 @@ export default function Experience() {
 
       {/* Pendidikan */}
       <Reveal delay={120} className="mt-14">
-        <div className="panel-accent flex flex-col justify-between gap-4 rounded-[1.25rem] p-7 sm:flex-row sm:items-center md:p-8">
+        <div className="panel-accent flex flex-col justify-between gap-4 rounded-lg p-7 sm:flex-row sm:items-center md:p-8">
           <div>
             <p className="type-eyebrow mb-2 text-soft">Education</p>
             <h3 className="type-h3">{education?.degree}</h3>

@@ -11,7 +11,7 @@ export default function Principles() {
   const [open, setOpen] = useState(0);
 
   return (
-    <div id="principles" className="py-6 md:py-10">
+    <div id="principles" className="py-4 md:py-6">
       <Panel variant="cream" ghost="Approach">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal className="mb-10">
@@ -34,7 +34,7 @@ export default function Principles() {
               return (
                 <Reveal key={p.title} delay={i * 60}>
                   <div
-                    className={`rounded-[1.25rem] border-b border-current/15 transition-colors ${
+                    className={`rounded-lg border-b border-current/15 transition-colors ${
                       isOpen ? 'panel-accent my-2 border-transparent' : ''
                     }`}
                   >

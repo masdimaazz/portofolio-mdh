@@ -8,7 +8,7 @@ const SOCIALS = [
 
 export default function Contact() {
   return (
-    <div id="contact" className="py-6 md:py-10">
+    <div id="contact" className="py-4 md:py-6">
       <Panel variant="accent">
         <div className="relative px-6 py-20 text-center sm:px-9 md:px-16 md:py-28">
 

@@ -83,7 +83,7 @@ export default function ProjectModal({
 
       <div
         ref={panelRef}
-        className="panel-cream relative z-10 flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-[1.5rem] shadow-2xl md:flex-row"
+        className="panel-cream relative z-10 flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-lg shadow-2xl md:flex-row"
       >
         {/* Gambar */}
         <div className="relative md:w-3/5">

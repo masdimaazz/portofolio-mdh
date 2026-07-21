@@ -15,7 +15,7 @@ export default function Work() {
     setOpenIndex((i) => (i === null ? i : (i + dir + PROJECTS.length) % PROJECTS.length));
 
   return (
-    <div id="work" className="py-6 md:py-10">
+    <div id="work" className="py-4 md:py-6">
       <Panel variant="cream" ghost="Selected">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal className="mb-12">
@@ -84,7 +84,7 @@ export default function Work() {
                           }`}
                         >
                           <div
-                            className={`relative overflow-hidden rounded-[1.5rem] ${
+                            className={`relative overflow-hidden rounded-lg ${
                               p.featured ? 'aspect-[16/9]' : 'aspect-square'
                             }`}
                           >

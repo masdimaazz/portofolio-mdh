@@ -19,7 +19,7 @@ const SHOTS = [
 
 export default function Realizing() {
   return (
-    <div id="realizing" className="py-6 md:py-10">
+    <div id="realizing" className="py-4 md:py-6">
       <Panel variant="cream" ghost="Realizing">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal>
@@ -41,7 +41,7 @@ export default function Realizing() {
               {SHOTS.map((s, i) => (
                 <div
                   key={i}
-                  className={`overflow-hidden rounded-[1.25rem] ${s.area} ${s.shift}`}
+                  className={`overflow-hidden rounded-lg ${s.area} ${s.shift}`}
                 >
                   <img
                     src={s.img}

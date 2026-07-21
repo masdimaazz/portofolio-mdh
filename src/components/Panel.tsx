@@ -25,7 +25,7 @@ export default function Panel({
         </span>
       )}
       <div
-        className={`relative z-10 mx-auto max-w-[90rem] overflow-hidden rounded-[1.5rem] md:rounded-[2.5rem] ${
+        className={`relative z-10 mx-auto max-w-[92rem] overflow-hidden rounded-lg border border-current/10 ${
           variant === 'accent' ? 'panel-accent' : 'panel-cream'
         } ${className}`}
       >

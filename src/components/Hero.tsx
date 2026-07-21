@@ -7,7 +7,7 @@ export default function Hero() {
 
   return (
     <section id="top" className="px-2 pt-20 sm:px-4 md:pt-24">
-      <div className="relative mx-auto flex min-h-[88vh] max-w-[100rem] flex-col overflow-hidden rounded-[1.5rem] bg-[#0a1024] md:rounded-[2.5rem]">
+      <div className="relative mx-auto flex min-h-[88vh] max-w-[100rem] flex-col overflow-hidden rounded-lg bg-[#0a1024] md:rounded-xl">
         {/* Foto subjek + duotone biru */}
         <img
           src={profile.avatarUrl}

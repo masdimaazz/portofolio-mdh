@@ -12,7 +12,7 @@ const WHAT_I_DO = [
 export default function About() {
   const { profile } = useContent();
   return (
-    <div id="about" className="py-6 md:py-10">
+    <div id="about" className="py-4 md:py-6">
       <Panel variant="cream" ghost="Creating">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal>
