@@ -22,6 +22,13 @@ const NAME: Record<string, string> = {
   Pr: 'Adobe Premiere Pro', Id: 'Adobe InDesign', Fig: 'Figma', Bl: 'Blender', Cv: 'Canva',
 };
 
+// Peta nama skill (dari DB) → logo brand, untuk ikon di samping progress bar.
+const SKILL_LOGO: Record<string, string> = {
+  illustrator: illustrator, photoshop, canva,
+  'after effects': afterEffects, 'premiere pro': premiere, premiere,
+  blender, indesign, figma,
+};
+
 export default function Skills() {
   const { skills: SKILLS, software: SOFTWARE } = useContent();
   // Bar terisi saat section masuk viewport
@@ -75,10 +82,17 @@ export default function Skills() {
 
           {/* Progress bar skill */}
           <div className="mt-12 grid gap-x-10 gap-y-6 sm:grid-cols-2">
-            {SKILLS.map((s, i) => (
+            {SKILLS.map((s, i) => {
+              const logo = SKILL_LOGO[s.name.toLowerCase().trim()];
+              return (
               <div key={s.name}>
                 <div className="mb-2 flex items-center justify-between text-sm font-semibold">
-                  <span>{s.name}</span>
+                  <span className="flex items-center gap-2">
+                    {logo && (
+                      <img src={logo} alt="" className="h-5 w-5 rounded object-contain" loading="lazy" />
+                    )}
+                    {s.name}
+                  </span>
                   <span className="text-soft">{s.pct}%</span>
                 </div>
                 <div className="h-2.5 overflow-hidden rounded-full bg-current/10">
@@ -92,7 +106,8 @@ export default function Skills() {
                   />
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </Panel>
