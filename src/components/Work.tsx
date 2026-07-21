@@ -15,7 +15,7 @@ export default function Work() {
     setOpenIndex((i) => (i === null ? i : (i + dir + PROJECTS.length) % PROJECTS.length));
 
   return (
-    <div id="work" className="py-4 md:py-6">
+    <div id="work">
       <Panel variant="cream" ghost="Selected">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal className="mb-12">

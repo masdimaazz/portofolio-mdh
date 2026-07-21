@@ -19,7 +19,7 @@ const SHOTS = [
 
 export default function Realizing() {
   return (
-    <div id="realizing" className="py-4 md:py-6">
+    <div id="realizing">
       <Panel variant="cream" ghost="Realizing">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal>

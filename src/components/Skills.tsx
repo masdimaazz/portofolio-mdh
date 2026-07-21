@@ -43,7 +43,7 @@ export default function Skills() {
   const { skills: SKILLS, software: SOFTWARE } = useContent();
 
   return (
-    <div id="skills" className="py-4 md:py-6">
+    <div id="skills">
       <Panel variant="cream" ghost="Toolkit">
         <div className="p-6 sm:p-9 md:p-14">
           <SectionHead label="skills & software">

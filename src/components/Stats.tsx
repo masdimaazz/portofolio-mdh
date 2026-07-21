@@ -6,7 +6,7 @@ export default function Stats() {
   const { stats: STATS } = useContent();
 
   return (
-    <div id="stats" className="py-4 md:py-6">
+    <div id="stats">
       <Panel variant="accent">
         <div className="p-6 sm:p-9 md:p-14">
           <SectionHead label="my experience" className="mb-8" />

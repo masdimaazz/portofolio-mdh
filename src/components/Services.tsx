@@ -5,7 +5,7 @@ import Panel from './Panel';import { useContent } from '@/data/ContentContext';
 export default function Services() {
   const { services: SERVICES } = useContent();
   return (
-    <div id="services" className="py-4 md:py-6">
+    <div id="services">
       <Panel variant="accent" ghost="Not Just">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal>

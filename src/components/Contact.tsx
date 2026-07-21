@@ -1,5 +1,5 @@
 import { ArrowUpRight, Mail } from 'lucide-react';
-import Panel from './Panel';
+import Panel from './Panel';
 const SOCIALS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/muhammad-dimas-hadiyanto-a53b37331/' },
   { label: 'WhatsApp', href: 'https://wa.me/6288215990350' },
@@ -8,7 +8,7 @@ const SOCIALS = [
 
 export default function Contact() {
   return (
-    <div id="contact" className="py-4 md:py-6">
+    <div id="contact">
       <Panel variant="accent">
         <div className="relative px-6 py-20 text-center sm:px-9 md:px-16 md:py-28">
 

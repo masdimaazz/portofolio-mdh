@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
-// Panel mengambang bersudut membulat di atas halaman (gaya Silva).
-// `ghost` = teks watermark raksasa yang tampak di balik panel.
+// Pita warna full-bleed (edge-to-edge) dipisah garis rambut — gaya spread majalah.
+// `ghost` = teks watermark raksasa di balik pita. Padding isi diberikan oleh anak.
 interface PanelProps {
   children: ReactNode;
   variant?: 'cream' | 'accent';
@@ -18,19 +18,19 @@ export default function Panel({
   className = '',
 }: PanelProps) {
   return (
-    <section id={id} className="relative mx-auto max-w-[120rem] px-3 sm:px-6">
+    <section
+      id={id}
+      className={`relative w-full overflow-hidden border-t border-current/12 ${
+        variant === 'accent' ? 'panel-accent' : 'panel-cream'
+      } ${className}`}
+    >
       {ghost && (
         <span className="ghost absolute left-1/2 top-1/2 -z-0 -translate-x-1/2 -translate-y-1/2 text-[26vw]">
           {ghost}
         </span>
       )}
-      <div
-        className={`relative z-10 mx-auto max-w-[92rem] overflow-hidden rounded-lg border border-current/10 ${
-          variant === 'accent' ? 'panel-accent' : 'panel-cream'
-        } ${className}`}
-      >
-        {children}
-      </div>
+      {/* Isi dibatasi lebar & dipusatkan; padding horizontal datang dari anak */}
+      <div className="relative z-10 mx-auto max-w-[84rem]">{children}</div>
     </section>
   );
 }

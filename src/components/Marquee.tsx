@@ -5,7 +5,7 @@ export default function Marquee() {
   const { marquee } = useContent();
   const row = [...marquee, ...marquee];
   return (
-    <div className="mx-2 mt-3 overflow-hidden rounded-full py-3.5 select-none sm:mx-4" style={{ background: 'var(--brand-500)' }} aria-hidden="true">
+    <div className="overflow-hidden py-3.5 select-none border-y border-black/10" style={{ background: 'var(--brand-500)' }} aria-hidden="true">
       <div className="flex w-max marquee-track">
         {row.map((item, i) => (
           <div key={i} className="flex items-center gap-6 px-6">

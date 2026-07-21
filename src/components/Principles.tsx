@@ -11,7 +11,7 @@ export default function Principles() {
   const [open, setOpen] = useState(0);
 
   return (
-    <div id="principles" className="py-4 md:py-6">
+    <div id="principles">
       <Panel variant="cream" ghost="Approach">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal className="mb-10">

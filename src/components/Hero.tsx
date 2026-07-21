@@ -6,8 +6,8 @@ export default function Hero() {
   const mid = Math.floor(words.length / 2); // kata tengah di-highlight
 
   return (
-    <section id="top" className="px-2 pt-20 sm:px-4 md:pt-24">
-      <div className="relative mx-auto flex min-h-[88vh] max-w-[100rem] flex-col overflow-hidden rounded-lg bg-[#0a1024] md:rounded-xl">
+    <section id="top">
+      <div className="relative flex min-h-screen flex-col overflow-hidden bg-[#0a1024]">
         {/* Foto subjek + duotone biru */}
         <img
           src={profile.avatarUrl}

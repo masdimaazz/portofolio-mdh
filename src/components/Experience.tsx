@@ -6,7 +6,7 @@ import { companyLogo } from '@/lib/companyLogos';
 export default function Experience() {
   const { experience: TIMELINE, education } = useContent();
   return (
-    <div id="experience" className="py-4 md:py-6">
+    <div id="experience">
     <Panel variant="cream" ghost="Journey">
     <div className="mx-auto max-w-4xl p-6 sm:p-9 md:p-14">
       <Reveal className="mb-14">
