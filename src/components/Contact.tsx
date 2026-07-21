@@ -56,12 +56,12 @@ export default function Contact() {
                 key={label}
                 href={href}
                 {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
-                className="group flex items-center gap-3 rounded-lg border border-current/25 px-4 py-3.5 text-left transition-colors hover:bg-white hover:text-black"
+                className="group flex items-center gap-3 rounded-lg border border-white/20 bg-white/5 px-4 py-3.5 text-left text-white transition-colors hover:bg-white hover:text-black"
               >
                 <Icon className="h-5 w-5 shrink-0" />
                 <span className="min-w-0">
                   <span className="block text-sm font-semibold">{label}</span>
-                  <span className="block truncate text-xs text-soft group-hover:text-black/60">
+                  <span className="block truncate text-xs text-white/70 group-hover:text-black/60">
                     {handle}
                   </span>
                 </span>
