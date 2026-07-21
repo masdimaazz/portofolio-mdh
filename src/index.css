@@ -1,28 +1,58 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Syne", sans-serif;
-  --font-sans: "Plus Jakarta Sans", sans-serif;
-  --font-mono: "Fira Code", monospace;
+  /* Anton = display raksasa uppercase, Archivo = judul section tebal */
+  --font-display: "Anton", sans-serif;
+  --font-head: "Archivo", sans-serif;
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  /* Biru elektrik brand (gaya Denis) — nama var tetap agar markup lama ikut */
+  --red-500: #3b82f6;
+  --red-700: #1d4ed8;
+  --red-900: #1e3a8a;
 }
 
 @layer base {
+  /* Terang: steel biru muda, kartu putih, teks navy */
   :root {
-    --bg: 0 0% 99%;
-    --fg: 240 10% 8%;
-    --muted: 240 4% 46%;
+    --page: 214 32% 90%;     /* steel muda */
+    --bg: 214 32% 90%;
+    --fg: 222 47% 12%;       /* navy gelap */
+    --muted: 215 16% 38%;
     --card: 0 0% 100%;
-    --border: 240 6% 90%;
-    --accent: 252 100% 65%;
+    --border: 214 22% 82%;
+    --accent: 221 83% 53%;   /* biru elektrik */
+    --ghost: 221 45% 32%;
+
+    /* Panel: "cream" = kartu terang, "red" = panel biru aksen */
+    --cream: 0 0% 100%;
+    --cream-fg: 222 47% 12%;
+    --red: 221 83% 53%;
+    --red-fg: 0 0% 100%;
+
+    --ink: 221 83% 53%;
+    --ink-fg: 0 0% 100%;
   }
 
+  /* Gelap (default, paling setia ref Denis): navy-black + biru elektrik */
   .dark {
-    --bg: 240 10% 4%;
-    --fg: 0 0% 98%;
-    --muted: 240 5% 60%;
-    --card: 240 8% 8%;
-    --border: 240 5% 16%;
-    --accent: 252 100% 72%;
+    --page: 222 47% 5%;      /* navy-black */
+    --bg: 222 47% 5%;
+    --fg: 210 40% 96%;       /* nyaris putih */
+    --muted: 215 20% 62%;
+    --card: 222 38% 13%;     /* kartu navy */
+    --border: 217 28% 22%;
+    --accent: 217 91% 62%;   /* biru terang */
+    --ghost: 217 45% 60%;
+
+    --cream: 222 38% 13%;    /* "kartu terang" jadi navy gelap */
+    --cream-fg: 210 40% 96%;
+    --red: 221 83% 48%;      /* panel biru aksen */
+    --red-fg: 210 40% 98%;
+
+    --ink: 217 91% 58%;
+    --ink-fg: 0 0% 100%;
   }
 
   * {
@@ -33,11 +63,47 @@
     scroll-behavior: smooth;
   }
 
+  /* Target anchor mendarat di bawah navbar fixed, tidak ketutup */
+  #top, #work, #realizing, #about, #experience,
+  #services, #principles, #contact {
+    scroll-margin-top: 6rem;
+  }
+
+  /* Cincin fokus jelas untuk navigasi keyboard */
+  :focus-visible {
+    outline: 3px solid var(--red-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Kunci scroll saat modal terbuka */
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  /* Hormati preferensi kurangi gerak */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
   body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background-color: hsl(var(--bg));
+    background-color: hsl(var(--page));
     color: hsl(var(--fg));
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -45,7 +111,7 @@
   }
 
   ::selection {
-    background: hsl(var(--accent));
+    background: var(--red-500);
     color: white;
   }
 }
@@ -56,6 +122,120 @@
   .border-base { border-color: hsl(var(--border)); }
   .accent { color: hsl(var(--accent)); }
   .bg-accent { background-color: hsl(var(--accent)); }
+
+  /* Tinta = tombol utama */
+  .bg-ink { background-color: hsl(var(--ink)); }
+  .text-ink { color: hsl(var(--ink)); }
+  .text-ink-fg { color: hsl(var(--ink-fg)); }
+
+  /* Panel mengambang gaya Silva */
+  .panel-cream {
+    background-color: hsl(var(--cream));
+    color: hsl(var(--cream-fg));
+  }
+  .panel-red {
+    background-color: hsl(var(--red));
+    color: hsl(var(--red-fg));
+  }
+  /* muted lokal di dalam panel krem/merah — dinaikkan agar lolos kontras */
+  .panel-cream .text-soft { color: hsl(var(--cream-fg) / 0.74); }
+  .panel-red .text-soft { color: hsl(var(--red-fg) / 0.82); }
+
+  /* Kata bertinta merah untuk judul dua-warna */
+  .hl { color: var(--red-500); }
+
+  /* Teks watermark raksasa di balik panel */
+  .ghost {
+    font-family: var(--font-head);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.82;
+    letter-spacing: -0.02em;
+    color: hsl(var(--ghost) / 0.14);
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* Keluarga font */
+  .font-display { font-family: var(--font-display); }
+  .font-head { font-family: var(--font-head); }
+  .tracking-mega { letter-spacing: -0.02em; }
+
+  /* ---- Sistem tipografi terpusat ---- */
+  /* Dipakai lintas section biar skala & bobotnya konsisten. */
+
+  /* Display raksasa: hero + penutup Contact */
+  .type-mega {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(3.25rem, 11vw, 10rem);
+    line-height: 0.82;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+
+  /* Judul section utama (Work, About, Experience, Services) */
+  .type-h1 {
+    font-family: var(--font-head);
+    text-transform: uppercase;
+    font-size: clamp(2.25rem, 6vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    font-weight: 900;
+  }
+
+  /* Sub-judul / pernyataan sekunder */
+  .type-h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+  }
+
+  /* Judul kartu / baris (proyek, role, item) */
+  .type-h3 {
+    font-family: var(--font-head);
+    text-transform: uppercase;
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+  }
+
+  /* Baris daftar besar (list Services bernomor) */
+  .type-list {
+    font-family: var(--font-head);
+    text-transform: uppercase;
+    font-size: clamp(1.75rem, 4.5vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-weight: 900;
+  }
+
+  /* Eyebrow / label mono kecil */
+  .type-eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    line-height: 1.4;
+  }
+
+  /* Paragraf pengantar besar */
+  .type-lead {
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.3vw, 1.125rem);
+    line-height: 1.65;
+  }
+
+  /* Body standar */
+  .type-body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
 
   /* Reveal animasi dasar saat scroll */
   .reveal {
@@ -69,13 +249,16 @@
     transform: translateY(0);
   }
 
-  .marquee-track { animation: marquee 28s linear infinite; }
-  .spin-slow { animation: spin 16s linear infinite; }
+  .marquee-track { animation: marquee 30s linear infinite; }
+  .marquee-track-rev { animation: marquee-rev 34s linear infinite; }
+  .spin-slow { animation: spin 14s linear infinite; }
+  .spin-slower { animation: spin 22s linear infinite; }
   .float { animation: float 6s ease-in-out infinite; }
-  .gradient-text {
-    background: linear-gradient(120deg, hsl(var(--accent)), #ff7eb3 55%, #ffb347);
-    -webkit-background-clip: text;
-    background-clip: text;
+  .wiggle { animation: wiggle 5s ease-in-out infinite; }
+
+  /* Garis outline text buat aksen editorial */
+  .text-outline {
+    -webkit-text-stroke: 1.5px hsl(var(--fg));
     color: transparent;
   }
 }
@@ -84,10 +267,18 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+@keyframes marquee-rev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-16px); }
 }
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(8deg); }
 }

@@ -1,5 +1,10 @@
+import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import Reveal from './Reveal';
+import Badge from './Badge';
+import Panel from './Panel';
+import Starburst from './Starburst';
+import ProjectModal from './ProjectModal';
 import delsRamadhan from '@/assets/work/dels-ramadhan.jpg';
 import delsStand from '@/assets/work/dels-stand.png';
 import delsIdulAdha from '@/assets/work/dels-iduladha.jpg';
@@ -7,10 +12,12 @@ import delsTentCard from '@/assets/work/dels-tentcard.jpg';
 import firstpage from '@/assets/work/firstpage.jpg';
 import kemensos from '@/assets/work/kemensos.jpg';
 
+// Diurutkan mengelompok per perusahaan (Delisari → Firstpage → Kemensos)
 const PROJECTS = [
   {
     title: "Del's Ramadhan Campaign",
-    category: 'Delisari Nusantara · Social Media Key Visual',
+    company: 'Delisari Nusantara',
+    category: 'Social Media Key Visual',
     year: '2025',
     img: delsRamadhan,
     tags: ['Key Visual', 'Packaging', 'Campaign'],
@@ -18,106 +25,179 @@ const PROJECTS = [
   },
   {
     title: "Del's Nocciola Display Stand",
-    category: 'Delisari Nusantara · 3D POSM Design',
+    company: 'Delisari Nusantara',
+    category: '3D POSM Design',
     year: '2025',
     img: delsStand,
     tags: ['3D', 'Blender', 'Retail POSM'],
   },
   {
-    title: 'Firstpage.id Content Series',
-    category: 'Firstpage.id · LinkedIn & Instagram',
-    year: '2025',
-    img: firstpage,
-    tags: ['Editorial', 'Social Feeds', 'Branding'],
-  },
-  {
-    title: 'Hari Anak Nasional 2023',
-    category: 'Kementerian Sosial RI · Campaign',
-    year: '2023',
-    img: kemensos,
-    tags: ['Government', 'Feed Design', 'Layout'],
-  },
-  {
     title: "Del's Recipe Tent Card",
-    category: 'Delisari Nusantara · Print Collateral',
+    company: 'Delisari Nusantara',
+    category: 'Print Collateral',
     year: '2025',
     img: delsTentCard,
     tags: ['Print', 'Layout', 'F&B'],
   },
   {
     title: "Del's Idul Adha Greeting",
-    category: 'Delisari Nusantara · Social Media',
+    company: 'Delisari Nusantara',
+    category: 'Social Media Greeting',
     year: '2025',
     img: delsIdulAdha,
     tags: ['Greeting', 'Brand', 'Social'],
   },
+  {
+    title: 'Firstpage.id Content Series',
+    company: 'Firstpage.id',
+    category: 'LinkedIn & Instagram Feeds',
+    year: '2025',
+    img: firstpage,
+    tags: ['Editorial', 'Social Feeds', 'Branding'],
+  },
+  {
+    title: 'Hari Anak Nasional 2023',
+    company: 'Kementerian Sosial RI',
+    category: 'Government Campaign',
+    year: '2023',
+    img: kemensos,
+    tags: ['Government', 'Feed Design', 'Layout'],
+  },
+];
+
+// Metadata tiap perusahaan (urutan = urutan tampil)
+const COMPANIES = [
+  { name: 'Delisari Nusantara', role: 'Creative Marketing · F&B Brand', period: '2025' },
+  { name: 'Firstpage.id', role: 'Graphic Design · Content Series', period: '2025' },
+  { name: 'Kementerian Sosial RI', role: 'Graphic Design · Government', period: '2023' },
 ];
 
 export default function Work() {
-  return (
-    <section id="work" className="py-24 md:py-32 mx-auto max-w-6xl px-5 md:px-6">
-      <Reveal className="flex items-end justify-between gap-6 mb-14">
-        <div>
-          <p className="font-mono text-xs uppercase tracking-widest accent mb-3">Selected work</p>
-          <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight">
-            Featured projects
-          </h2>
-        </div>
-        <a
-          href="#contact"
-          className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-muted hover:text-[hsl(var(--fg))] transition-colors whitespace-nowrap"
-        >
-          Work with me <ArrowUpRight className="w-4 h-4" />
-        </a>
-      </Reveal>
+  // Indeks proyek (global) yang dibuka di modal
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const move = (dir: number) =>
+    setOpenIndex((i) => (i === null ? i : (i + dir + PROJECTS.length) % PROJECTS.length));
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
-        {PROJECTS.map((p, i) => (
-          <Reveal
-            key={p.title}
-            delay={(i % 3) * 100}
-            className={p.featured ? 'sm:col-span-2' : ''}
-          >
-            <a
-              href="#"
-              className="group block rounded-3xl overflow-hidden border border-base bg-card hover:shadow-2xl hover:shadow-black/10 transition-all duration-500 h-full"
-            >
-              <div
-                className={`relative overflow-hidden ${
-                  p.featured ? 'aspect-[16/9]' : 'aspect-square'
-                }`}
+  return (
+    <div id="work" className="py-6 md:py-10">
+      <Panel variant="cream" ghost="Selected">
+        <div className="p-6 sm:p-9 md:p-14">
+          <Reveal className="mb-12">
+            <div className="flex items-center justify-between">
+              <Badge num="01" label="selected work" />
+              <Starburst size={26} />
+            </div>
+            <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
+              <h2 className="type-h1">
+                Work, grouped
+                <br />
+                by <span className="hl">company</span>
+              </h2>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-1 text-sm font-semibold text-soft transition-opacity hover:opacity-70"
               >
-                <img
-                  src={p.img}
-                  alt={p.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white text-black flex items-center justify-center translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                  <ArrowUpRight className="w-5 h-5" />
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="flex items-center justify-between gap-4">
-                  <h3 className="font-display font-bold text-lg md:text-xl">{p.title}</h3>
-                  <span className="text-xs font-mono text-muted shrink-0">{p.year}</span>
-                </div>
-                <p className="text-sm text-muted mt-1">{p.category}</p>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {p.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs font-medium px-3 py-1 rounded-full border border-base text-muted"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </a>
+                Work with me <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
           </Reveal>
-        ))}
-      </div>
-    </section>
+
+          {/* Satu blok per perusahaan */}
+          <div className="space-y-16">
+            {COMPANIES.map((co, ci) => {
+              // Ambil proyek perusahaan ini beserta indeks globalnya (untuk modal)
+              const items = PROJECTS.map((p, gi) => ({ p, gi })).filter(
+                (x) => x.p.company === co.name
+              );
+              return (
+                <Reveal key={co.name}>
+                  <div>
+                    {/* Header perusahaan */}
+                    <div className="mb-7 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-current/15 pb-4">
+                      <div className="flex items-baseline gap-4">
+                        <span className="type-list text-2xl hl md:text-3xl">
+                          {String(ci + 1).padStart(2, '0')}
+                        </span>
+                        <div>
+                          <h3 className="type-h3 text-xl md:text-2xl">{co.name}</h3>
+                          <p className="mt-1 text-sm text-soft">{co.role}</p>
+                        </div>
+                      </div>
+                      <span className="font-mono text-xs text-soft">
+                        {co.period} · {items.length} project{items.length > 1 ? 's' : ''}
+                      </span>
+                    </div>
+
+                    {/* Grid proyek perusahaan */}
+                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:gap-7">
+                      {items.map(({ p, gi }) => (
+                        <button
+                          key={p.title}
+                          type="button"
+                          onClick={() => setOpenIndex(gi)}
+                          aria-label={`View project: ${p.title}`}
+                          className={`group block h-full w-full text-left ${
+                            p.featured ? 'sm:col-span-2' : ''
+                          }`}
+                        >
+                          <div
+                            className={`relative overflow-hidden rounded-[1.5rem] ${
+                              p.featured ? 'aspect-[16/9]' : 'aspect-square'
+                            }`}
+                          >
+                            <img
+                              src={p.img}
+                              alt={p.title}
+                              loading="lazy"
+                              decoding="async"
+                              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                            <div className="absolute right-4 top-4 flex h-11 w-11 translate-y-2 items-center justify-center rounded-full bg-white text-black opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                              <ArrowUpRight className="h-5 w-5" />
+                            </div>
+                            <span className="absolute left-4 top-4 font-mono text-xs text-white/90">
+                              ({String(gi + 1).padStart(2, '0')})
+                            </span>
+                          </div>
+                          <div className="flex items-start justify-between gap-4 px-1 pt-4">
+                            <div>
+                              <h4 className="type-h3">{p.title}</h4>
+                              <p className="mt-1 text-sm text-soft">{p.category}</p>
+                              <div className="mt-3 flex flex-wrap gap-2">
+                                {p.tags.map((t) => (
+                                  <span
+                                    key={t}
+                                    className="rounded-full border border-current/20 px-3 py-1 text-xs font-medium text-soft"
+                                  >
+                                    {t}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                            <span className="shrink-0 font-mono text-xs text-soft">{p.year}</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </Panel>
+
+      {openIndex !== null && (
+        <ProjectModal
+          project={PROJECTS[openIndex]}
+          index={openIndex}
+          total={PROJECTS.length}
+          onClose={() => setOpenIndex(null)}
+          onPrev={() => move(-1)}
+          onNext={() => move(1)}
+        />
+      )}
+    </div>
   );
 }

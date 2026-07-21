@@ -1,52 +1,85 @@
-import { Palette, Code2, Box, Sparkles } from 'lucide-react';
 import Reveal from './Reveal';
+import Badge from './Badge';
+import Panel from './Panel';
+import Starburst from './Starburst';
 
 const SERVICES = [
   {
-    icon: Palette,
-    title: 'UI/UX Design',
-    desc: 'End-to-end product design from research and wireframes to polished, accessible interfaces.',
+    lead: 'Brand',
+    rest: 'Identity',
+    desc: 'Distinctive logos, systems and guidelines that make brands instantly recognisable across every touchpoint.',
   },
   {
-    icon: Code2,
-    title: 'Development',
-    desc: 'Pixel-perfect front-ends in React & TypeScript with smooth, performant interactions.',
+    lead: 'Social &',
+    rest: 'Campaigns',
+    desc: 'Scroll-stopping key visuals, feeds and ad creatives tuned to each platform and audience.',
   },
   {
-    icon: Box,
-    title: '3D & Motion',
-    desc: 'Eye-catching 3D visuals and micro-animations that bring interfaces to life.',
+    lead: 'Digital',
+    rest: 'Experience',
+    desc: 'Research-driven, accessible UI/UX and web design — from wireframes to polished front-ends.',
   },
   {
-    icon: Sparkles,
-    title: 'Brand Identity',
-    desc: 'Distinctive logos, systems and guidelines that make brands instantly recognisable.',
+    lead: '3D &',
+    rest: 'Motion',
+    desc: 'Eye-catching 3D POSM, packaging renders and micro-animations that add life to a brand.',
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 md:py-32 mx-auto max-w-6xl px-5 md:px-6">
-      <Reveal className="max-w-2xl mb-14">
-        <p className="font-mono text-xs uppercase tracking-widest accent mb-3">Services</p>
-        <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight">
-          How I can help you
-        </h2>
-      </Reveal>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {SERVICES.map((s, i) => (
-          <Reveal key={s.title} delay={i * 90}>
-            <div className="group h-full p-7 rounded-3xl border border-base bg-card hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/5 transition-all duration-400">
-              <div className="w-12 h-12 rounded-2xl bg-accent/10 accent flex items-center justify-center mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
-                <s.icon className="w-6 h-6" />
-              </div>
-              <h3 className="font-display font-bold text-xl mb-2">{s.title}</h3>
-              <p className="text-sm text-muted leading-relaxed">{s.desc}</p>
+    <div id="services" className="py-6 md:py-10">
+      <Panel variant="red" ghost="Not Just">
+        <div className="p-6 sm:p-9 md:p-14">
+          <Reveal>
+            <div className="flex items-center justify-between">
+              <Badge label="dimas services" />
+              <span className="type-eyebrow opacity-60">[ ** ]</span>
             </div>
+            <h2 className="type-h1 mt-6">
+              Services that
+              <br />
+              drive <span className="text-white">brands</span>
+            </h2>
           </Reveal>
-        ))}
-      </div>
-    </section>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map((s, i) => (
+              <Reveal
+                key={s.lead + s.rest}
+                delay={i * 80}
+                className={i % 2 === 1 ? 'lg:mt-14' : ''}
+              >
+                <div className="group panel-cream flex h-full flex-col rounded-[1.25rem] p-7 transition-transform duration-300 hover:-translate-y-2">
+                  <div className="flex items-start justify-between">
+                    <h3 className="type-h3 text-xl leading-tight md:text-2xl">
+                      {s.lead}
+                      <br />
+                      <span className="hl">{s.rest}</span>
+                    </h3>
+                    <div className="flex flex-col items-end gap-3">
+                      <Starburst
+                        size={22}
+                        className="transition-transform duration-500 group-hover:rotate-180"
+                      />
+                      <span className="type-eyebrow text-soft">
+                        [{String(i + 1).padStart(2, '0')}]
+                      </span>
+                    </div>
+                  </div>
+                  <p className="mt-8 text-sm leading-relaxed text-soft">{s.desc}</p>
+                  <a
+                    href="#contact"
+                    className="type-eyebrow mt-6 inline-block hl transition-opacity hover:opacity-70"
+                  >
+                    [ discover ]
+                  </a>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </Panel>
+    </div>
   );
 }

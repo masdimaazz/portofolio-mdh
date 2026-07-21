@@ -1,24 +1,24 @@
 const ITEMS = [
-  'UI / UX Design',
   'Branding',
-  'Web Development',
+  'Social Campaigns',
+  'UI / UX Design',
   '3D & Motion',
-  'Design Systems',
-  'Prototyping',
+  'Packaging',
+  'Editorial Layout',
 ];
 
-// Pita berjalan sebagai transisi antar section
+// Pita merah berjalan dengan pemisah bintang — transisi antar section
 export default function Marquee() {
   const row = [...ITEMS, ...ITEMS];
   return (
-    <div className="py-8 border-y border-base overflow-hidden select-none">
+    <div className="mx-2 mt-3 overflow-hidden rounded-full py-3.5 select-none sm:mx-4" style={{ background: 'var(--red-500)' }} aria-hidden="true">
       <div className="flex w-max marquee-track">
         {row.map((item, i) => (
           <div key={i} className="flex items-center gap-6 px-6">
-            <span className="font-display font-bold text-2xl md:text-4xl text-muted">
+            <span className="font-head text-lg font-bold uppercase tracking-wide text-white md:text-2xl">
               {item}
             </span>
-            <span className="accent text-2xl md:text-4xl">✦</span>
+            <span className="text-lg text-white md:text-2xl">✳</span>
           </div>
         ))}
       </div>

@@ -1,4 +1,7 @@
 import Reveal from './Reveal';
+import Badge from './Badge';
+import Panel from './Panel';
+import Starburst from './Starburst';
 
 // Timeline pengalaman — data asli dari CV
 const TIMELINE = [
@@ -50,17 +53,24 @@ const TIMELINE = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 md:py-32 mx-auto max-w-4xl px-5 md:px-6">
+    <div id="experience" className="py-6 md:py-10">
+    <Panel variant="cream" ghost="Journey">
+    <div className="mx-auto max-w-4xl p-6 sm:p-9 md:p-14">
       <Reveal className="mb-14">
-        <p className="font-mono text-xs uppercase tracking-widest accent mb-3">Career path</p>
-        <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight">
-          Experience
+        <div className="flex items-center justify-between">
+          <Badge num="03" label="career path" />
+          <Starburst size={26} />
+        </div>
+        <h2 className="type-h1 mt-6">
+          The <span className="hl">experience</span>
+          <br />
+          behind the work
         </h2>
       </Reveal>
 
       <div className="relative">
         {/* Garis vertikal timeline */}
-        <div className="absolute left-[7px] md:left-[9px] top-2 bottom-2 w-px bg-[hsl(var(--border))]" />
+        <div className="absolute left-[7px] md:left-[9px] top-2 bottom-2 w-px bg-current/25" />
 
         <div className="space-y-10">
           {TIMELINE.map((item, i) => (
@@ -71,7 +81,7 @@ export default function Experience() {
                   className={`absolute left-0 top-1.5 w-3.5 h-3.5 md:w-[18px] md:h-[18px] rounded-full border-2 ${
                     item.current
                       ? 'bg-accent border-transparent'
-                      : 'bg-card border-[hsl(var(--border))]'
+                      : 'border-current/50 bg-transparent'
                   }`}
                 >
                   {item.current && (
@@ -80,14 +90,14 @@ export default function Experience() {
                 </span>
 
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 className="font-display font-bold text-xl">{item.role}</h3>
-                  <span className="text-xs font-mono text-muted">{item.period}</span>
+                  <h3 className="type-h3">{item.role}</h3>
+                  <span className="text-xs font-mono text-soft">{item.period}</span>
                 </div>
-                <p className="accent font-semibold text-sm mt-0.5">{item.org}</p>
+                <p className="hl font-semibold text-sm mt-0.5">{item.org}</p>
                 <ul className="mt-3 space-y-1.5">
                   {item.points.map((p) => (
-                    <li key={p} className="text-sm text-muted leading-relaxed flex gap-2.5">
-                      <span className="mt-2 w-1 h-1 rounded-full bg-[hsl(var(--muted))] shrink-0" />
+                    <li key={p} className="text-sm text-soft leading-relaxed flex gap-2.5">
+                      <span className="mt-2 w-1 h-1 rounded-full bg-current shrink-0" />
                       {p}
                     </li>
                   ))}
@@ -100,22 +110,24 @@ export default function Experience() {
 
       {/* Pendidikan */}
       <Reveal delay={120} className="mt-14">
-        <div className="rounded-3xl border border-base bg-card p-7 md:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="panel-red flex flex-col justify-between gap-4 rounded-[1.25rem] p-7 sm:flex-row sm:items-center md:p-8">
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-muted mb-2">Education</p>
-            <h3 className="font-display font-bold text-lg">
+            <p className="type-eyebrow mb-2 text-soft">Education</p>
+            <h3 className="type-h3">
               Applied Bachelor — Multimedia Engineering Technology
             </h3>
-            <p className="text-sm text-muted mt-1">
+            <p className="text-sm text-soft mt-1">
               Politeknik Negeri Media Kreatif Jakarta
             </p>
           </div>
           <div className="text-left sm:text-right shrink-0">
-            <p className="font-display font-extrabold text-2xl">3.52<span className="text-muted text-base">/4.0</span></p>
-            <p className="text-xs font-mono text-muted mt-1">Aug 2020 – Nov 2024</p>
+            <p className="font-head text-2xl font-black">3.52<span className="text-soft text-base">/4.0</span></p>
+            <p className="text-xs font-mono text-soft mt-1">Aug 2020 – Nov 2024</p>
           </div>
         </div>
       </Reveal>
-    </section>
+    </div>
+    </Panel>
+    </div>
   );
 }

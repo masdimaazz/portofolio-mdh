@@ -1,66 +1,60 @@
 import Reveal from './Reveal';
+import Badge from './Badge';
+import Panel from './Panel';
+import Starburst from './Starburst';
 
-const STACK = [
-  'Illustrator', 'Photoshop', 'After Effects', 'Figma',
-  'Blender', 'InDesign', 'Canva', 'Premiere Pro',
+const WHAT_I_DO = [
+  'Branding & logo design',
+  'UI/UX & responsive design',
+  'Social media & campaign visuals',
+  '3D product & POSM design',
 ];
 
 export default function About() {
   return (
-    <section id="about" className="py-24 md:py-32 mx-auto max-w-6xl px-5 md:px-6">
-      <div className="grid md:grid-cols-2 gap-14 md:gap-20 items-start">
-        <Reveal>
-          <p className="font-mono text-xs uppercase tracking-widest accent mb-3">About me</p>
-          <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight leading-[1.05]">
-            Design that solves problems, not just decorates.
-          </h2>
-          <p className="mt-7 text-muted leading-relaxed">
-            I'm a graphic designer and Multimedia Engineering graduate from
-            Politeknik Negeri Media Kreatif Jakarta. My background spans brand
-            visuals, packaging, social campaigns, and UI/UX — always grounded in
-            user research and current design trends.
-          </p>
-          <p className="mt-4 text-muted leading-relaxed">
-            My final project was an Augmented Reality mobile app introducing
-            traditional West Javanese musical instruments — where I combined
-            education, technology, and design into one experience.
-          </p>
-        </Reveal>
+    <div id="about" className="py-6 md:py-10">
+      <Panel variant="cream" ghost="Creating">
+        <div className="p-6 sm:p-9 md:p-14">
+          <Reveal>
+            <div className="flex items-center justify-between">
+              <Badge label="about dimas" />
+              <Starburst size={26} />
+            </div>
+            <h2 className="type-h1 mt-6 max-w-4xl">
+              Creative direction for{' '}
+              <span className="hl">bold, memorable</span> brands
+            </h2>
+          </Reveal>
 
-        <Reveal delay={120}>
-          <div className="space-y-8">
-            <div>
-              <h3 className="font-display font-bold text-lg mb-4">What I do</h3>
-              <ul className="space-y-3">
-                {[
-                  'Branding & logo design',
-                  'UI/UX & responsive design',
-                  'Social media & campaign visuals',
-                  '3D product & POSM design',
-                ].map((s) => (
-                  <li key={s} className="flex items-center gap-3 text-sm md:text-base">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+          <div className="mt-12 grid items-start gap-12 md:grid-cols-2 md:gap-16">
+            <Reveal>
+              <p className="type-lead text-soft">
+                I'm Muhammad Dimas Hadiyanto — a graphic designer and Multimedia
+                Engineering graduate from Politeknik Negeri Media Kreatif Jakarta.
+                My work spans brand visuals, packaging, social campaigns, and
+                UI/UX, always grounded in research and current design trends.
+              </p>
+              <p className="type-lead mt-4 text-soft">
+                My final project was an Augmented Reality mobile app introducing
+                traditional West Javanese musical instruments — combining
+                education, technology, and design into one experience.
+              </p>
+            </Reveal>
+
+            <Reveal delay={120}>
+              <h3 className="type-eyebrow mb-4 text-soft">What I do</h3>
+              <ul className="divide-y divide-current/15 border-y border-current/15">
+                {WHAT_I_DO.map((s) => (
+                  <li key={s} className="type-h3 flex items-center gap-3 py-3.5">
+                    <Starburst size={16} />
                     {s}
                   </li>
                 ))}
               </ul>
-            </div>
-            <div>
-              <h3 className="font-display font-bold text-lg mb-4">Tools I use</h3>
-              <div className="flex flex-wrap gap-2">
-                {STACK.map((t) => (
-                  <span
-                    key={t}
-                    className="text-sm font-medium px-3.5 py-1.5 rounded-full bg-card border border-base"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
+            </Reveal>
           </div>
-        </Reveal>
-      </div>
-    </section>
+        </div>
+      </Panel>
+    </div>
   );
 }

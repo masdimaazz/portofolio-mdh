@@ -1,53 +1,53 @@
 import { ArrowUpRight, Mail } from 'lucide-react';
-import Reveal from './Reveal';
+import Panel from './Panel';
+import Starburst from './Starburst';
 
 const SOCIALS = [
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/muhammad-dimas-hadiyanto' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/muhammad-dimas-hadiyanto-a53b37331/' },
   { label: 'WhatsApp', href: 'https://wa.me/6288215990350' },
   { label: 'Email', href: 'mailto:masdimaaz@gmail.com' },
 ];
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 md:py-32 mx-auto max-w-6xl px-5 md:px-6">
-      <Reveal>
-        <div className="relative overflow-hidden rounded-[2.5rem] border border-base bg-card px-6 py-16 md:px-16 md:py-24 text-center">
-          <div
-            className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[30rem] h-[30rem] rounded-full blur-3xl opacity-30"
-            style={{ background: 'radial-gradient(circle, hsl(var(--accent)), transparent 65%)' }}
-          />
-          <p className="relative font-mono text-xs uppercase tracking-widest accent mb-5">
-            Let's work together
-          </p>
-          <h2 className="relative font-display font-extrabold text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.02]">
-            Have a project<br className="hidden sm:block" /> in mind?
+    <div id="contact" className="py-6 md:py-10">
+      <Panel variant="red">
+        <div className="relative px-6 py-20 text-center sm:px-9 md:px-16 md:py-28">
+          <Starburst size={54} className="absolute left-[12%] top-[18%] hidden sm:block" />
+          <Starburst size={44} className="absolute right-[14%] bottom-[20%] hidden sm:block" />
+
+          <p className="type-eyebrow text-soft">[ 05 · let's work together ]</p>
+          <h2 className="type-mega mt-6">
+            Have a project
+            <br />
+            in <span className="text-white">mind?</span>
           </h2>
-          <p className="relative mt-6 text-muted max-w-md mx-auto">
+          <p className="type-lead mx-auto mt-7 max-w-md text-soft">
             Open to graphic design roles and freelance projects. Based in
             Jakarta, Indonesia — let's create something great together.
           </p>
           <a
             href="mailto:masdimaaz@gmail.com"
-            className="relative group mt-10 inline-flex items-center gap-3 bg-accent text-white font-semibold text-base sm:text-lg px-8 py-4 rounded-full hover:opacity-90 transition-opacity"
+            className="group mt-10 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-base font-semibold text-black transition-opacity hover:opacity-85 sm:text-lg"
           >
-            <Mail className="w-5 h-5" />
+            <Mail className="h-5 w-5" />
             masdimaaz@gmail.com
-            <ArrowUpRight className="w-5 h-5 group-hover:rotate-45 transition-transform" />
+            <ArrowUpRight className="h-5 w-5 transition-transform group-hover:rotate-45" />
           </a>
 
-          <div className="relative mt-12 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
             {SOCIALS.map((s) => (
               <a
                 key={s.label}
                 href={s.href}
-                className="text-sm font-medium px-5 py-2.5 rounded-full border border-base hover:bg-accent hover:text-white hover:border-transparent transition-colors"
+                className="rounded-full border border-current/30 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-white hover:text-black"
               >
                 {s.label}
               </a>
             ))}
           </div>
         </div>
-      </Reveal>
-    </section>
+      </Panel>
+    </div>
   );
 }
