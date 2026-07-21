@@ -27,6 +27,38 @@ function App() {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }, [isDark]);
 
+  // Navigasi anchor tanpa mengotori URL dengan "#..." — scroll mulus, URL tetap bersih
+  useEffect(() => {
+    const cleanUrl = () =>
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey) return;
+      const link = (e.target as HTMLElement)?.closest('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!link) return;
+      const href = link.getAttribute('href') || '';
+      e.preventDefault();
+      if (href === '#') return; // placeholder, jangan lompat
+      const id = href.slice(1);
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const behavior: ScrollBehavior = reduce ? 'auto' : 'smooth';
+      const el = document.getElementById(id);
+      if (id === 'top' || !el) window.scrollTo({ top: 0, behavior });
+      else el.scrollIntoView({ behavior, block: 'start' });
+      cleanUrl();
+    };
+
+    // Bersihkan juga bila halaman dibuka dengan hash di URL
+    if (window.location.hash) {
+      const el = document.getElementById(window.location.hash.slice(1));
+      if (el) setTimeout(() => el.scrollIntoView(), 0);
+      cleanUrl();
+    }
+
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
+
   return (
     <div className="relative min-h-screen">
       <button
