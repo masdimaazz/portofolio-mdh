@@ -7,8 +7,8 @@ import delsTentCard from '@/assets/work/dels-tentcard.webp';
 import firstpage from '@/assets/work/firstpage.webp';
 import kemensos from '@/assets/work/kemensos.webp';
 // Foto profil disajikan dari /public (bukan di-bundle) supaya bisa di-<link rel=preload>
-// dari index.html → LCP hero lebih cepat. URL relatif agar tetap jalan di file://.
-const profileImg = './profile.webp';
+// dari index.html → LCP hero lebih cepat.
+const profileImg = '/profile.webp';
 
 export interface Profile {
   name: string;
