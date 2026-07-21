@@ -2,6 +2,7 @@ import Reveal from './Reveal';
 import Badge from './Badge';
 import Panel from './Panel';
 import Starburst from './Starburst';
+import { useContent } from '@/data/ContentContext';
 
 const WHAT_I_DO = [
   'Branding & logo design',
@@ -11,6 +12,7 @@ const WHAT_I_DO = [
 ];
 
 export default function About() {
+  const { profile } = useContent();
   return (
     <div id="about" className="py-6 md:py-10">
       <Panel variant="cream" ghost="Creating">
@@ -28,17 +30,8 @@ export default function About() {
 
           <div className="mt-12 grid items-start gap-12 md:grid-cols-2 md:gap-16">
             <Reveal>
-              <p className="type-lead text-soft">
-                I'm Muhammad Dimas Hadiyanto — a graphic designer and Multimedia
-                Engineering graduate from Politeknik Negeri Media Kreatif Jakarta.
-                My work spans brand visuals, packaging, social campaigns, and
-                UI/UX, always grounded in research and current design trends.
-              </p>
-              <p className="type-lead mt-4 text-soft">
-                My final project was an Augmented Reality mobile app introducing
-                traditional West Javanese musical instruments — combining
-                education, technology, and design into one experience.
-              </p>
+              <p className="type-lead text-soft">{profile.aboutP1}</p>
+              <p className="type-lead mt-4 text-soft">{profile.aboutP2}</p>
             </Reveal>
 
             <Reveal delay={120}>

@@ -5,74 +5,11 @@ import Badge from './Badge';
 import Panel from './Panel';
 import Starburst from './Starburst';
 import ProjectModal from './ProjectModal';
-import delsRamadhan from '@/assets/work/dels-ramadhan.jpg';
-import delsStand from '@/assets/work/dels-stand.png';
-import delsIdulAdha from '@/assets/work/dels-iduladha.jpg';
-import delsTentCard from '@/assets/work/dels-tentcard.jpg';
-import firstpage from '@/assets/work/firstpage.jpg';
-import kemensos from '@/assets/work/kemensos.jpg';
-
-// Diurutkan mengelompok per perusahaan (Delisari → Firstpage → Kemensos)
-const PROJECTS = [
-  {
-    title: "Del's Ramadhan Campaign",
-    company: 'Delisari Nusantara',
-    category: 'Social Media Key Visual',
-    year: '2025',
-    img: delsRamadhan,
-    tags: ['Key Visual', 'Packaging', 'Campaign'],
-    featured: true,
-  },
-  {
-    title: "Del's Nocciola Display Stand",
-    company: 'Delisari Nusantara',
-    category: '3D POSM Design',
-    year: '2025',
-    img: delsStand,
-    tags: ['3D', 'Blender', 'Retail POSM'],
-  },
-  {
-    title: "Del's Recipe Tent Card",
-    company: 'Delisari Nusantara',
-    category: 'Print Collateral',
-    year: '2025',
-    img: delsTentCard,
-    tags: ['Print', 'Layout', 'F&B'],
-  },
-  {
-    title: "Del's Idul Adha Greeting",
-    company: 'Delisari Nusantara',
-    category: 'Social Media Greeting',
-    year: '2025',
-    img: delsIdulAdha,
-    tags: ['Greeting', 'Brand', 'Social'],
-  },
-  {
-    title: 'Firstpage.id Content Series',
-    company: 'Firstpage.id',
-    category: 'LinkedIn & Instagram Feeds',
-    year: '2025',
-    img: firstpage,
-    tags: ['Editorial', 'Social Feeds', 'Branding'],
-  },
-  {
-    title: 'Hari Anak Nasional 2023',
-    company: 'Kementerian Sosial RI',
-    category: 'Government Campaign',
-    year: '2023',
-    img: kemensos,
-    tags: ['Government', 'Feed Design', 'Layout'],
-  },
-];
-
-// Metadata tiap perusahaan (urutan = urutan tampil)
-const COMPANIES = [
-  { name: 'Delisari Nusantara', role: 'Creative Marketing · F&B Brand', period: '2025' },
-  { name: 'Firstpage.id', role: 'Graphic Design · Content Series', period: '2025' },
-  { name: 'Kementerian Sosial RI', role: 'Graphic Design · Government', period: '2023' },
-];
+import { useContent } from '@/data/ContentContext';
 
 export default function Work() {
+  // Proyek & perusahaan dari Supabase (fallback ke default)
+  const { projects: PROJECTS, companies: COMPANIES } = useContent();
   // Indeks proyek (global) yang dibuka di modal
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const move = (dir: number) =>
@@ -146,7 +83,7 @@ export default function Work() {
                             }`}
                           >
                             <img
-                              src={p.img}
+                              src={p.cover}
                               alt={p.title}
                               loading="lazy"
                               decoding="async"

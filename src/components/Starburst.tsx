@@ -7,7 +7,7 @@ interface StarburstProps {
 }
 
 export default function Starburst({
-  color = 'var(--red-500)',
+  color = 'var(--brand-500)',
   size = 28,
   className = '',
   spin = false,

@@ -11,7 +11,7 @@ const SOCIALS = [
 export default function Contact() {
   return (
     <div id="contact" className="py-6 md:py-10">
-      <Panel variant="red">
+      <Panel variant="accent">
         <div className="relative px-6 py-20 text-center sm:px-9 md:px-16 md:py-28">
           <Starburst size={54} className="absolute left-[12%] top-[18%] hidden sm:block" />
           <Starburst size={44} className="absolute right-[14%] bottom-[20%] hidden sm:block" />

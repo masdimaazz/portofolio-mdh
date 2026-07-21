@@ -1,9 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon-mdh.png" />
     <link rel="apple-touch-icon" href="/favicon-mdh.png" />
+    <!-- Preload foto hero → LCP lebih cepat (dipasangkan fetchpriority di <img>) -->
+    <link rel="preload" as="image" href="./profile.webp" type="image/webp" fetchpriority="high" />
     <meta name="theme-color" content="#2563eb" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Muhammad Dimas Hadiyanto — graphic designer & visual storyteller in Jakarta. Branding, social campaigns, packaging, and UI/UX for brands and institutions." />
@@ -15,11 +17,13 @@
     <meta property="og:title" content="Muhammad Dimas Hadiyanto — Graphic Designer" />
     <meta property="og:description" content="Graphic designer & visual storyteller in Jakarta. Branding, social campaigns, packaging, and UI/UX." />
     <meta property="og:url" content="https://portofolio-mdh.vercel.app" />
-    <meta property="og:image" content="https://portofolio-mdh.vercel.app/favicon-mdh.png" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="https://portofolio-mdh.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Muhammad Dimas Hadiyanto — Graphic Designer" />
     <meta name="twitter:description" content="Graphic designer & visual storyteller in Jakarta." />
-    <meta name="twitter:image" content="https://portofolio-mdh.vercel.app/favicon-mdh.png" />
+    <meta name="twitter:image" content="https://portofolio-mdh.vercel.app/og-image.png" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,6 +31,40 @@
       href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Structured data — bantu Google memahami identitas & profil -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Muhammad Dimas Hadiyanto",
+        "url": "https://portofolio-mdh.vercel.app/",
+        "image": "https://portofolio-mdh.vercel.app/favicon-mdh.png",
+        "jobTitle": "Graphic Designer",
+        "description": "Graphic designer & visual storyteller in Jakarta. Branding, social campaigns, packaging, and UI/UX for brands and institutions.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Jakarta",
+          "addressCountry": "ID"
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Politeknik Negeri Media Kreatif Jakarta"
+        },
+        "knowsAbout": [
+          "Graphic Design",
+          "Brand Identity",
+          "Social Media Campaigns",
+          "Packaging Design",
+          "UI/UX Design",
+          "Motion Graphics",
+          "3D Design"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/muhammad-dimas-hadiyanto-a53b37331/"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

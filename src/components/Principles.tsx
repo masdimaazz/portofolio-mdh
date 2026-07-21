@@ -3,27 +3,10 @@ import { Plus, Minus } from 'lucide-react';
 import Reveal from './Reveal';
 import Badge from './Badge';
 import Panel from './Panel';
-
-const PRINCIPLES = [
-  {
-    title: 'Clarity above excess',
-    body: 'Every element earns its place. I strip away the noise so the message lands instantly — legible, focused, and honest.',
-  },
-  {
-    title: 'Aesthetic with purpose',
-    body: 'Beauty that serves the brand, never decoration for its own sake. Each visual choice supports a clear intent.',
-  },
-  {
-    title: 'Research-driven thinking',
-    body: 'Design grounded in user insight and current visual culture — decisions backed by context, not guesswork.',
-  },
-  {
-    title: 'Built beyond trends',
-    body: 'Systems and identities made to stay relevant, not just fashionable. Work that still holds up years later.',
-  },
-];
+import { useContent } from '@/data/ContentContext';
 
 export default function Principles() {
+  const { principles: PRINCIPLES } = useContent();
   // Satu baris terbuka pada satu waktu (default: yang pertama)
   const [open, setOpen] = useState(0);
 
@@ -52,7 +35,7 @@ export default function Principles() {
                 <Reveal key={p.title} delay={i * 60}>
                   <div
                     className={`rounded-[1.25rem] border-b border-current/15 transition-colors ${
-                      isOpen ? 'panel-red my-2 border-transparent' : ''
+                      isOpen ? 'panel-accent my-2 border-transparent' : ''
                     }`}
                   >
                     <h3>

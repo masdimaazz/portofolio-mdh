@@ -2,34 +2,13 @@ import Reveal from './Reveal';
 import Badge from './Badge';
 import Panel from './Panel';
 import Starburst from './Starburst';
-
-const SERVICES = [
-  {
-    lead: 'Brand',
-    rest: 'Identity',
-    desc: 'Distinctive logos, systems and guidelines that make brands instantly recognisable across every touchpoint.',
-  },
-  {
-    lead: 'Social &',
-    rest: 'Campaigns',
-    desc: 'Scroll-stopping key visuals, feeds and ad creatives tuned to each platform and audience.',
-  },
-  {
-    lead: 'Digital',
-    rest: 'Experience',
-    desc: 'Research-driven, accessible UI/UX and web design — from wireframes to polished front-ends.',
-  },
-  {
-    lead: '3D &',
-    rest: 'Motion',
-    desc: 'Eye-catching 3D POSM, packaging renders and micro-animations that add life to a brand.',
-  },
-];
+import { useContent } from '@/data/ContentContext';
 
 export default function Services() {
+  const { services: SERVICES } = useContent();
   return (
     <div id="services" className="py-6 md:py-10">
-      <Panel variant="red" ghost="Not Just">
+      <Panel variant="accent" ghost="Not Just">
         <div className="p-6 sm:p-9 md:p-14">
           <Reveal>
             <div className="flex items-center justify-between">
@@ -67,7 +46,7 @@ export default function Services() {
                       </span>
                     </div>
                   </div>
-                  <p className="mt-8 text-sm leading-relaxed text-soft">{s.desc}</p>
+                  <p className="mt-8 text-sm leading-relaxed text-soft">{s.description}</p>
                   <a
                     href="#contact"
                     className="type-eyebrow mt-6 inline-block hl transition-opacity hover:opacity-70"

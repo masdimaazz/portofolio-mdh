@@ -6,7 +6,7 @@ export interface Project {
   company?: string;
   category: string;
   year: string;
-  img: string;
+  cover: string;
   tags: string[];
 }
 
@@ -88,7 +88,7 @@ export default function ProjectModal({
         {/* Gambar */}
         <div className="relative md:w-3/5">
           <img
-            src={project.img}
+            src={project.cover}
             alt={project.title}
             decoding="async"
             className="h-56 w-full object-cover sm:h-72 md:h-full"

@@ -2,13 +2,7 @@ import { useEffect, useState } from 'react';
 import Panel from './Panel';
 import Badge from './Badge';
 import { useReveal } from '@/hooks/useReveal';
-
-const STATS = [
-  { value: 5, decimals: 0, suffix: '+', label: 'Years in design' },
-  { value: 20, decimals: 0, suffix: '+', label: 'Projects delivered' },
-  { value: 4, decimals: 0, suffix: '', label: 'Brands & institutions' },
-  { value: 3.52, decimals: 2, suffix: '', label: 'GPA / 4.0' },
-];
+import { useContent } from '@/data/ContentContext';
 
 // Angka menghitung naik dari 0 saat masuk viewport
 function Counter({
@@ -54,11 +48,12 @@ function Counter({
 }
 
 export default function Stats() {
+  const { stats: STATS } = useContent();
   const { ref, shown } = useReveal<HTMLDivElement>();
 
   return (
     <div id="stats" className="py-6 md:py-10">
-      <Panel variant="red">
+      <Panel variant="accent">
         <div ref={ref} className="p-6 sm:p-9 md:p-14">
           <Badge label="my experience" />
           <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-4">

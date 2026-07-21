@@ -2,29 +2,10 @@ import Badge from './Badge';
 import Panel from './Panel';
 import Starburst from './Starburst';
 import { useReveal } from '@/hooks/useReveal';
-
-// Ikon software: label 2 huruf + warna khas app
-const SOFTWARE = [
-  { label: 'Ps', color: '#31A8FF' },
-  { label: 'Ai', color: '#FF9A00' },
-  { label: 'Ae', color: '#9999FF' },
-  { label: 'Pr', color: '#EA77FF' },
-  { label: 'Id', color: '#FF3366' },
-  { label: 'Fig', color: '#A259FF' },
-  { label: 'Bl', color: '#EA7600' },
-  { label: 'Cv', color: '#00C4CC' },
-];
-
-const SKILLS = [
-  { name: 'Illustrator', pct: 92 },
-  { name: 'Photoshop', pct: 88 },
-  { name: 'Canva', pct: 95 },
-  { name: 'After Effects', pct: 80 },
-  { name: 'Premiere Pro', pct: 82 },
-  { name: 'Blender', pct: 70 },
-];
+import { useContent } from '@/data/ContentContext';
 
 export default function Skills() {
+  const { skills: SKILLS, software: SOFTWARE } = useContent();
   // Bar terisi saat section masuk viewport
   const { ref, shown } = useReveal<HTMLDivElement>();
 
@@ -69,7 +50,7 @@ export default function Skills() {
                     className="h-full rounded-full"
                     style={{
                       width: shown ? `${s.pct}%` : '0%',
-                      background: 'var(--red-500)',
+                      background: 'var(--brand-500)',
                       transition: `width 1s cubic-bezier(0.22,1,0.36,1) ${i * 90}ms`,
                     }}
                   />

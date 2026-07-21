@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 // `ghost` = teks watermark raksasa yang tampak di balik panel.
 interface PanelProps {
   children: ReactNode;
-  variant?: 'cream' | 'red';
+  variant?: 'cream' | 'accent';
   ghost?: string;
   id?: string;
   className?: string;
@@ -26,7 +26,7 @@ export default function Panel({
       )}
       <div
         className={`relative z-10 mx-auto max-w-[90rem] overflow-hidden rounded-[1.5rem] md:rounded-[2.5rem] ${
-          variant === 'red' ? 'panel-red' : 'panel-cream'
+          variant === 'accent' ? 'panel-accent' : 'panel-cream'
         } ${className}`}
       >
         {children}

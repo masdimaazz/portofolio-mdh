@@ -7,10 +7,10 @@
   --font-sans: "Space Grotesk", sans-serif;
   --font-mono: "Space Mono", monospace;
 
-  /* Biru elektrik brand (gaya Denis) — nama var tetap agar markup lama ikut */
-  --red-500: #3b82f6;
-  --red-700: #1d4ed8;
-  --red-900: #1e3a8a;
+  /* Biru elektrik brand — skala 500/700/900 dipakai untuk aksen & highlight */
+  --brand-500: #3b82f6;
+  --brand-700: #1d4ed8;
+  --brand-900: #1e3a8a;
 }
 
 @layer base {
@@ -25,11 +25,11 @@
     --accent: 221 83% 53%;   /* biru elektrik */
     --ghost: 221 45% 32%;
 
-    /* Panel: "cream" = kartu terang, "red" = panel biru aksen */
+    /* Panel: "cream" = kartu terang, "accent" = panel biru aksen */
     --cream: 0 0% 100%;
     --cream-fg: 222 47% 12%;
-    --red: 221 83% 53%;
-    --red-fg: 0 0% 100%;
+    --accent-panel: 221 83% 53%;
+    --accent-panel-fg: 0 0% 100%;
 
     --ink: 221 83% 53%;
     --ink-fg: 0 0% 100%;
@@ -48,8 +48,8 @@
 
     --cream: 222 38% 13%;    /* "kartu terang" jadi navy gelap */
     --cream-fg: 210 40% 96%;
-    --red: 221 83% 48%;      /* panel biru aksen */
-    --red-fg: 210 40% 98%;
+    --accent-panel: 221 83% 48%;      /* panel biru aksen */
+    --accent-panel-fg: 210 40% 98%;
 
     --ink: 217 91% 58%;
     --ink-fg: 0 0% 100%;
@@ -71,7 +71,7 @@
 
   /* Cincin fokus jelas untuk navigasi keyboard */
   :focus-visible {
-    outline: 3px solid var(--red-500);
+    outline: 3px solid var(--brand-500);
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -111,7 +111,7 @@
   }
 
   ::selection {
-    background: var(--red-500);
+    background: var(--brand-500);
     color: white;
   }
 }
@@ -133,16 +133,16 @@
     background-color: hsl(var(--cream));
     color: hsl(var(--cream-fg));
   }
-  .panel-red {
-    background-color: hsl(var(--red));
-    color: hsl(var(--red-fg));
+  .panel-accent {
+    background-color: hsl(var(--accent-panel));
+    color: hsl(var(--accent-panel-fg));
   }
   /* muted lokal di dalam panel krem/merah — dinaikkan agar lolos kontras */
   .panel-cream .text-soft { color: hsl(var(--cream-fg) / 0.74); }
-  .panel-red .text-soft { color: hsl(var(--red-fg) / 0.82); }
+  .panel-accent .text-soft { color: hsl(var(--accent-panel-fg) / 0.82); }
 
   /* Kata bertinta merah untuk judul dua-warna */
-  .hl { color: var(--red-500); }
+  .hl { color: var(--brand-500); }
 
   /* Teks watermark raksasa di balik panel */
   .ghost {

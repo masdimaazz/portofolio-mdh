@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { ContentProvider } from '@/data/ContentContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
@@ -60,6 +61,7 @@ function App() {
   }, []);
 
   return (
+    <ContentProvider>
     <div className="relative min-h-screen">
       <button
         type="button"
@@ -89,6 +91,7 @@ function App() {
       </main>
       <Footer />
     </div>
+    </ContentProvider>
   );
 }
 

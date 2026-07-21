@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "images:webp": "node convert-webp.mjs",
+    "og:image": "node generate-og.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

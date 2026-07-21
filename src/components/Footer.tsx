@@ -32,7 +32,7 @@ const COLUMNS = [
 export default function Footer() {
   return (
     <footer className="px-2 pb-6 sm:px-4">
-      <div className="panel-red overflow-hidden rounded-[1.5rem] px-6 pt-14 sm:px-9 md:rounded-[2.5rem] md:px-14 md:pt-16">
+      <div className="panel-accent overflow-hidden rounded-[1.5rem] px-6 pt-14 sm:px-9 md:rounded-[2.5rem] md:px-14 md:pt-16">
         <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
           <div>
             {/* Logo MDH (di-mask currentColor) */}

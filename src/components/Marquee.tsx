@@ -1,17 +1,11 @@
-const ITEMS = [
-  'Branding',
-  'Social Campaigns',
-  'UI / UX Design',
-  '3D & Motion',
-  'Packaging',
-  'Editorial Layout',
-];
+import { useContent } from '@/data/ContentContext';
 
-// Pita merah berjalan dengan pemisah bintang — transisi antar section
+// Pita berjalan dengan pemisah bintang — transisi antar section
 export default function Marquee() {
-  const row = [...ITEMS, ...ITEMS];
+  const { marquee } = useContent();
+  const row = [...marquee, ...marquee];
   return (
-    <div className="mx-2 mt-3 overflow-hidden rounded-full py-3.5 select-none sm:mx-4" style={{ background: 'var(--red-500)' }} aria-hidden="true">
+    <div className="mx-2 mt-3 overflow-hidden rounded-full py-3.5 select-none sm:mx-4" style={{ background: 'var(--brand-500)' }} aria-hidden="true">
       <div className="flex w-max marquee-track">
         {row.map((item, i) => (
           <div key={i} className="flex items-center gap-6 px-6">

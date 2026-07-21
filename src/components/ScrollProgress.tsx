@@ -24,7 +24,7 @@ export default function ScrollProgress() {
       className="fixed inset-x-0 top-0 z-[60] h-1 origin-left"
       style={{
         transform: `scaleX(${progress})`,
-        background: 'var(--red-500)',
+        background: 'var(--brand-500)',
       }}
       role="progressbar"
       aria-label="Page scroll progress"

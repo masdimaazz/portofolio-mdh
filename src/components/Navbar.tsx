@@ -99,7 +99,7 @@ export default function Navbar({ isDark, onToggleTheme }: NavbarProps) {
                   className={`absolute -bottom-2 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full transition-all duration-300 ${
                     isActive ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                   }`}
-                  style={{ background: 'var(--red-500)' }}
+                  style={{ background: 'var(--brand-500)' }}
                 />
               </a>
             );
@@ -149,7 +149,7 @@ export default function Navbar({ isDark, onToggleTheme }: NavbarProps) {
                 {isActive && (
                   <span
                     className="h-1.5 w-1.5 rounded-full"
-                    style={{ background: 'var(--red-500)' }}
+                    style={{ background: 'var(--brand-500)' }}
                   />
                 )}
                 {l.label}

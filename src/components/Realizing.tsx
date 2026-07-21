@@ -2,12 +2,12 @@ import Reveal from './Reveal';
 import Badge from './Badge';
 import Panel from './Panel';
 import Starburst from './Starburst';
-import delsRamadhan from '@/assets/work/dels-ramadhan.jpg';
-import delsStand from '@/assets/work/dels-stand.png';
-import firstpage from '@/assets/work/firstpage.jpg';
-import kemensos from '@/assets/work/kemensos.jpg';
-import delsTentCard from '@/assets/work/dels-tentcard.jpg';
-import delsIdulAdha from '@/assets/work/dels-iduladha.jpg';
+import delsRamadhan from '@/assets/work/dels-ramadhan.webp';
+import delsStand from '@/assets/work/dels-stand.webp';
+import firstpage from '@/assets/work/firstpage.webp';
+import kemensos from '@/assets/work/kemensos.webp';
+import delsTentCard from '@/assets/work/dels-tentcard.webp';
+import delsIdulAdha from '@/assets/work/dels-iduladha.webp';
 
 // Kolase foto acak-tumpang tindih — tiap item punya span & geser sendiri
 const SHOTS = [

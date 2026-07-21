@@ -2,56 +2,10 @@ import Reveal from './Reveal';
 import Badge from './Badge';
 import Panel from './Panel';
 import Starburst from './Starburst';
-
-// Timeline pengalaman — data asli dari CV
-const TIMELINE = [
-  {
-    role: 'Creative Marketing Intern',
-    org: 'PT. Delisari Nusantara',
-    period: 'May 2025 – Jul 2025',
-    current: false,
-    points: [
-      'Produced visual promo materials — catalogs, product packaging, and social media content.',
-      'Contributed creative ideas to boost brand engagement on digital platforms.',
-      'Adapted design trends and market insight into on-target output.',
-    ],
-  },
-  {
-    role: 'Graphic Design Intern',
-    org: 'Firstpage.id',
-    period: 'Jan 2025 – Jul 2025',
-    current: false,
-    points: [
-      'Designed Instagram feed content for Firstpage.id.',
-      'Created LinkedIn feed visuals and editorial layouts.',
-      'Delivered role-specific work with measurable engagement results.',
-    ],
-  },
-  {
-    role: 'Social Media Staff',
-    org: 'Karang Taruna',
-    period: 'Oct 2024 – Present',
-    current: true,
-    points: [
-      'Design visual content (posters, feeds, stories) for social, religious, and youth activities.',
-      'Write informative, engaging captions and copywriting.',
-      'Document activities for promotion and digital archives.',
-    ],
-  },
-  {
-    role: 'Graphic Design Intern',
-    org: 'Kementerian Sosial RI',
-    period: 'Feb 2023 – Jul 2023',
-    current: false,
-    points: [
-      'Designed Instagram feed content for the Ministry of Social Affairs.',
-      'Managed the social media content timeline.',
-      'Rebranded the HLUN 2022 logo and Instagram feed branding.',
-    ],
-  },
-];
+import { useContent } from '@/data/ContentContext';
 
 export default function Experience() {
+  const { experience: TIMELINE, education } = useContent();
   return (
     <div id="experience" className="py-6 md:py-10">
     <Panel variant="cream" ghost="Journey">
@@ -110,19 +64,15 @@ export default function Experience() {
 
       {/* Pendidikan */}
       <Reveal delay={120} className="mt-14">
-        <div className="panel-red flex flex-col justify-between gap-4 rounded-[1.25rem] p-7 sm:flex-row sm:items-center md:p-8">
+        <div className="panel-accent flex flex-col justify-between gap-4 rounded-[1.25rem] p-7 sm:flex-row sm:items-center md:p-8">
           <div>
             <p className="type-eyebrow mb-2 text-soft">Education</p>
-            <h3 className="type-h3">
-              Applied Bachelor — Multimedia Engineering Technology
-            </h3>
-            <p className="text-sm text-soft mt-1">
-              Politeknik Negeri Media Kreatif Jakarta
-            </p>
+            <h3 className="type-h3">{education?.degree}</h3>
+            <p className="text-sm text-soft mt-1">{education?.school}</p>
           </div>
           <div className="text-left sm:text-right shrink-0">
-            <p className="font-head text-2xl font-black">3.52<span className="text-soft text-base">/4.0</span></p>
-            <p className="text-xs font-mono text-soft mt-1">Aug 2020 – Nov 2024</p>
+            <p className="font-head text-2xl font-black">{education?.gpa}<span className="text-soft text-base">/4.0</span></p>
+            <p className="text-xs font-mono text-soft mt-1">{education?.period}</p>
           </div>
         </div>
       </Reveal>
