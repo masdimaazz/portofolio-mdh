@@ -128,6 +128,21 @@ export default function FieldInput({ field, value, onChange, options }: Props) {
             ))}
           </select>
         );
+      case 'choice':
+        return (
+          <select
+            className={inputCls}
+            value={(value as string) ?? ''}
+            onChange={(e) => onChange(e.target.value)}
+          >
+            <option value="">— pilih —</option>
+            {(field.choices || []).map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+        );
       case 'image':
         return (
           <div className="space-y-2">

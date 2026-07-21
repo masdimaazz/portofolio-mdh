@@ -10,7 +10,8 @@ export type FieldType =
   | 'list' // array kalimat, satu per baris
   | 'image' // upload → public URL
   | 'color'
-  | 'select'; // FK dropdown
+  | 'select' // FK dropdown
+  | 'choice'; // pilihan statis (dropdown)
 
 export interface Field {
   key: string;
@@ -20,6 +21,7 @@ export interface Field {
   optionsFrom?: string; // untuk 'select': nama tabel sumber (id + labelKey)
   optionLabel?: string; // kolom label di tabel sumber
   imageFolder?: string; // untuk 'image': folder di Storage
+  choices?: string[]; // untuk 'choice': daftar opsi statis
 }
 
 export interface Entity {
@@ -85,7 +87,13 @@ export const ENTITIES: Entity[] = [
         optionsFrom: 'companies',
         optionLabel: 'name',
       },
-      { key: 'category', label: 'Kategori', type: 'text' },
+      { key: 'category', label: 'Kategori (deskripsi)', type: 'text' },
+      {
+        key: 'kind',
+        label: 'Tipe (untuk filter)',
+        type: 'choice',
+        choices: ['Branding', 'Social', 'Print', '3D', 'Motion', 'UI/UX'],
+      },
       { key: 'year', label: 'Tahun', type: 'text' },
       { key: 'cover_url', label: 'Cover', type: 'image', imageFolder: 'projects' },
       { key: 'tags', label: 'Tags', type: 'tags', help: 'Pisahkan dengan koma' },
@@ -96,12 +104,27 @@ export const ENTITIES: Entity[] = [
       title: '',
       company_id: null,
       category: '',
+      kind: '',
       year: '',
       cover_url: '',
       tags: [],
       featured: false,
       published: true,
     },
+  },
+  {
+    table: 'certificates',
+    label: 'Certificates',
+    icon: '📜',
+    titleKey: 'title',
+    subtitleKey: 'issuer',
+    fields: [
+      { key: 'title', label: 'Judul', type: 'text' },
+      { key: 'issuer', label: 'Penerbit', type: 'text' },
+      { key: 'year', label: 'Tahun', type: 'text' },
+      { key: 'image_url', label: 'Gambar sertifikat', type: 'image', imageFolder: 'certificates' },
+    ],
+    defaultRow: { title: '', issuer: '', year: '', image_url: '' },
   },
   {
     table: 'experience',

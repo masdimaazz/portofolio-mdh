@@ -14,6 +14,13 @@ export default function Work() {
   const move = (dir: number) =>
     setOpenIndex((i) => (i === null ? i : (i + dir + PROJECTS.length) % PROJECTS.length));
 
+  // Filter berdasar tipe (kind); tab hanya muncul bila ada data kind
+  const [filter, setFilter] = useState<string>('All');
+  const kinds = [
+    'All',
+    ...Array.from(new Set(PROJECTS.map((p) => p.kind).filter((k): k is string => Boolean(k)))),
+  ];
+
   return (
     <div id="work">
       <Panel variant="cream" ghost="Selected">
@@ -36,13 +43,34 @@ export default function Work() {
             </SectionHead>
           </Reveal>
 
+          {/* Tab filter tipe */}
+          {kinds.length > 1 && (
+            <div className="mb-10 flex flex-wrap gap-2">
+              {kinds.map((k) => (
+                <button
+                  key={k}
+                  type="button"
+                  onClick={() => setFilter(k)}
+                  className={`rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-wide transition-colors ${
+                    filter === k
+                      ? 'border-transparent bg-ink text-ink-fg'
+                      : 'border-current/25 text-soft hover:border-current/50'
+                  }`}
+                >
+                  {k}
+                </button>
+              ))}
+            </div>
+          )}
+
           {/* Satu blok per perusahaan */}
           <div className="space-y-16">
             {COMPANIES.map((co, ci) => {
               // Ambil proyek perusahaan ini beserta indeks globalnya (untuk modal)
               const items = PROJECTS.map((p, gi) => ({ p, gi })).filter(
-                (x) => x.p.company === co.name
+                (x) => x.p.company === co.name && (filter === 'All' || x.p.kind === filter)
               );
+              if (items.length === 0) return null;
               return (
                 <Reveal key={co.name}>
                   <div>

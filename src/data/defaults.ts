@@ -26,8 +26,9 @@ export interface Profile {
 export interface Company { name: string; role: string; period: string }
 export interface Project {
   title: string; company: string; category: string; year: string;
-  cover: string; tags: string[]; featured?: boolean;
+  cover: string; tags: string[]; featured?: boolean; kind?: string;
 }
+export interface Certificate { title: string; issuer: string; year: string; image: string }
 export interface ExperienceItem {
   role: string; org: string; period: string; current: boolean; points: string[];
 }
@@ -42,6 +43,7 @@ export interface Content {
   profile: Profile;
   companies: Company[];
   projects: Project[];
+  certificates: Certificate[];
   experience: ExperienceItem[];
   education: Education | null;
   services: Service[];
@@ -74,13 +76,14 @@ export const DEFAULTS: Content = {
     { name: 'Kementerian Sosial RI', role: 'Graphic Design · Government', period: '2023' },
   ],
   projects: [
-    { title: "Del's Ramadhan Campaign", company: 'Delisari Nusantara', category: 'Social Media Key Visual', year: '2025', cover: delsRamadhan, tags: ['Key Visual', 'Packaging', 'Campaign'], featured: true },
-    { title: "Del's Nocciola Display Stand", company: 'Delisari Nusantara', category: '3D POSM Design', year: '2025', cover: delsStand, tags: ['3D', 'Blender', 'Retail POSM'] },
-    { title: "Del's Recipe Tent Card", company: 'Delisari Nusantara', category: 'Print Collateral', year: '2025', cover: delsTentCard, tags: ['Print', 'Layout', 'F&B'] },
-    { title: "Del's Idul Adha Greeting", company: 'Delisari Nusantara', category: 'Social Media Greeting', year: '2025', cover: delsIdulAdha, tags: ['Greeting', 'Brand', 'Social'] },
-    { title: 'Firstpage.id Content Series', company: 'Firstpage.id', category: 'LinkedIn & Instagram Feeds', year: '2025', cover: firstpage, tags: ['Editorial', 'Social Feeds', 'Branding'] },
-    { title: 'Hari Anak Nasional 2023', company: 'Kementerian Sosial RI', category: 'Government Campaign', year: '2023', cover: kemensos, tags: ['Government', 'Feed Design', 'Layout'] },
+    { title: "Del's Ramadhan Campaign", company: 'Delisari Nusantara', category: 'Social Media Key Visual', year: '2025', cover: delsRamadhan, tags: ['Key Visual', 'Packaging', 'Campaign'], featured: true, kind: 'Branding' },
+    { title: "Del's Nocciola Display Stand", company: 'Delisari Nusantara', category: '3D POSM Design', year: '2025', cover: delsStand, tags: ['3D', 'Blender', 'Retail POSM'], kind: '3D' },
+    { title: "Del's Recipe Tent Card", company: 'Delisari Nusantara', category: 'Print Collateral', year: '2025', cover: delsTentCard, tags: ['Print', 'Layout', 'F&B'], kind: 'Print' },
+    { title: "Del's Idul Adha Greeting", company: 'Delisari Nusantara', category: 'Social Media Greeting', year: '2025', cover: delsIdulAdha, tags: ['Greeting', 'Brand', 'Social'], kind: 'Social' },
+    { title: 'Firstpage.id Content Series', company: 'Firstpage.id', category: 'LinkedIn & Instagram Feeds', year: '2025', cover: firstpage, tags: ['Editorial', 'Social Feeds', 'Branding'], kind: 'Social' },
+    { title: 'Hari Anak Nasional 2023', company: 'Kementerian Sosial RI', category: 'Government Campaign', year: '2023', cover: kemensos, tags: ['Government', 'Feed Design', 'Layout'], kind: 'Social' },
   ],
+  certificates: [],
   experience: [
     { role: 'Creative Marketing Intern', org: 'PT. Delisari Nusantara', period: 'May 2025 – Jul 2025', current: false, points: ['Produced visual promo materials — catalogs, product packaging, and social media content.', 'Contributed creative ideas to boost brand engagement on digital platforms.', 'Adapted design trends and market insight into on-target output.'] },
     { role: 'Graphic Design Intern', org: 'Firstpage.id', period: 'Jan 2025 – Jul 2025', current: false, points: ['Designed Instagram feed content for Firstpage.id.', 'Created LinkedIn feed visuals and editorial layouts.', 'Delivered role-specific work with measurable engagement results.'] },

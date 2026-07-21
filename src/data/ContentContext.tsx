@@ -18,8 +18,9 @@ interface ProfileRow {
 interface CompanyRow { id: string; name: string; role: string; period: string }
 interface ProjectRow {
   title: string; company_id: string; category: string; year: string;
-  cover_url: string; tags?: string[]; featured?: boolean;
+  cover_url: string; tags?: string[]; featured?: boolean; kind?: string;
 }
+interface CertificateRow { title: string; issuer?: string; year?: string; image_url?: string }
 interface ExperienceRow { role: string; org: string; period: string; current: boolean; points?: string[] }
 interface EducationRow { degree: string; school: string; gpa: string; period: string }
 interface ServiceRow { lead: string; rest: string; description: string }
@@ -47,10 +48,11 @@ export function ContentProvider({ children }: { children: ReactNode }) {
       const supabase = await getSupabase();
       if (!supabase || !active) return;
       try {
-        const [prof, comp, proj, exp, edu, srv, prin, sk, sw, st, mq] = await Promise.all([
+        const [prof, comp, proj, cert, exp, edu, srv, prin, sk, sw, st, mq] = await Promise.all([
           supabase.from('profile').select('*').eq('id', 1).maybeSingle(),
           supabase.from('companies').select('*').order('sort_order'),
           supabase.from('projects').select('*').eq('published', true).order('sort_order'),
+          supabase.from('certificates').select('*').order('sort_order'),
           supabase.from('experience').select('*').order('sort_order'),
           supabase.from('education').select('*').order('sort_order'),
           supabase.from('services').select('*').order('sort_order'),
@@ -96,6 +98,10 @@ export function ContentProvider({ children }: { children: ReactNode }) {
             cover: r.cover_url,
             tags: r.tags || [],
             featured: r.featured,
+            kind: r.kind,
+          })),
+          certificates: pick<CertificateRow, Content['certificates'][number]>(cert.data, DEFAULTS.certificates, (r) => ({
+            title: r.title, issuer: r.issuer ?? '', year: r.year ?? '', image: r.image_url ?? '',
           })),
           experience: pick<ExperienceRow, Content['experience'][number]>(exp.data, DEFAULTS.experience, (r) => ({
             role: r.role, org: r.org, period: r.period, current: r.current, points: r.points || [],

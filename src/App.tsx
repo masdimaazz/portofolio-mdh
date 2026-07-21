@@ -11,6 +11,7 @@ import About from '@/components/About';
 import Stats from '@/components/Stats';
 import Skills from '@/components/Skills';
 import Experience from '@/components/Experience';
+import Certificates from '@/components/Certificates';
 import Work from '@/components/Work';
 import Realizing from '@/components/Realizing';
 import Services from '@/components/Services';
@@ -84,6 +85,7 @@ function App() {
         <Stats />
         <Skills />
         <Experience />
+        <Certificates />
         <Work />
         <Realizing />
         <Services />
