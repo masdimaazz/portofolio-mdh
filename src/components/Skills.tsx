@@ -20,6 +20,10 @@ const NAME: Record<string, string> = {
   Pr: 'Adobe Premiere Pro', Id: 'Adobe InDesign', Fig: 'Figma', Bl: 'Blender', Cv: 'Canva',
 };
 
+// Logo tertentu perlu padding ekstra agar ukuran optisnya seragam.
+// Figma portrait (tinggi) → dikecilkan supaya tak mendominasi.
+const PAD: Record<string, string> = { Fig: 'p-[15px]' };
+
 // Peta nama skill (dari DB) → logo brand, untuk ikon kecil di daftar skill.
 const SKILL_LOGO: Record<string, string> = {
   illustrator: illustrator, photoshop, canva,
@@ -59,7 +63,9 @@ export default function Skills() {
                 <span
                   key={s.label}
                   title={name}
-                  className="grid h-12 w-12 place-items-center overflow-hidden rounded-lg bg-white p-2.5 ring-1 ring-black/10 transition-transform hover:-translate-y-0.5"
+                  className={`grid h-12 w-12 place-items-center overflow-hidden rounded-lg bg-white ring-1 ring-black/10 transition-transform hover:-translate-y-0.5 ${
+                    PAD[s.label] || 'p-2.5'
+                  }`}
                 >
                   <img src={logo} alt={name} loading="lazy" className="max-h-full max-w-full object-contain" />
                 </span>
