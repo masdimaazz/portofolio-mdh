@@ -1,3 +1,4 @@
+import { Download } from 'lucide-react';
 import { useContent } from '@/data/ContentContext';
 import RotatingRole from './RotatingRole';
 
@@ -83,6 +84,16 @@ export default function Hero() {
             >
               About me
             </a>
+            {profile.cvUrl && (
+              <a
+                href={profile.cvUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              >
+                <Download className="h-4 w-4" /> Download CV
+              </a>
+            )}
           </div>
         </div>
 

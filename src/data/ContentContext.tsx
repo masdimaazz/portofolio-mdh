@@ -13,7 +13,7 @@ export function useContent(): Content {
 interface ProfileRow {
   name?: string; tagline?: string; roles?: string[];
   about_p1?: string; about_p2?: string; email?: string; whatsapp?: string;
-  linkedin?: string; location?: string; avatar_url?: string;
+  linkedin?: string; location?: string; avatar_url?: string; cv_url?: string;
 }
 interface CompanyRow { id: string; name: string; role: string; period: string }
 interface ProjectRow {
@@ -82,6 +82,7 @@ export function ContentProvider({ children }: { children: ReactNode }) {
                 linkedin: p.linkedin ?? DEFAULTS.profile.linkedin,
                 location: p.location ?? DEFAULTS.profile.location,
                 avatarUrl: p.avatar_url ?? DEFAULTS.profile.avatarUrl,
+                cvUrl: p.cv_url ?? DEFAULTS.profile.cvUrl,
               }
             : DEFAULTS.profile,
           companies: pick<CompanyRow, Content['companies'][number]>(comp.data, DEFAULTS.companies, (c) => ({

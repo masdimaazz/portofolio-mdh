@@ -21,6 +21,7 @@ export interface Profile {
   linkedin: string;
   location: string;
   avatarUrl: string;
+  cvUrl: string;
 }
 export interface Company { name: string; role: string; period: string }
 export interface Project {
@@ -65,6 +66,7 @@ export const DEFAULTS: Content = {
     linkedin: 'https://www.linkedin.com/in/muhammad-dimas-hadiyanto-a53b37331/',
     location: 'Jakarta, Indonesia',
     avatarUrl: profileImg,
+    cvUrl: '',
   },
   companies: [
     { name: 'Delisari Nusantara', role: 'Creative Marketing · F&B Brand', period: '2025' },
