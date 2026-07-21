@@ -3,15 +3,22 @@ import { LogOut, ExternalLink } from 'lucide-react';
 import { ENTITIES } from './config';
 import { client } from './client';
 import EntityEditor from './EntityEditor';
+import AdminMessages from './AdminMessages';
 
 export default function Dashboard({ email }: { email: string }) {
   const [active, setActive] = useState(ENTITIES[0].table);
-  const entity = ENTITIES.find((e) => e.table === active)!;
+  const isMessages = active === 'messages';
+  const entity = ENTITIES.find((e) => e.table === active);
 
   async function logout() {
     const c = await client();
     await c.auth.signOut();
   }
+
+  const navItemCls = (on: boolean) =>
+    `flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
+      on ? 'bg-[hsl(var(--accent))] font-semibold text-white' : 'hover:bg-[hsl(var(--border))]'
+    }`;
 
   return (
     <div className="min-h-screen">
@@ -47,19 +54,15 @@ export default function Dashboard({ email }: { email: string }) {
         <aside className="hidden w-52 shrink-0 md:block">
           <nav className="sticky top-20 space-y-1">
             {ENTITIES.map((e) => (
-              <button
-                key={e.table}
-                onClick={() => setActive(e.table)}
-                className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
-                  active === e.table
-                    ? 'bg-[hsl(var(--accent))] font-semibold text-white'
-                    : 'hover:bg-[hsl(var(--border))]'
-                }`}
-              >
+              <button key={e.table} onClick={() => setActive(e.table)} className={navItemCls(active === e.table)}>
                 <span>{e.icon}</span>
                 {e.label}
               </button>
             ))}
+            <button onClick={() => setActive('messages')} className={navItemCls(isMessages)}>
+              <span>📨</span>
+              Messages
+            </button>
           </nav>
         </aside>
 
@@ -75,12 +78,17 @@ export default function Dashboard({ email }: { email: string }) {
                 {e.icon} {e.label}
               </option>
             ))}
+            <option value="messages">📨 Messages</option>
           </select>
         </div>
 
         {/* Konten */}
         <main className="min-w-0 flex-1">
-          <EntityEditor key={entity.table} entity={entity} />
+          {isMessages ? (
+            <AdminMessages />
+          ) : entity ? (
+            <EntityEditor key={entity.table} entity={entity} />
+          ) : null}
         </main>
       </div>
     </div>

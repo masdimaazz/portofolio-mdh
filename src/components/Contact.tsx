@@ -1,5 +1,6 @@
 import { ArrowUpRight, Mail } from 'lucide-react';
 import Panel from './Panel';
+import ContactForm from './ContactForm';
 import { useContent } from '@/data/ContentContext';
 
 // lucide v1 tak punya ikon brand → pakai SVG inline untuk LinkedIn & WhatsApp.
@@ -68,6 +69,12 @@ export default function Contact() {
                 <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 opacity-50" />
               </a>
             ))}
+          </div>
+
+          {/* Form kontak */}
+          <div className="mx-auto mt-14 max-w-xl">
+            <p className="type-eyebrow mb-5 text-soft">— or drop a message</p>
+            <ContactForm />
           </div>
         </div>
       </Panel>
