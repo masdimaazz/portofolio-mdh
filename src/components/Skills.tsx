@@ -29,6 +29,11 @@ const SKILL_LOGO: Record<string, string> = {
   blender, indesign, figma,
 };
 
+// Logo "mark" (transparan, tanpa background sendiri) → dibuat lebih besar biar
+// seimbang dengan app-icon Adobe yang sudah terisi penuh oleh kotaknya.
+const MARK = new Set(['Fig', 'Bl', 'Cv']);
+const markByLogo = new Set([figma, blender, canva]);
+
 export default function Skills() {
   const { skills: SKILLS, software: SOFTWARE } = useContent();
   // Bar terisi saat section masuk viewport
@@ -57,7 +62,9 @@ export default function Skills() {
                 <span
                   key={s.label}
                   title={name}
-                  className="grid h-12 w-12 place-items-center rounded-xl bg-white p-2 shadow-lg ring-1 ring-black/5 transition-transform hover:-translate-y-1"
+                  className={`grid h-12 w-12 place-items-center rounded-xl bg-white shadow-lg ring-1 ring-black/5 transition-transform hover:-translate-y-1 ${
+                    MARK.has(s.label) ? 'p-1.5' : 'p-2.5'
+                  }`}
                 >
                   <img
                     src={logo}
@@ -89,7 +96,13 @@ export default function Skills() {
                 <div className="mb-2 flex items-center justify-between text-sm font-semibold">
                   <span className="flex items-center gap-2">
                     {logo && (
-                      <img src={logo} alt="" className="h-5 w-5 rounded object-contain" loading="lazy" />
+                      <span
+                        className={`grid h-6 w-6 place-items-center rounded-md bg-white ring-1 ring-black/5 ${
+                          markByLogo.has(logo) ? 'p-0.5' : 'p-1'
+                        }`}
+                      >
+                        <img src={logo} alt="" className="h-full w-full object-contain" loading="lazy" />
+                      </span>
                     )}
                     {s.name}
                   </span>
