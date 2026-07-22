@@ -97,7 +97,7 @@ export default function Skills() {
           </div>
 
           {/* Daftar skill gaya indeks: nama · titik-titik · level */}
-          <dl className="mt-12 grid gap-x-14 border-t border-current/12 sm:grid-cols-2">
+          <div className="mt-12 grid gap-x-14 border-t border-current/12 sm:grid-cols-2">
             {SKILLS.map((s) => {
               const logo = SKILL_LOGO[s.name.toLowerCase().trim()];
               return (
@@ -110,18 +110,20 @@ export default function Skills() {
                       <img src={logo} alt="" loading="lazy" className="max-h-full max-w-full object-contain" />
                     </span>
                   )}
-                  <dt className="font-head text-base font-bold uppercase tracking-tight">{s.name}</dt>
+                  <span className="font-head text-base font-bold uppercase tracking-tight">
+                    {s.name}
+                  </span>
                   <span
                     aria-hidden="true"
                     className="mb-1 flex-1 self-end border-b border-dotted border-current/30"
                   />
-                  <dd className="font-mono text-xs uppercase tracking-widest text-soft">
+                  <span className="font-mono text-xs uppercase tracking-widest text-soft">
                     {level(s.pct)}
-                  </dd>
+                  </span>
                 </div>
               );
             })}
-          </dl>
+          </div>
         </div>
       </Panel>
     </div>

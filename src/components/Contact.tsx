@@ -62,7 +62,7 @@ export default function Contact() {
                 <Icon className="h-5 w-5 shrink-0" />
                 <span className="min-w-0">
                   <span className="block text-sm font-semibold">{label}</span>
-                  <span className="block truncate text-xs text-white/70 group-hover:text-black/60">
+                  <span className="block truncate text-xs text-white/85 group-hover:text-black/60">
                     {handle}
                   </span>
                 </span>

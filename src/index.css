@@ -28,10 +28,10 @@
     /* Panel: "cream" = kartu terang, "accent" = panel biru aksen */
     --cream: 0 0% 100%;
     --cream-fg: 222 47% 12%;
-    --accent-panel: 221 83% 53%;
+    --accent-panel: 221 83% 46%;
     --accent-panel-fg: 0 0% 100%;
 
-    --ink: 221 83% 53%;
+    --ink: 221 83% 47%;
     --ink-fg: 0 0% 100%;
 
     --hl: #2563eb; /* highlight teks — biru gelap agar kontras di latar terang */
@@ -50,10 +50,10 @@
 
     --cream: 222 38% 13%;    /* "kartu terang" jadi navy gelap */
     --cream-fg: 210 40% 96%;
-    --accent-panel: 221 83% 48%;      /* panel biru aksen */
+    --accent-panel: 221 83% 44%;      /* panel biru aksen (gelap utk kontras AA) */
     --accent-panel-fg: 210 40% 98%;
 
-    --ink: 217 91% 58%;
+    --ink: 217 84% 48%;
     --ink-fg: 0 0% 100%;
 
     --hl: #60a5fa; /* highlight teks — biru terang agar kontras di latar gelap */
@@ -148,7 +148,7 @@
   }
   /* muted lokal di dalam panel krem/merah — dinaikkan agar lolos kontras */
   .panel-cream .text-soft { color: hsl(var(--cream-fg) / 0.74); }
-  .panel-accent .text-soft { color: hsl(var(--accent-panel-fg) / 0.82); }
+  .panel-accent .text-soft { color: hsl(var(--accent-panel-fg) / 0.92); }
 
   /* Kata bertinta merah untuk judul dua-warna */
   .hl { color: var(--hl); }
