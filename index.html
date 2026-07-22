@@ -25,13 +25,9 @@
     <meta name="twitter:title" content="Muhammad Dimas Hadiyanto — Graphic Designer" />
     <meta name="twitter:description" content="Graphic designer & visual storyteller in Jakarta." />
     <meta name="twitter:image" content="https://portofolio-mdh.vercel.app/og-image.png" />
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts di-self-host (public/fonts, via src/fonts.css) — tanpa request eksternal -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/archivo-900.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/space-grotesk-400.woff2" crossorigin />
 
     <!-- Structured data — bantu Google memahami identitas & profil -->
     <script type="application/ld+json">
