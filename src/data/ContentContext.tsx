@@ -44,7 +44,7 @@ export function ContentProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let active = true;
 
-    (async () => {
+    const load = async () => {
       // Import client-nya dinamis; null bila env kosong → tetap pakai DEFAULTS
       const supabase = await getSupabase();
       if (!supabase || !active) return;
@@ -129,10 +129,18 @@ export function ContentProvider({ children }: { children: ReactNode }) {
       } catch {
         // biarkan DEFAULTS bila ada error
       }
-    })();
+    };
+
+    load();
+    // Ambil ulang saat tab kembali aktif → sinkron dengan perubahan admin tanpa reload manual
+    const onVisible = () => document.visibilityState === 'visible' && load();
+    document.addEventListener('visibilitychange', onVisible);
+    window.addEventListener('focus', load);
 
     return () => {
       active = false;
+      document.removeEventListener('visibilitychange', onVisible);
+      window.removeEventListener('focus', load);
     };
   }, []);
 
