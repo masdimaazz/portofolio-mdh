@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Loader2, ArrowRight } from 'lucide-react';
 import { client } from './client';
 import logoMdh from '@/assets/logo-mdh.png';
 
-// Logo MDH sebagai mask (ikut warna via backgroundColor) — wordmark, bukan huruf "M".
-const logoMaskStyle = (color: string) => ({
+// Set true HANYA setelah provider Google diaktifkan di Supabase.
+const GOOGLE_ENABLED = false;
+
+// Frasa yang menggambarkan situs (kinetic typography, berganti otomatis).
+const PHRASES = ['Branding & identity', 'Social campaigns', 'UI/UX & web design', '3D & motion'];
+
+const logoMask = {
   aspectRatio: '600 / 340',
-  backgroundColor: color,
+  backgroundColor: '#eef2ff',
   WebkitMaskImage: `url(${logoMdh})`,
   maskImage: `url(${logoMdh})`,
   WebkitMaskRepeat: 'no-repeat' as const,
@@ -15,17 +20,52 @@ const logoMaskStyle = (color: string) => ({
   maskPosition: 'left center',
   WebkitMaskSize: 'contain' as const,
   maskSize: 'contain' as const,
-});
-
-// Set true HANYA setelah provider Google diaktifkan di Supabase
-// (Authentication → Providers → Google) + OAuth credential dari Google Cloud.
-const GOOGLE_ENABLED = false;
+};
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [phrase, setPhrase] = useState(0);
+
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+
+  // Kinetic typography — ganti frasa tiap 2.2 dtk
+  useEffect(() => {
+    const t = setInterval(() => setPhrase((v) => (v + 1) % PHRASES.length), 2200);
+    return () => clearInterval(t);
+  }, []);
+
+  // Cursor kustom + beam mengikuti mouse + ripple saat klik
+  useEffect(() => {
+    const stage = stageRef.current;
+    const beams = stage ? Array.from(stage.querySelectorAll<HTMLElement>('.login-beam')) : [];
+    const onMove = (e: MouseEvent) => {
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      }
+      const nx = (e.clientX / window.innerWidth - 0.5) * 6;
+      beams.forEach((b, i) => {
+        b.style.transform = `rotate(${-16 - nx * (i + 1)}deg)`;
+      });
+    };
+    const onClick = (e: MouseEvent) => {
+      const r = document.createElement('div');
+      r.className = 'login-ripple';
+      r.style.left = e.clientX + 'px';
+      r.style.top = e.clientY + 'px';
+      document.body.appendChild(r);
+      setTimeout(() => r.remove(), 700);
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('click', onClick);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('click', onClick);
+    };
+  }, []);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -35,14 +75,12 @@ export default function Login() {
       const c = await client();
       const { error } = await c.auth.signInWithPassword({ email, password });
       if (error) throw error;
-      // onAuthStateChange di AdminApp yang lanjut ke dashboard
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Login gagal');
       setBusy(false);
     }
   }
 
-  // Login via Google OAuth → balik ke /admin. Email hasil login harus ada di tabel `admins`.
   async function google() {
     setError(null);
     try {
@@ -58,137 +96,126 @@ export default function Login() {
   }
 
   const inputCls =
-    'w-full rounded-lg border border-white/15 bg-white/[0.04] px-3.5 py-2.5 text-sm text-white placeholder-white/35 outline-none transition-colors focus:border-white/45';
+    'w-full rounded-[10px] border border-white/12 bg-white/[0.05] px-3.5 py-2.5 text-sm text-[#f4f7ff] placeholder-[#5f6a92] outline-none transition-colors focus:border-[#2563eb] focus:bg-[rgba(37,99,235,0.08)]';
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-[#dfe3ea] p-4 sm:p-8">
-      {/* Latar blueprint tipis + corner registration marks (gaya teknis referensi) */}
+    <div
+      ref={stageRef}
+      className="relative flex min-h-screen items-center justify-center overflow-hidden md:cursor-none"
+      style={{
+        background:
+          'radial-gradient(120% 90% at 85% 15%, #1c2a63 0%, #0a0e2a 42%, #05061a 78%)',
+      }}
+    >
+      {/* Beam cahaya */}
       <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.5]"
+        className="login-beam pointer-events-none absolute -top-[20%] right-[-6%] h-[160%] w-[34%] opacity-85 blur-[6px]"
+        style={{ background: 'linear-gradient(180deg, rgba(96,165,250,0.14), rgba(37,99,235,0.03) 60%, transparent)', transform: 'rotate(-16deg)' }}
+      />
+      <div
+        className="login-beam pointer-events-none absolute -top-[20%] right-[52%] h-[160%] w-[24%] opacity-45 blur-[6px]"
+        style={{ background: 'linear-gradient(180deg, rgba(96,165,250,0.14), rgba(37,99,235,0.03) 60%, transparent)', transform: 'rotate(-16deg)' }}
+      />
+      <div
+        className="login-beam pointer-events-none absolute -top-[20%] right-[30%] h-[160%] w-[18%] opacity-30 blur-[6px]"
+        style={{ background: 'linear-gradient(180deg, rgba(96,165,250,0.14), rgba(37,99,235,0.03) 60%, transparent)', transform: 'rotate(-16deg)' }}
+      />
+
+      {/* Grain */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 mix-blend-overlay"
         style={{
           backgroundImage:
-            'linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E\")",
         }}
       />
-      <span aria-hidden className="absolute left-5 top-5 h-4 w-4 border-l border-t border-black/25" />
-      <span aria-hidden className="absolute right-5 top-5 h-4 w-4 border-r border-t border-black/25" />
-      <span aria-hidden className="absolute bottom-5 left-5 h-4 w-4 border-b border-l border-black/25" />
-      <span aria-hidden className="absolute bottom-5 right-5 h-4 w-4 border-b border-r border-black/25" />
-      <span aria-hidden className="absolute left-10 top-6 hidden font-mono text-[10px] uppercase tracking-[0.2em] text-black/40 sm:block">
-        Portfolio · CMS
-      </span>
-      <span aria-hidden className="absolute bottom-6 right-10 hidden font-mono text-[10px] uppercase tracking-[0.2em] text-black/40 sm:block">
-        © {new Date().getFullYear()} MDH
-      </span>
 
-      {/* "App" dark mengambang */}
-      <div className="relative z-10 flex w-full max-w-4xl overflow-hidden rounded-[1.5rem] bg-[#0a1024] shadow-2xl shadow-black/30 ring-1 ring-black/5 md:min-h-[540px]">
-        {/* Kolom kiri: brand/visual */}
-        <div className="relative hidden w-1/2 flex-col justify-between overflow-hidden p-10 md:flex">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-[0.06]"
-            style={{
-              backgroundImage:
-                'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)',
-              backgroundSize: '40px 40px',
-            }}
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -left-24 top-1/3 h-72 w-72 rounded-full blur-[100px]"
-            style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.5), transparent 70%)' }}
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full blur-[100px]"
-            style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.45), transparent 70%)' }}
-          />
+      {/* Brand kiri-atas */}
+      <div className="login-reveal absolute left-8 top-8 z-10 md:left-12 md:top-10">
+        <span aria-hidden className="block h-5" style={logoMask} />
+        <span className="mt-1.5 block font-mono text-[10px] uppercase tracking-[0.25em] text-[#7fa8f5]">
+          portfolio cms
+        </span>
+      </div>
 
-          <div className="relative flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-white/60">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> [ Portfolio CMS ]
-          </div>
-
-          <div className="relative">
-            <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.25em] text-white/40">// secure area</p>
-            <h1
-              className="font-head font-black uppercase leading-[0.9] text-white"
-              style={{ fontSize: 'clamp(2.5rem, 5vw, 3.75rem)' }}
+      {/* Konten tengah: kinetic headline + panel */}
+      <div className="relative z-10 flex w-full flex-col items-center gap-11 px-4">
+        <div className="login-reveal text-center" style={{ animationDelay: '0.15s' }}>
+          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/40">
+            Graphic designer crafting
+          </p>
+          <div className="mt-3 flex min-h-[1.35em] items-center justify-center">
+            <h2
+              key={phrase}
+              className="role-in font-head font-black uppercase leading-none tracking-tight"
+              style={{
+                fontSize: 'clamp(1.6rem, 4.2vw, 2.6rem)',
+                background: 'linear-gradient(100deg, #93c5fd, #818cf8 45%, #c084fc)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+                filter: 'drop-shadow(0 0 24px rgba(129,140,248,0.35))',
+              }}
             >
-              Admin
-              <br />
-              <span className="bg-gradient-to-r from-blue-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
-                Access
-              </span>
-            </h1>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
-              Kelola seluruh konten portofolio — proyek, sertifikat, pesan — dari satu tempat.
-            </p>
-          </div>
-
-          <div className="relative flex items-center justify-between">
-            <span aria-hidden="true" className="block h-7" style={logoMaskStyle('#fff')} />
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/40">v1.0 — 2026</span>
+              {PHRASES[phrase]}
+            </h2>
           </div>
         </div>
 
-        {/* Kolom kanan: form */}
-        <div className="flex w-full flex-col justify-center bg-[#0e1526] p-8 sm:p-10 md:w-1/2">
-          {/* Header ringkas untuk mobile */}
-          <div className="mb-6 md:hidden">
-            <span aria-hidden="true" className="block h-6" style={logoMaskStyle('#fff')} />
-            <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-white/40">
-              Admin · Portfolio CMS
-            </p>
-          </div>
-
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/45">[ 01 · sign in ]</p>
-          <h2 className="mt-2 font-head text-2xl font-bold text-white">Welcome back</h2>
+        {/* Glass panel */}
+        <form
+          onSubmit={submit}
+          className="login-reveal w-full max-w-[380px] rounded-[18px] border border-white/10 bg-white/[0.045] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-xl"
+          style={{ animationDelay: '0.3s' }}
+        >
+          <h1
+            className="font-head text-xl font-bold text-[#f4f7ff]"
+            style={{ textShadow: '0 0 20px rgba(96,165,250,0.3)' }}
+          >
+            Selamat datang kembali
+          </h1>
+          <p className="mt-1.5 text-[13.5px] text-[#a8b2d6]">
+            Masuk untuk mengelola konten portofolio.
+          </p>
 
           {error && (
-            <div className="mt-5 rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+            <div className="mt-4 rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-300">
               {error}
             </div>
           )}
 
-          <form onSubmit={submit} className="mt-6">
+          <div className="mt-6">
             {GOOGLE_ENABLED && (
-              <>
-                <button
-                  type="button"
-                  onClick={google}
-                  className="mb-4 inline-flex w-full items-center justify-center gap-2.5 rounded-lg border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-white hover:border-white/40"
-                >
-                  <svg className="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1Z" />
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23Z" />
-                    <path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84Z" />
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38Z" />
-                  </svg>
-                  Masuk dengan Google
-                </button>
-                <div className="mb-4 flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest text-white/40">
-                  <span className="h-px flex-1 bg-white/15" /> atau <span className="h-px flex-1 bg-white/15" />
-                </div>
-              </>
+              <button
+                type="button"
+                onClick={google}
+                className="mb-4 inline-flex w-full items-center justify-center gap-2.5 rounded-[10px] border border-white/12 bg-white/[0.05] px-4 py-2.5 text-sm font-semibold text-white hover:border-white/40"
+              >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1Z" />
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23Z" />
+                  <path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84Z" />
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38Z" />
+                </svg>
+                Masuk dengan Google
+              </button>
             )}
 
-            <label className="mb-3 block">
-              <span className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">Email</span>
+            <label className="mb-4 block">
+              <span className="mb-1.5 block text-[12.5px] font-medium text-[#c3cbe8]">Email</span>
               <input
                 type="email"
                 required
                 autoComplete="email"
-                placeholder="you@email.com"
+                placeholder="nama@email.com"
                 className={inputCls}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </label>
             <label className="mb-5 block">
-              <span className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">Password</span>
+              <span className="mb-1.5 block text-[12.5px] font-medium text-[#c3cbe8]">Kata sandi</span>
               <input
                 type="password"
                 required
@@ -203,7 +230,11 @@ export default function Login() {
             <button
               type="submit"
               disabled={busy}
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-500 to-violet-500 px-4 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-[10px] px-4 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-px disabled:opacity-60"
+              style={{
+                background: 'linear-gradient(180deg, #3b7bf0, #2563eb)',
+                boxShadow: '0 6px 20px rgba(37,99,235,0.35)',
+              }}
             >
               {busy ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -214,15 +245,53 @@ export default function Login() {
                 </>
               )}
             </button>
-          </form>
+          </div>
 
-          <a
-            href="/"
-            className="mt-6 inline-block font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 hover:text-white/80"
-          >
-            ← kembali ke situs
-          </a>
-        </div>
+          <div className="mt-5 text-center text-[12.5px] text-[#7f88ab]">
+            <a href="/" className="text-[#7fa8f5] hover:underline">
+              ← Kembali ke situs
+            </a>
+          </div>
+        </form>
+      </div>
+
+      {/* URL glow bawah (gaya penutup GIF) */}
+      <div
+        className="login-reveal pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-xs tracking-widest"
+        style={{
+          animationDelay: '0.5s',
+          background: 'linear-gradient(100deg, #60a5fa, #a78bfa, #f0abfc)',
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+          color: 'transparent',
+          filter: 'drop-shadow(0 0 12px rgba(147,197,253,0.4))',
+        }}
+      >
+        portofolio-mdh.vercel.app
+      </div>
+
+      {/* Vignette */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{ background: 'radial-gradient(120% 100% at 50% 50%, transparent 45%, rgba(0,0,0,0.6) 100%)' }}
+      />
+
+      {/* Cursor kustom (desktop) */}
+      <div
+        ref={cursorRef}
+        aria-hidden
+        className="pointer-events-none fixed left-0 top-0 z-[70] hidden md:block"
+        style={{ filter: 'drop-shadow(0 0 6px rgba(147,197,253,0.8))' }}
+      >
+        <svg width="26" height="26" viewBox="0 0 26 26">
+          <path
+            d="M2 2 L2 20 L7 15 L11 22 L14 20.5 L10 13.5 L17 13 Z"
+            fill="#f4f7ff"
+            stroke="#2563eb"
+            strokeWidth="0.6"
+          />
+        </svg>
       </div>
     </div>
   );
