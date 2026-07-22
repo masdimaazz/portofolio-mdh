@@ -294,7 +294,9 @@
 
   /* Login motion (gaya referensi kinetic) */
   .login-reveal { animation: loginReveal 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-  .login-beam { animation: beamFloat 7s ease-in-out infinite; }
+  .login-beam { animation: beamSway 9s ease-in-out infinite; }
+  .login-orb { animation: orbDrift1 14s ease-in-out infinite; }
+  .login-orb-2 { animation: orbDrift2 18s ease-in-out infinite; }
   .login-ripple {
     position: fixed;
     z-index: 60;
@@ -360,7 +362,19 @@
 @keyframes loginRipple {
   to { width: 72px; height: 72px; opacity: 0; border-color: rgba(147, 197, 253, 0); }
 }
-@keyframes beamFloat {
-  0%, 100% { opacity: 0.75; }
-  50% { opacity: 0.35; }
+@keyframes beamSway {
+  0%, 100% { transform: rotate(-19deg); opacity: 0.75; }
+  50% { transform: rotate(-11deg); opacity: 0.4; }
+}
+@keyframes orbDrift1 {
+  0%, 100% { transform: translate(-8%, 8%) scale(1); }
+  50% { transform: translate(10%, -8%) scale(1.18); }
+}
+@keyframes orbDrift2 {
+  0%, 100% { transform: translate(6%, -6%) scale(1.1); }
+  50% { transform: translate(-10%, 8%) scale(0.92); }
+}
+@keyframes huePulse {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(-18deg); }
 }

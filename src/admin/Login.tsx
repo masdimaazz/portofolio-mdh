@@ -30,7 +30,6 @@ export default function Login() {
   const [phrase, setPhrase] = useState(0);
 
   const cursorRef = useRef<HTMLDivElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
 
   // Kinetic typography — ganti frasa tiap 2.2 dtk
   useEffect(() => {
@@ -38,18 +37,12 @@ export default function Login() {
     return () => clearInterval(t);
   }, []);
 
-  // Cursor kustom + beam mengikuti mouse + ripple saat klik
+  // Cursor kustom + ripple saat klik (motion latar berjalan sendiri via CSS)
   useEffect(() => {
-    const stage = stageRef.current;
-    const beams = stage ? Array.from(stage.querySelectorAll<HTMLElement>('.login-beam')) : [];
     const onMove = (e: MouseEvent) => {
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
       }
-      const nx = (e.clientX / window.innerWidth - 0.5) * 6;
-      beams.forEach((b, i) => {
-        b.style.transform = `rotate(${-16 - nx * (i + 1)}deg)`;
-      });
     };
     const onClick = (e: MouseEvent) => {
       const r = document.createElement('div');
@@ -100,25 +93,34 @@ export default function Login() {
 
   return (
     <div
-      ref={stageRef}
       className="relative flex min-h-screen items-center justify-center overflow-hidden md:cursor-none"
       style={{
         background:
           'radial-gradient(120% 90% at 85% 15%, #1c2a63 0%, #0a0e2a 42%, #05061a 78%)',
       }}
     >
-      {/* Beam cahaya */}
+      {/* Beam cahaya — menyapu terus-menerus */}
       <div
-        className="login-beam pointer-events-none absolute -top-[20%] right-[-6%] h-[160%] w-[34%] opacity-85 blur-[6px]"
-        style={{ background: 'linear-gradient(180deg, rgba(96,165,250,0.14), rgba(37,99,235,0.03) 60%, transparent)', transform: 'rotate(-16deg)' }}
+        className="login-beam pointer-events-none absolute -top-[20%] right-[-6%] h-[160%] w-[34%] blur-[6px]"
+        style={{ background: 'linear-gradient(180deg, rgba(96,165,250,0.14), rgba(37,99,235,0.03) 60%, transparent)' }}
       />
       <div
-        className="login-beam pointer-events-none absolute -top-[20%] right-[52%] h-[160%] w-[24%] opacity-45 blur-[6px]"
-        style={{ background: 'linear-gradient(180deg, rgba(96,165,250,0.14), rgba(37,99,235,0.03) 60%, transparent)', transform: 'rotate(-16deg)' }}
+        className="login-beam pointer-events-none absolute -top-[20%] right-[52%] h-[160%] w-[24%] blur-[6px]"
+        style={{ background: 'linear-gradient(180deg, rgba(96,165,250,0.14), rgba(37,99,235,0.03) 60%, transparent)', animationDuration: '11s', animationDelay: '-3s' }}
       />
       <div
-        className="login-beam pointer-events-none absolute -top-[20%] right-[30%] h-[160%] w-[18%] opacity-30 blur-[6px]"
-        style={{ background: 'linear-gradient(180deg, rgba(96,165,250,0.14), rgba(37,99,235,0.03) 60%, transparent)', transform: 'rotate(-16deg)' }}
+        className="login-beam pointer-events-none absolute -top-[20%] right-[30%] h-[160%] w-[18%] blur-[6px]"
+        style={{ background: 'linear-gradient(180deg, rgba(96,165,250,0.14), rgba(37,99,235,0.03) 60%, transparent)', animationDuration: '13s', animationDelay: '-6s' }}
+      />
+
+      {/* Orb cahaya melayang */}
+      <div
+        className="login-orb pointer-events-none absolute left-[10%] top-[20%] h-80 w-80 rounded-full blur-[90px]"
+        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.4), transparent 70%)' }}
+      />
+      <div
+        className="login-orb-2 pointer-events-none absolute right-[8%] bottom-[8%] h-96 w-96 rounded-full blur-[100px]"
+        style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.35), transparent 70%)' }}
       />
 
       {/* Grain */}
