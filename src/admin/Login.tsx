@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Loader2, Lock } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { client } from './client';
 
 export default function Login() {
@@ -42,18 +42,33 @@ export default function Login() {
     'w-full rounded-lg border border-base bg-[hsl(var(--page))] px-3 py-2.5 text-sm outline-none focus:border-[hsl(var(--accent))]';
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4">
+      {/* Latar: glow aksen + grid tipis */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{ background: 'radial-gradient(75% 55% at 50% 0%, hsl(var(--accent) / 0.20), transparent 70%)' }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)',
+          backgroundSize: '56px 56px',
+        }}
+      />
       <form
         onSubmit={submit}
-        className="w-full max-w-sm rounded-2xl border border-base bg-card p-8 shadow-xl"
+        className="relative z-10 w-full max-w-sm rounded-2xl border border-base bg-card/80 p-8 shadow-2xl backdrop-blur"
       >
-        <div className="mb-6 flex items-center gap-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[hsl(var(--accent))] text-white">
-            <Lock className="h-4 w-4" />
+        <div className="mb-7 flex flex-col items-center gap-3 text-center">
+          <span className="grid h-12 w-12 place-items-center rounded-xl bg-[hsl(var(--accent))] text-lg font-black text-white shadow-lg">
+            M
           </span>
           <div>
-            <h1 className="font-bold leading-tight">Admin Portofolio</h1>
-            <p className="text-xs text-muted">Masuk untuk mengelola konten</p>
+            <h1 className="text-lg font-bold leading-tight">Admin Portofolio</h1>
+            <p className="mt-0.5 text-xs text-muted">Masuk untuk mengelola konten situs</p>
           </div>
         </div>
 

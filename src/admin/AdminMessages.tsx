@@ -97,8 +97,8 @@ export default function AdminMessages() {
           {rows.map((m) => (
             <div
               key={m.id}
-              className={`rounded-xl border bg-card p-4 ${
-                m.read ? 'border-base' : 'border-[hsl(var(--accent))]'
+              className={`rounded-xl border p-4 backdrop-blur-xl ${
+                m.read ? 'border-white/10 bg-card/50' : 'border-[hsl(var(--accent))] bg-card/60'
               }`}
             >
               <div className="flex flex-wrap items-center justify-between gap-2">

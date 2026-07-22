@@ -21,9 +21,18 @@ export default function Dashboard({ email }: { email: string }) {
     }`;
 
   return (
-    <div className="min-h-screen">
+    <div className="relative min-h-screen">
+      {/* Latar ambient gelap ber-glow (gaya blur-admin) */}
+      <div
+        aria-hidden="true"
+        className="fixed inset-0 -z-10"
+        style={{
+          background:
+            'radial-gradient(55% 45% at 15% 0%, hsl(var(--accent) / 0.16), transparent 60%), radial-gradient(50% 45% at 100% 10%, hsl(265 80% 60% / 0.14), transparent 60%), hsl(var(--page))',
+        }}
+      />
       {/* Topbar */}
-      <header className="sticky top-0 z-20 flex items-center justify-between border-b border-base bg-card/90 px-4 py-3 backdrop-blur md:px-6">
+      <header className="sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-card/60 px-4 py-3 backdrop-blur-xl md:px-6">
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[hsl(var(--accent))] text-xs font-bold text-white">
             M
@@ -51,16 +60,22 @@ export default function Dashboard({ email }: { email: string }) {
 
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-6 md:flex-row md:px-6">
         {/* Sidebar */}
-        <aside className="hidden w-52 shrink-0 md:block">
-          <nav className="sticky top-20 space-y-1">
+        <aside className="hidden w-56 shrink-0 md:block">
+          <nav className="sticky top-20 space-y-0.5">
+            <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wider text-muted">
+              Content
+            </p>
             {ENTITIES.map((e) => (
               <button key={e.table} onClick={() => setActive(e.table)} className={navItemCls(active === e.table)}>
-                <span>{e.icon}</span>
+                <span className="text-base">{e.icon}</span>
                 {e.label}
               </button>
             ))}
+            <p className="px-3 pb-1 pt-4 text-[11px] font-semibold uppercase tracking-wider text-muted">
+              Inbox
+            </p>
             <button onClick={() => setActive('messages')} className={navItemCls(isMessages)}>
-              <span>📨</span>
+              <span className="text-base">📨</span>
               Messages
             </button>
           </nav>
@@ -71,14 +86,18 @@ export default function Dashboard({ email }: { email: string }) {
           <select
             value={active}
             onChange={(e) => setActive(e.target.value)}
-            className="w-full rounded-lg border border-base bg-card px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-base bg-card px-3 py-2.5 text-sm"
           >
-            {ENTITIES.map((e) => (
-              <option key={e.table} value={e.table}>
-                {e.icon} {e.label}
-              </option>
-            ))}
-            <option value="messages">📨 Messages</option>
+            <optgroup label="Content">
+              {ENTITIES.map((e) => (
+                <option key={e.table} value={e.table}>
+                  {e.icon} {e.label}
+                </option>
+              ))}
+            </optgroup>
+            <optgroup label="Inbox">
+              <option value="messages">📨 Messages</option>
+            </optgroup>
           </select>
         </div>
 
