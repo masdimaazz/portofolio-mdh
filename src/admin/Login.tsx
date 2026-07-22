@@ -40,20 +40,23 @@ export default function Login() {
 
   const cursorRef = useRef<HTMLDivElement>(null);
 
-  // Kinetic typography — ganti frasa tiap 2.2 dtk
+  // Kinetic typography — ganti frasa tiap 2.2 dtk (dibekukan bila kurangi-gerak)
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const t = setInterval(() => setPhrase((v) => (v + 1) % PHRASES.length), 2200);
     return () => clearInterval(t);
   }, []);
 
   // Cursor kustom + ripple saat klik (motion latar berjalan sendiri via CSS)
   useEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const onMove = (e: MouseEvent) => {
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
       }
     };
     const onClick = (e: MouseEvent) => {
+      if (reduce) return; // tanpa ripple saat kurangi-gerak
       const r = document.createElement('div');
       r.className = 'login-ripple';
       r.style.left = e.clientX + 'px';

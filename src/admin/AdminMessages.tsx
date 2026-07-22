@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Trash2, Loader2, RefreshCw, Mail } from 'lucide-react';
+import { Trash2, RefreshCw, Mail } from 'lucide-react';
 import { client } from './client';
+import { toast, Skeleton } from './ui';
 
 type Msg = {
   id: string;
@@ -54,8 +55,11 @@ export default function AdminMessages() {
       const c = await client();
       await c.from('messages').delete().eq('id', m.id);
       await load();
+      toast('Pesan dihapus');
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Gagal menghapus');
+      const msg = e instanceof Error ? e.message : 'Gagal menghapus';
+      setError(msg);
+      toast(msg, 'error');
     }
   }
 
@@ -85,8 +89,10 @@ export default function AdminMessages() {
       )}
 
       {loading ? (
-        <div className="flex items-center gap-2 text-muted">
-          <Loader2 className="h-4 w-4 animate-spin" /> Memuat…
+        <div className="space-y-3">
+          <Skeleton className="h-24 w-full" />
+          <Skeleton className="h-24 w-full" />
+          <Skeleton className="h-24 w-full" />
         </div>
       ) : rows.length === 0 ? (
         <p className="rounded-xl border border-dashed border-base px-4 py-10 text-center text-sm text-muted">

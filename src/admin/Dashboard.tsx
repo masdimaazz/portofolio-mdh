@@ -5,6 +5,8 @@ import { client } from './client';
 import EntityEditor from './EntityEditor';
 import AdminMessages from './AdminMessages';
 import AdminOverview from './AdminOverview';
+import { Toaster } from './ui';
+import logoMdh from '@/assets/logo-mdh.png';
 
 // Partikel latar halus (samakan dengan login)
 const PARTICLES = Array.from({ length: 12 }, (_, i) => ({
@@ -66,11 +68,24 @@ export default function Dashboard({ email }: { email: string }) {
       </div>
       {/* Topbar */}
       <header className="sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-white/[0.05] px-4 py-3 backdrop-blur-xl md:px-6">
-        <div className="flex items-center gap-2">
-          <span className="admin-grad flex h-7 w-7 items-center justify-center rounded-md text-xs font-bold text-white">
-            M
-          </span>
-          <span className="font-semibold">Admin Portofolio</span>
+        <div className="flex items-center gap-2.5">
+          <span
+            aria-hidden
+            className="block h-4"
+            style={{
+              aspectRatio: '600 / 340',
+              backgroundColor: '#eef2ff',
+              WebkitMaskImage: `url(${logoMdh})`,
+              maskImage: `url(${logoMdh})`,
+              WebkitMaskRepeat: 'no-repeat',
+              maskRepeat: 'no-repeat',
+              WebkitMaskPosition: 'left center',
+              maskPosition: 'left center',
+              WebkitMaskSize: 'contain',
+              maskSize: 'contain',
+            }}
+          />
+          <span className="text-sm font-semibold text-white/50">Admin</span>
         </div>
         <div className="flex items-center gap-3">
           <a
@@ -150,6 +165,7 @@ export default function Dashboard({ email }: { email: string }) {
           ) : null}
         </main>
       </div>
+      <Toaster />
     </div>
   );
 }

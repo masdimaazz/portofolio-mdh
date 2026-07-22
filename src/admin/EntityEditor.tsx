@@ -3,6 +3,7 @@ import { Plus, Trash2, ArrowUp, ArrowDown, X, Loader2 } from 'lucide-react';
 import type { Entity } from './config';
 import { client } from './client';
 import FieldInput from './FieldInput';
+import { toast, Skeleton } from './ui';
 
 type Row = Record<string, unknown> & { id?: string | number };
 
@@ -102,9 +103,12 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
       }
       setEditing(entity.single ? editing : null);
       setDirty(false);
+      toast('Tersimpan');
       if (!entity.single) await load();
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Gagal menyimpan');
+      const m = e instanceof Error ? e.message : 'Gagal menyimpan';
+      setError(m);
+      toast(m, 'error');
     } finally {
       setSaving(false);
     }
@@ -117,8 +121,11 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
       const { error } = await c.from(entity.table).delete().eq('id', row.id);
       if (error) throw error;
       await load();
+      toast('Item dihapus');
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Gagal menghapus');
+      const m = e instanceof Error ? e.message : 'Gagal menghapus';
+      setError(m);
+      toast(m, 'error');
     }
   }
 
@@ -160,8 +167,11 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
 
   if (loading) {
     return (
-      <div className="flex items-center gap-2 text-muted">
-        <Loader2 className="h-4 w-4 animate-spin" /> Memuat {entity.label}…
+      <div className="space-y-3">
+        <Skeleton className="mb-6 h-8 w-44" />
+        <Skeleton className="h-16 w-full" />
+        <Skeleton className="h-16 w-full" />
+        <Skeleton className="h-16 w-full" />
       </div>
     );
   }
@@ -305,9 +315,15 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
             </div>
           ))}
           {rows.length === 0 && (
-            <p className="rounded-xl border border-dashed border-base px-4 py-8 text-center text-sm text-muted">
-              Belum ada item. Klik "Tambah" untuk membuat.
-            </p>
+            <div className="rounded-xl border border-dashed border-white/15 px-4 py-12 text-center">
+              <p className="text-sm text-muted">Belum ada item di {entity.label.toLowerCase()}.</p>
+              <button
+                onClick={() => openForm({ ...entity.defaultRow })}
+                className="admin-grad mt-4 inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold"
+              >
+                <Plus className="h-4 w-4" /> Tambah item pertama
+              </button>
+            </div>
           )}
         </div>
       )}
