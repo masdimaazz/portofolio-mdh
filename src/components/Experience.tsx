@@ -71,20 +71,32 @@ export default function Experience() {
         </div>
       </div>
 
-      {/* Pendidikan */}
-      <Reveal delay={120} className="mt-14">
-        <div className="panel-accent flex flex-col justify-between gap-4 rounded-lg p-7 sm:flex-row sm:items-center md:p-8">
-          <div>
-            <p className="type-eyebrow mb-2 text-soft">Education</p>
-            <h3 className="type-h3">{education?.degree}</h3>
-            <p className="text-sm text-soft mt-1">{education?.school}</p>
+      {/* Pendidikan (bisa lebih dari satu) */}
+      {education.length > 0 && (
+        <Reveal delay={120} className="mt-14">
+          <p className="type-eyebrow mb-3 text-soft">Education</p>
+          <div className="space-y-3">
+            {education.map((ed, i) => (
+              <div
+                key={ed.degree + i}
+                className="panel-accent flex flex-col justify-between gap-4 rounded-lg p-7 sm:flex-row sm:items-center md:p-8"
+              >
+                <div>
+                  <h3 className="type-h3">{ed.degree}</h3>
+                  <p className="mt-1 text-sm text-soft">{ed.school}</p>
+                </div>
+                <div className="shrink-0 text-left sm:text-right">
+                  <p className="font-head text-2xl font-black">
+                    {ed.gpa}
+                    <span className="text-base text-soft">/4.0</span>
+                  </p>
+                  <p className="mt-1 font-mono text-xs text-soft">{ed.period}</p>
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="text-left sm:text-right shrink-0">
-            <p className="font-head text-2xl font-black">{education?.gpa}<span className="text-soft text-base">/4.0</span></p>
-            <p className="text-xs font-mono text-soft mt-1">{education?.period}</p>
-          </div>
-        </div>
-      </Reveal>
+        </Reveal>
+      )}
     </div>
     </Panel>
     </div>

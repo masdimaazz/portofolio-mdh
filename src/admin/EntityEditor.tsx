@@ -127,15 +127,20 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
     if (target < 0 || target >= rows.length) return;
     const a = rows[index];
     const b = rows[target];
+    // Optimistic: tukar posisi + sort_order di state langsung (tanpa reload penuh)
+    const next = [...rows];
+    next[index] = { ...b, sort_order: a.sort_order };
+    next[target] = { ...a, sort_order: b.sort_order };
+    setRows(next);
     try {
       const c = await client();
       await Promise.all([
         c.from(entity.table).update({ sort_order: b.sort_order }).eq('id', a.id),
         c.from(entity.table).update({ sort_order: a.sort_order }).eq('id', b.id),
       ]);
-      await load();
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Gagal mengubah urutan');
+      await load(); // resync bila gagal
     }
   }
 

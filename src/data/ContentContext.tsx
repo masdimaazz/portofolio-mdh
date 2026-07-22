@@ -70,7 +70,6 @@ export function ContentProvider({ children }: { children: ReactNode }) {
         const companyById = new Map<string, string>(companies.map((c) => [c.id, c.name]));
 
         const p = prof.data as ProfileRow | null;
-        const e = (edu.data?.[0] ?? null) as EducationRow | null;
 
         setContent({
           profile: p
@@ -110,9 +109,9 @@ export function ContentProvider({ children }: { children: ReactNode }) {
           experience: pick<ExperienceRow, Content['experience'][number]>(exp.data, DEFAULTS.experience, (r) => ({
             role: r.role, org: r.org, period: r.period, current: r.current, points: r.points || [],
           })),
-          education: e
-            ? { degree: e.degree, school: e.school, gpa: e.gpa, period: e.period }
-            : DEFAULTS.education,
+          education: pick<EducationRow, Content['education'][number]>(edu.data, DEFAULTS.education, (r) => ({
+            degree: r.degree, school: r.school, gpa: r.gpa, period: r.period,
+          })),
           services: pick<ServiceRow, Content['services'][number]>(srv.data, DEFAULTS.services, (r) => ({
             lead: r.lead, rest: r.rest, description: r.description,
           })),
@@ -131,16 +130,21 @@ export function ContentProvider({ children }: { children: ReactNode }) {
       }
     };
 
-    load();
-    // Ambil ulang saat tab kembali aktif → sinkron dengan perubahan admin tanpa reload manual
-    const onVisible = () => document.visibilityState === 'visible' && load();
+    // Throttle: refetch hanya saat tab kembali terlihat & sudah > 4 dtk sejak load terakhir
+    let lastLoad = 0;
+    const run = () => {
+      lastLoad = Date.now();
+      load();
+    };
+    run();
+    const onVisible = () => {
+      if (document.visibilityState === 'visible' && Date.now() - lastLoad > 4000) run();
+    };
     document.addEventListener('visibilitychange', onVisible);
-    window.addEventListener('focus', load);
 
     return () => {
       active = false;
       document.removeEventListener('visibilitychange', onVisible);
-      window.removeEventListener('focus', load);
     };
   }, []);
 

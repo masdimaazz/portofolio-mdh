@@ -46,7 +46,7 @@ export interface Content {
   projects: Project[];
   certificates: Certificate[];
   experience: ExperienceItem[];
-  education: Education | null;
+  education: Education[];
   services: Service[];
   principles: Principle[];
   skills: Skill[];
@@ -91,7 +91,9 @@ export const DEFAULTS: Content = {
     { role: 'Social Media Staff', org: 'Karang Taruna', period: 'Oct 2024 – Present', current: true, points: ['Design visual content (posters, feeds, stories) for social, religious, and youth activities.', 'Write informative, engaging captions and copywriting.', 'Document activities for promotion and digital archives.'] },
     { role: 'Graphic Design Intern', org: 'Kementerian Sosial RI', period: 'Feb 2023 – Jul 2023', current: false, points: ['Designed Instagram feed content for the Ministry of Social Affairs.', 'Managed the social media content timeline.', 'Rebranded the HLUN 2022 logo and Instagram feed branding.'] },
   ],
-  education: { degree: 'Applied Bachelor — Multimedia Engineering Technology', school: 'Politeknik Negeri Media Kreatif Jakarta', gpa: '3.52', period: 'Aug 2020 – Nov 2024' },
+  education: [
+    { degree: 'Applied Bachelor — Multimedia Engineering Technology', school: 'Politeknik Negeri Media Kreatif Jakarta', gpa: '3.52', period: 'Aug 2020 – Nov 2024' },
+  ],
   services: [
     { lead: 'Brand', rest: 'Identity', description: 'Distinctive logos, systems and guidelines that make brands instantly recognisable across every touchpoint.' },
     { lead: 'Social &', rest: 'Campaigns', description: 'Scroll-stopping key visuals, feeds and ad creatives tuned to each platform and audience.' },
