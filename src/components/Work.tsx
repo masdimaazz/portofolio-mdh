@@ -51,6 +51,7 @@ export default function Work() {
                   key={k}
                   type="button"
                   onClick={() => setFilter(k)}
+                  aria-pressed={filter === k}
                   className={`rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-wide transition-colors ${
                     filter === k
                       ? 'border-transparent bg-ink text-ink-fg'

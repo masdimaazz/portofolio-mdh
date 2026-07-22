@@ -12,7 +12,25 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
   const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState<Row | null>(null);
   const [saving, setSaving] = useState(false);
+  const [dirty, setDirty] = useState(false);
   const [options, setOptions] = useState<Record<string, { id: string; label: string }[]>>({});
+
+  // Buka/tutup form + reset penanda "belum disimpan"
+  const openForm = (row: Row | null) => {
+    setEditing(row);
+    setDirty(false);
+  };
+
+  // Peringatkan bila menutup/reload tab saat ada editan belum disimpan
+  useEffect(() => {
+    if (!dirty) return;
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, [dirty]);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -46,6 +64,7 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
       setError(e instanceof Error ? e.message : 'Gagal memuat data');
     } finally {
       setLoading(false);
+      setDirty(false);
     }
   }, [entity]);
 
@@ -82,6 +101,7 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
         if (error) throw error;
       }
       setEditing(entity.single ? editing : null);
+      setDirty(false);
       if (!entity.single) await load();
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Gagal menyimpan');
@@ -152,7 +172,7 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
         </div>
         {!entity.single && (
           <button
-            onClick={() => setEditing({ ...entity.defaultRow })}
+            onClick={() => openForm({ ...entity.defaultRow })}
             className="inline-flex items-center gap-1.5 rounded-lg bg-[hsl(var(--accent))] px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
           >
             <Plus className="h-4 w-4" /> Tambah
@@ -172,7 +192,7 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
           {!entity.single && (
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-semibold">{editing.id ? 'Edit item' : 'Item baru'}</h2>
-              <button onClick={() => setEditing(null)} className="text-muted hover:text-[hsl(var(--fg))]">
+              <button onClick={() => openForm(null)} className="text-muted hover:text-[hsl(var(--fg))]">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -183,7 +203,10 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
                 <FieldInput
                   field={f}
                   value={editing[f.key]}
-                  onChange={(v) => setEditing((cur) => (cur ? { ...cur, [f.key]: v } : cur))}
+                  onChange={(v) => {
+                    setEditing((cur) => (cur ? { ...cur, [f.key]: v } : cur));
+                    setDirty(true);
+                  }}
                   options={f.optionsFrom ? options[f.optionsFrom] : undefined}
                 />
               </div>
@@ -199,11 +222,14 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
             </button>
             {!entity.single && (
               <button
-                onClick={() => setEditing(null)}
+                onClick={() => openForm(null)}
                 className="rounded-lg border border-base px-4 py-2 text-sm hover:border-[hsl(var(--accent))]"
               >
                 Batal
               </button>
+            )}
+            {dirty && (
+              <span className="ml-auto text-xs font-medium text-amber-400">● Belum disimpan</span>
             )}
           </div>
         </div>
@@ -259,7 +285,7 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
               )}
 
               <button
-                onClick={() => setEditing({ ...row })}
+                onClick={() => openForm({ ...row })}
                 className="rounded-lg border border-base px-3 py-1.5 text-sm hover:border-[hsl(var(--accent))]"
               >
                 Edit
