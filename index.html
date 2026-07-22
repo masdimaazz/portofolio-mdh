@@ -64,9 +64,57 @@
         ]
       }
     </script>
+
+    <!-- Loader awal (tampil sebelum JS termuat; diganti React saat render) -->
+    <style>
+      #app-loader {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: #05061a;
+        z-index: 9999;
+      }
+      #app-loader svg {
+        width: 3.25em;
+        transform-origin: center;
+        animation: al-rotate 2s linear infinite;
+      }
+      #app-loader circle {
+        fill: none;
+        stroke: hsl(214, 97%, 59%);
+        stroke-width: 2;
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        stroke-linecap: round;
+        animation: al-dash 1.5s ease-in-out infinite;
+      }
+      @keyframes al-rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes al-dash {
+        0% {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 90, 200;
+          stroke-dashoffset: -35px;
+        }
+        100% {
+          stroke-dashoffset: -125px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="app-loader">
+        <svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20"></circle></svg>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

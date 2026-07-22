@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import type { Session } from '@supabase/supabase-js';
-import { Loader2 } from 'lucide-react';
 import { client } from './client';
 import Login from './Login';
 import Dashboard from './Dashboard';
+import { PageSpinner } from '@/components/Spinner';
 
 export default function AdminApp() {
   const [session, setSession] = useState<Session | null>(null);
@@ -50,11 +50,7 @@ export default function AdminApp() {
   }, [session]);
 
   if (!ready) {
-    return (
-      <div className="flex min-h-screen items-center justify-center text-muted">
-        <Loader2 className="h-5 w-5 animate-spin" />
-      </div>
-    );
+    return <PageSpinner />;
   }
 
   if (!session || isAdmin === false) {
@@ -71,11 +67,7 @@ export default function AdminApp() {
   }
 
   if (isAdmin === null) {
-    return (
-      <div className="flex min-h-screen items-center justify-center text-muted">
-        <Loader2 className="h-5 w-5 animate-spin" /> <span className="ml-2">Memverifikasi…</span>
-      </div>
-    );
+    return <PageSpinner />;
   }
 
   return <Dashboard email={session.user.email || ''} />;
