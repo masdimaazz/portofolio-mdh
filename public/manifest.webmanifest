@@ -1,0 +1,12 @@
+{
+  "name": "Muhammad Dimas Hadiyanto — Graphic Designer",
+  "short_name": "MDH Portfolio",
+  "description": "Graphic designer & visual storyteller in Jakarta. Branding, social campaigns, packaging, and UI/UX.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a1024",
+  "theme_color": "#2563eb",
+  "icons": [
+    { "src": "/favicon-mdh.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

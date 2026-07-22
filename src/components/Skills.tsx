@@ -74,7 +74,7 @@ export default function Skills() {
                 >
                   {logo ? (
                     <span
-                      className={`grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-md bg-white ring-1 ring-black/10 ${
+                      className={`grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-md bg-white shadow-sm ring-1 ring-black/10 ${
                         PAD[s.label] || 'p-2'
                       }`}
                     >
@@ -106,7 +106,7 @@ export default function Skills() {
                   className="flex items-center gap-3 border-b border-current/12 py-3.5"
                 >
                   {logo && (
-                    <span className="grid h-6 w-6 shrink-0 place-items-center overflow-hidden rounded bg-white p-1 ring-1 ring-black/10">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center overflow-hidden rounded bg-white p-1 shadow-sm ring-1 ring-black/10">
                       <img src={logo} alt="" loading="lazy" className="max-h-full max-w-full object-contain" />
                     </span>
                   )}

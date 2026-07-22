@@ -7,16 +7,22 @@ export default function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [company, setCompany] = useState(''); // honeypot — harus tetap kosong
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [err, setErr] = useState<string | null>(null);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    // Honeypot terisi → kemungkinan bot; pura-pura sukses tanpa menyimpan.
+    if (company.trim() !== '') {
+      setStatus('sent');
+      return;
+    }
     setStatus('sending');
     setErr(null);
     try {
       const supabase = await getSupabase();
-      if (!supabase) throw new Error('Form belum aktif (Supabase belum dikonfigurasi).');
+      if (!supabase) throw new Error('Form is not active yet.');
       const { error } = await supabase.from('messages').insert({ name, email, message });
       if (error) throw error;
       setStatus('sent');
@@ -24,7 +30,7 @@ export default function ContactForm() {
       setEmail('');
       setMessage('');
     } catch (e) {
-      setErr(e instanceof Error ? e.message : 'Gagal mengirim pesan');
+      setErr(e instanceof Error ? e.message : 'Failed to send message');
       setStatus('error');
     }
   }
@@ -42,14 +48,14 @@ export default function ContactForm() {
         <span className="grid h-11 w-11 place-items-center rounded-full bg-white text-black">
           <Check className="h-5 w-5" />
         </span>
-        <p className="font-head text-lg font-bold uppercase tracking-tight">Pesan terkirim!</p>
-        <p className="text-sm text-white/70">Terima kasih — saya akan segera membalas.</p>
+        <p className="font-head text-lg font-bold uppercase tracking-tight">Message sent!</p>
+        <p className="text-sm text-white/70">Thanks — I'll get back to you soon.</p>
         <button
           type="button"
           onClick={() => setStatus('idle')}
           className="mt-1 text-xs font-semibold uppercase tracking-widest text-white/60 hover:text-white"
         >
-          Kirim lagi
+          Send another
         </button>
       </div>
     );
@@ -57,11 +63,22 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={submit} className="grid gap-3 text-left">
+      {/* Honeypot: disembunyikan dari manusia, diisi bot */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+        value={company}
+        onChange={(e) => setCompany(e.target.value)}
+      />
       <div className="grid gap-3 sm:grid-cols-2">
         <input
           className={field}
-          placeholder="Nama"
-          aria-label="Nama"
+          placeholder="Name"
+          aria-label="Name"
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -78,14 +95,16 @@ export default function ContactForm() {
       </div>
       <textarea
         className={field + ' min-h-[120px] resize-y'}
-        placeholder="Ceritakan proyekmu…"
-        aria-label="Pesan"
+        placeholder="Tell me about your project…"
+        aria-label="Message"
+        aria-describedby={err ? 'cf-error' : undefined}
         required
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
       {err && (
         <p
+          id="cf-error"
           role="alert"
           className="rounded-lg border border-white/30 bg-white/10 px-3 py-2 text-xs text-white"
         >
@@ -102,7 +121,7 @@ export default function ContactForm() {
         ) : (
           <Send className="h-4 w-4" />
         )}
-        Kirim pesan
+        Send message
       </button>
     </form>
   );

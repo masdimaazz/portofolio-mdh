@@ -33,6 +33,8 @@
 
     --ink: 221 83% 53%;
     --ink-fg: 0 0% 100%;
+
+    --hl: #2563eb; /* highlight teks — biru gelap agar kontras di latar terang */
   }
 
   /* Gelap (default, paling setia ref Denis): navy-black + biru elektrik */
@@ -53,6 +55,8 @@
 
     --ink: 217 91% 58%;
     --ink-fg: 0 0% 100%;
+
+    --hl: #60a5fa; /* highlight teks — biru terang agar kontras di latar gelap */
   }
 
   * {
@@ -147,7 +151,7 @@
   .panel-accent .text-soft { color: hsl(var(--accent-panel-fg) / 0.82); }
 
   /* Kata bertinta merah untuk judul dua-warna */
-  .hl { color: var(--brand-500); }
+  .hl { color: var(--hl); }
 
   /* Teks watermark raksasa di balik panel */
   .ghost {
