@@ -63,15 +63,18 @@ export default function Work() {
             </div>
           )}
 
-          {/* Satu blok per perusahaan */}
+          {/* Satu blok per perusahaan — hanya yang punya proyek sesuai filter, dinomori ulang berurutan */}
           <div className="space-y-16">
-            {COMPANIES.map((co, ci) => {
-              // Ambil proyek perusahaan ini beserta indeks globalnya (untuk modal)
-              const items = PROJECTS.map((p, gi) => ({ p, gi })).filter(
+            {COMPANIES.map((co) => ({
+              co,
+              // proyek perusahaan ini beserta indeks globalnya (untuk modal)
+              items: PROJECTS.map((p, gi) => ({ p, gi })).filter(
                 (x) => x.p.company === co.name && (filter === 'All' || x.p.kind === filter)
-              );
-              if (items.length === 0) return null;
-              return (
+              ),
+            }))
+              .filter((g) => g.items.length > 0)
+              .map(({ co, items }, ci) => {
+                return (
                 <Reveal key={co.name}>
                   <div>
                     {/* Header perusahaan */}

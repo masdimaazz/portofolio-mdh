@@ -59,6 +59,11 @@
     border-color: hsl(var(--border));
   }
 
+  /* Anchor selalu mewarisi warna induk → cegah link tak terlihat di panel berwarna */
+  a {
+    color: inherit;
+  }
+
   html {
     scroll-behavior: smooth;
   }

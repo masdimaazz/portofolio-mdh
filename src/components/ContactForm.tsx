@@ -34,7 +34,11 @@ export default function ContactForm() {
 
   if (status === 'sent') {
     return (
-      <div className="flex flex-col items-center gap-3 rounded-lg border border-white/20 bg-white/5 px-6 py-10 text-center">
+      <div
+        role="status"
+        aria-live="polite"
+        className="flex flex-col items-center gap-3 rounded-lg border border-white/20 bg-white/5 px-6 py-10 text-center"
+      >
         <span className="grid h-11 w-11 place-items-center rounded-full bg-white text-black">
           <Check className="h-5 w-5" />
         </span>
@@ -57,6 +61,7 @@ export default function ContactForm() {
         <input
           className={field}
           placeholder="Nama"
+          aria-label="Nama"
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -65,6 +70,7 @@ export default function ContactForm() {
           type="email"
           className={field}
           placeholder="Email"
+          aria-label="Email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -73,12 +79,16 @@ export default function ContactForm() {
       <textarea
         className={field + ' min-h-[120px] resize-y'}
         placeholder="Ceritakan proyekmu…"
+        aria-label="Pesan"
         required
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
       {err && (
-        <p className="rounded-lg border border-white/30 bg-white/10 px-3 py-2 text-xs text-white">
+        <p
+          role="alert"
+          className="rounded-lg border border-white/30 bg-white/10 px-3 py-2 text-xs text-white"
+        >
           {err}
         </p>
       )}
