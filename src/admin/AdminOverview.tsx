@@ -13,9 +13,9 @@ interface StatCard {
 
 const CARDS: StatCard[] = [
   { key: 'projects', table: 'projects', label: 'Projects', icon: FolderCheck, grad: 'from-blue-500 to-indigo-600' },
-  { key: 'certificates', table: 'certificates', label: 'Certificates', icon: GraduationCap, grad: 'from-violet-500 to-purple-600' },
-  { key: 'messages', table: 'messages', label: 'Messages', icon: Mail, grad: 'from-emerald-500 to-teal-600' },
-  { key: 'companies', table: 'companies', label: 'Companies', icon: Building2, grad: 'from-amber-500 to-orange-600' },
+  { key: 'certificates', table: 'certificates', label: 'Certificates', icon: GraduationCap, grad: 'from-violet-500 to-fuchsia-600' },
+  { key: 'messages', table: 'messages', label: 'Messages', icon: Mail, grad: 'from-cyan-500 to-blue-600' },
+  { key: 'companies', table: 'companies', label: 'Companies', icon: Building2, grad: 'from-indigo-500 to-violet-600' },
 ];
 
 type Recent = { id: string; name: string; email: string; created_at: string; read: boolean };

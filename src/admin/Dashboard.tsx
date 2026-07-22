@@ -6,6 +6,15 @@ import EntityEditor from './EntityEditor';
 import AdminMessages from './AdminMessages';
 import AdminOverview from './AdminOverview';
 
+// Partikel latar halus (samakan dengan login)
+const PARTICLES = Array.from({ length: 12 }, (_, i) => ({
+  left: (i * 8.3 + 5) % 96,
+  bottom: (i * 17) % 70,
+  size: 2 + (i % 2),
+  dur: 11 + (i % 4) * 3,
+  delay: -((i * 2.1) % 14),
+}));
+
 export default function Dashboard({ email }: { email: string }) {
   const [active, setActive] = useState<string>('overview');
   const isOverview = active === 'overview';
@@ -40,6 +49,20 @@ export default function Dashboard({ email }: { email: string }) {
           className="login-orb-2 absolute bottom-[6%] right-[6%] h-96 w-96 rounded-full blur-[110px]"
           style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.18), transparent 70%)' }}
         />
+        {PARTICLES.map((p, i) => (
+          <span
+            key={i}
+            className="login-particle absolute rounded-full bg-blue-300/30"
+            style={{
+              left: `${p.left}%`,
+              bottom: `${p.bottom}%`,
+              width: p.size,
+              height: p.size,
+              animationDuration: `${p.dur}s`,
+              animationDelay: `${p.delay}s`,
+            }}
+          />
+        ))}
       </div>
       {/* Topbar */}
       <header className="sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-white/[0.05] px-4 py-3 backdrop-blur-xl md:px-6">
