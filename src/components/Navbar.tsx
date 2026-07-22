@@ -90,13 +90,17 @@ export default function Navbar({ isDark, onToggleTheme }: NavbarProps) {
                 key={l.href}
                 href={l.href}
                 aria-current={isActive ? 'true' : undefined}
-                className={`relative font-medium transition-opacity ${
+                className={`nav-link relative rounded-lg px-3 py-1.5 font-medium transition-opacity ${
                   isActive ? 'opacity-100' : 'opacity-70 hover:opacity-100'
                 }`}
               >
                 {l.label}
+                {/* Outline menggambar saat hover */}
+                <svg className="nav-outline" aria-hidden="true">
+                  <rect pathLength={100} />
+                </svg>
                 <span
-                  className={`absolute -bottom-2 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full transition-all duration-300 ${
+                  className={`absolute -bottom-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full transition-all duration-300 ${
                     isActive ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                   }`}
                   style={{ background: 'var(--brand-500)' }}
