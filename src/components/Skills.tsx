@@ -70,7 +70,7 @@ export default function Skills() {
                 <div
                   key={s.label}
                   title={name}
-                  className="flex items-center gap-3 rounded-lg border border-current/12 bg-current/[0.02] p-3 transition-colors hover:border-current/30"
+                  className="hover-lift flex items-center gap-3 rounded-lg border border-current/12 bg-current/[0.02] p-3 hover:border-current/30"
                 >
                   {logo ? (
                     <span

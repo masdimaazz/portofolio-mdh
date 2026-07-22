@@ -28,7 +28,7 @@ export default function Stats() {
               return (
                 <div
                   key={s.label}
-                  className="flex flex-col gap-4 rounded-lg border border-current/20 bg-current/[0.04] p-5 md:p-6"
+                  className="hover-lift flex flex-col gap-4 rounded-lg border border-current/20 bg-current/[0.04] p-5 hover:border-current/40 md:p-6"
                 >
                   <Icon className="h-6 w-6 opacity-70" />
                   <div

@@ -48,16 +48,16 @@ export default function Hero() {
 
         {/* Konten tengah */}
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 py-24 text-center text-white">
-          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-1.5 text-xs font-medium tracking-wide text-white/80">
+          <span className="enter-up mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-1.5 text-xs font-medium tracking-wide text-white/80">
             <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_3px_rgba(52,211,153,0.25)]" />
             Available for work
           </span>
-          <p className="type-eyebrow text-white/70">
+          <p className="enter-up type-eyebrow text-white/70" style={{ animationDelay: '80ms' }}>
             <span className="hl">•</span> Hi, I'm
           </p>
           <h1
-            className="mt-4 font-head font-black uppercase leading-[0.9] tracking-tight"
-            style={{ fontSize: 'clamp(2.75rem, 9vw, 8rem)' }}
+            className="enter-up mt-4 font-head font-black uppercase leading-[0.9] tracking-tight"
+            style={{ fontSize: 'clamp(2.75rem, 9vw, 8rem)', animationDelay: '160ms' }}
           >
             {words.map((w, i) => (
               <span key={i} className={i === mid ? 'hl' : undefined}>
@@ -66,12 +66,18 @@ export default function Hero() {
               </span>
             ))}
           </h1>
-          <p className="mt-6 flex items-center justify-center gap-2 font-mono text-sm uppercase tracking-widest text-white/70 sm:text-base">
+          <p
+            className="enter-up mt-6 flex items-center justify-center gap-2 font-mono text-sm uppercase tracking-widest text-white/70 sm:text-base"
+            style={{ animationDelay: '260ms' }}
+          >
             <span className="text-white/45">I'm a</span>
             <RotatingRole roles={profile.roles} />
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <div
+            className="enter-up mt-9 flex flex-wrap items-center justify-center gap-3"
+            style={{ animationDelay: '360ms' }}
+          >
             <a
               href="#work"
               className="rounded-full bg-white px-7 py-3 text-sm font-semibold text-black transition-transform hover:scale-105"

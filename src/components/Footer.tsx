@@ -64,7 +64,7 @@ export default function Footer() {
                   <li key={l.label}>
                     <a
                       href={l.href}
-                      className="text-sm font-medium transition-opacity hover:opacity-70"
+                      className="link-underline text-sm font-medium opacity-90 hover:opacity-100"
                     >
                       {l.label}
                     </a>

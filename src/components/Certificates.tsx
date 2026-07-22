@@ -21,7 +21,7 @@ export default function Certificates() {
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {certificates.map((c, i) => (
               <Reveal key={c.title + i} delay={i * 60}>
-                <div className="h-full overflow-hidden rounded-lg border border-current/15">
+                <div className="hover-lift h-full overflow-hidden rounded-lg border border-current/15 hover:border-current/35">
                   {c.image && (
                     <div className="aspect-[4/3] overflow-hidden bg-current/[0.03]">
                       <img
