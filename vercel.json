@@ -1,12 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "mdh-portfolio.vercel.app" }],
-      "destination": "https://portofolio-mdh.vercel.app/:path*",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     { "source": "/((?!assets/|.*\\.).*)", "destination": "/index.html" }
   ],
