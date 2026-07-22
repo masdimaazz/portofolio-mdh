@@ -9,6 +9,15 @@ const GOOGLE_ENABLED = false;
 // Frasa yang menggambarkan situs (kinetic typography, berganti otomatis).
 const PHRASES = ['Branding & identity', 'Social campaigns', 'UI/UX & web design', '3D & motion'];
 
+// Partikel cahaya melayang (posisi deterministik biar stabil antar-render).
+const PARTICLES = Array.from({ length: 16 }, (_, i) => ({
+  left: (i * 6.1 + 4) % 96,
+  bottom: (i * 13) % 55,
+  size: 2 + (i % 3),
+  dur: 9 + (i % 5) * 2,
+  delay: -((i * 1.7) % 12),
+}));
+
 const logoMask = {
   aspectRatio: '600 / 340',
   backgroundColor: '#eef2ff',
@@ -122,6 +131,25 @@ export default function Login() {
         className="login-orb-2 pointer-events-none absolute right-[8%] bottom-[8%] h-96 w-96 rounded-full blur-[100px]"
         style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.35), transparent 70%)' }}
       />
+
+      {/* Partikel cahaya melayang naik */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        {PARTICLES.map((p, i) => (
+          <span
+            key={i}
+            className="login-particle absolute rounded-full bg-blue-300/50"
+            style={{
+              left: `${p.left}%`,
+              bottom: `${p.bottom}%`,
+              width: p.size,
+              height: p.size,
+              animationDuration: `${p.dur}s`,
+              animationDelay: `${p.delay}s`,
+              boxShadow: '0 0 6px rgba(147,197,253,0.6)',
+            }}
+          />
+        ))}
+      </div>
 
       {/* Grain */}
       <div
