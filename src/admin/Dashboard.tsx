@@ -4,9 +4,11 @@ import { ENTITIES } from './config';
 import { client } from './client';
 import EntityEditor from './EntityEditor';
 import AdminMessages from './AdminMessages';
+import AdminOverview from './AdminOverview';
 
 export default function Dashboard({ email }: { email: string }) {
-  const [active, setActive] = useState(ENTITIES[0].table);
+  const [active, setActive] = useState<string>('overview');
+  const isOverview = active === 'overview';
   const isMessages = active === 'messages';
   const entity = ENTITIES.find((e) => e.table === active);
 
@@ -62,7 +64,11 @@ export default function Dashboard({ email }: { email: string }) {
         {/* Sidebar */}
         <aside className="hidden w-56 shrink-0 md:block">
           <nav className="sticky top-20 space-y-0.5">
-            <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wider text-muted">
+            <button onClick={() => setActive('overview')} className={navItemCls(isOverview)}>
+              <span className="text-base">📊</span>
+              Overview
+            </button>
+            <p className="px-3 pb-1 pt-4 text-[11px] font-semibold uppercase tracking-wider text-muted">
               Content
             </p>
             {ENTITIES.map((e) => (
@@ -88,6 +94,7 @@ export default function Dashboard({ email }: { email: string }) {
             onChange={(e) => setActive(e.target.value)}
             className="w-full rounded-lg border border-base bg-card px-3 py-2.5 text-sm"
           >
+            <option value="overview">📊 Overview</option>
             <optgroup label="Content">
               {ENTITIES.map((e) => (
                 <option key={e.table} value={e.table}>
@@ -103,7 +110,9 @@ export default function Dashboard({ email }: { email: string }) {
 
         {/* Konten */}
         <main className="min-w-0 flex-1">
-          {isMessages ? (
+          {isOverview ? (
+            <AdminOverview onNavigate={setActive} />
+          ) : isMessages ? (
             <AdminMessages />
           ) : entity ? (
             <EntityEditor key={entity.table} entity={entity} />
