@@ -1,6 +1,21 @@
 import { useState } from 'react';
 import { Loader2, ArrowRight } from 'lucide-react';
 import { client } from './client';
+import logoMdh from '@/assets/logo-mdh.png';
+
+// Logo MDH sebagai mask (ikut warna via backgroundColor) — wordmark, bukan huruf "M".
+const logoMaskStyle = (color: string) => ({
+  aspectRatio: '600 / 340',
+  backgroundColor: color,
+  WebkitMaskImage: `url(${logoMdh})`,
+  maskImage: `url(${logoMdh})`,
+  WebkitMaskRepeat: 'no-repeat' as const,
+  maskRepeat: 'no-repeat' as const,
+  WebkitMaskPosition: 'left center',
+  maskPosition: 'left center',
+  WebkitMaskSize: 'contain' as const,
+  maskSize: 'contain' as const,
+});
 
 // Set true HANYA setelah provider Google diaktifkan di Supabase
 // (Authentication → Providers → Google) + OAuth credential dari Google Cloud.
@@ -114,9 +129,7 @@ export default function Login() {
           </div>
 
           <div className="relative flex items-center justify-between">
-            <span className="grid h-11 w-11 place-items-center rounded-xl bg-white text-lg font-black text-[#0a1024]">
-              M
-            </span>
+            <span aria-hidden="true" className="block h-7" style={logoMaskStyle('#fff')} />
             <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/40">v1.0 — 2026</span>
           </div>
         </div>
@@ -124,14 +137,11 @@ export default function Login() {
         {/* Kolom kanan: form */}
         <div className="flex w-full flex-col justify-center bg-[#0e1526] p-8 sm:p-10 md:w-1/2">
           {/* Header ringkas untuk mobile */}
-          <div className="mb-6 flex items-center gap-2.5 md:hidden">
-            <span className="grid h-10 w-10 place-items-center rounded-lg bg-white text-base font-black text-[#0a1024]">
-              M
-            </span>
-            <div>
-              <p className="font-head text-sm font-bold uppercase text-white">Admin Portofolio</p>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-white/40">Portfolio CMS</p>
-            </div>
+          <div className="mb-6 md:hidden">
+            <span aria-hidden="true" className="block h-6" style={logoMaskStyle('#fff')} />
+            <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-white/40">
+              Admin · Portfolio CMS
+            </p>
           </div>
 
           <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/45">[ 01 · sign in ]</p>
