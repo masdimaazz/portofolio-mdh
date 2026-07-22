@@ -19,6 +19,7 @@ interface CompanyRow { id: string; name: string; role: string; period: string }
 interface ProjectRow {
   title: string; company_id: string; category: string; year: string;
   cover_url: string; tags?: string[]; featured?: boolean; kind?: string;
+  description?: string; link?: string; images?: string[];
 }
 interface CertificateRow { title: string; issuer?: string; year?: string; image_url?: string }
 interface ExperienceRow { role: string; org: string; period: string; current: boolean; points?: string[] }
@@ -99,6 +100,9 @@ export function ContentProvider({ children }: { children: ReactNode }) {
             tags: r.tags || [],
             featured: r.featured,
             kind: r.kind,
+            description: r.description ?? '',
+            link: r.link ?? '',
+            images: r.images || [],
           })),
           certificates: pick<CertificateRow, Content['certificates'][number]>(cert.data, DEFAULTS.certificates, (r) => ({
             title: r.title, issuer: r.issuer ?? '', year: r.year ?? '', image: r.image_url ?? '',

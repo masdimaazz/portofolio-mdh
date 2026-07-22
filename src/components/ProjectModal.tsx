@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { X, ArrowLeft, ArrowRight } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { X, ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 
 export interface Project {
   title: string;
@@ -8,6 +8,9 @@ export interface Project {
   year: string;
   cover: string;
   tags: string[];
+  description?: string;
+  link?: string;
+  images?: string[];
 }
 
 interface ProjectModalProps {
@@ -29,6 +32,16 @@ export default function ProjectModal({
 }: ProjectModalProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+
+  // Galeri = cover + gambar tambahan (buang yang kosong/duplikat)
+  const gallery = [project.cover, ...(project.images || [])].filter(
+    (v, i, a) => v && a.indexOf(v) === i
+  );
+  const [activeImg, setActiveImg] = useState(0);
+  // Reset ke gambar pertama tiap ganti proyek
+  useEffect(() => {
+    setActiveImg(0);
+  }, [index]);
 
   // Sekali saat mount: kunci scroll, fokus ke tombol tutup, kembalikan fokus saat unmount
   useEffect(() => {
@@ -85,21 +98,40 @@ export default function ProjectModal({
         ref={panelRef}
         className="panel-cream relative z-10 flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-lg shadow-2xl md:flex-row"
       >
-        {/* Gambar */}
-        <div className="relative md:w-3/5">
-          <img
-            src={project.cover}
-            alt={project.title}
-            decoding="async"
-            className="h-56 w-full object-cover sm:h-72 md:h-full"
-          />
-          <span className="absolute left-4 top-4 rounded-full bg-black/60 px-3 py-1 font-mono text-xs text-white">
-            {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
-          </span>
+        {/* Gambar + galeri */}
+        <div className="flex flex-col md:w-3/5">
+          <div className="relative flex-1">
+            <img
+              src={gallery[activeImg] || project.cover}
+              alt={project.title}
+              decoding="async"
+              className="h-56 w-full object-cover sm:h-72 md:h-full"
+            />
+            <span className="absolute left-4 top-4 rounded-full bg-black/60 px-3 py-1 font-mono text-xs text-white">
+              {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+            </span>
+          </div>
+          {gallery.length > 1 && (
+            <div className="flex gap-2 overflow-x-auto bg-black/5 p-2">
+              {gallery.map((img, i) => (
+                <button
+                  key={img + i}
+                  type="button"
+                  onClick={() => setActiveImg(i)}
+                  aria-label={`Gambar ${i + 1}`}
+                  className={`h-14 w-14 shrink-0 overflow-hidden rounded transition-opacity ${
+                    i === activeImg ? 'ring-2 ring-[hsl(var(--accent))]' : 'opacity-60 hover:opacity-100'
+                  }`}
+                >
+                  <img src={img} alt="" className="h-full w-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Detail */}
-        <div className="flex flex-1 flex-col p-6 sm:p-8">
+        <div className="flex flex-1 flex-col overflow-y-auto p-6 sm:p-8">
           <div className="flex items-start justify-between gap-4">
             <span className="type-eyebrow hl">[ project ]</span>
             <button
@@ -115,11 +147,13 @@ export default function ProjectModal({
           <h2 id="project-modal-title" className="type-h3 mt-5 text-2xl md:text-3xl">
             {project.title}
           </h2>
-          {project.company && (
-            <p className="mt-2 text-sm font-semibold hl">{project.company}</p>
-          )}
+          {project.company && <p className="mt-2 text-sm font-semibold hl">{project.company}</p>}
           <p className="mt-1 text-sm text-soft">{project.category}</p>
           <p className="mt-1 font-mono text-xs text-soft">{project.year}</p>
+
+          {project.description && (
+            <p className="mt-4 text-sm leading-relaxed text-soft">{project.description}</p>
+          )}
 
           <div className="mt-5 flex flex-wrap gap-2">
             {project.tags.map((t) => (
@@ -131,6 +165,17 @@ export default function ProjectModal({
               </span>
             ))}
           </div>
+
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-ink-fg transition-opacity hover:opacity-90"
+            >
+              View project <ArrowUpRight className="h-4 w-4" />
+            </a>
+          )}
 
           {/* Navigasi prev/next */}
           <div className="mt-auto flex items-center justify-between gap-3 pt-8">

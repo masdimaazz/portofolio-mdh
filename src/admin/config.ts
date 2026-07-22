@@ -11,7 +11,8 @@ export type FieldType =
   | 'image' // upload → public URL
   | 'color'
   | 'select' // FK dropdown
-  | 'choice'; // pilihan statis (dropdown)
+  | 'choice' // pilihan statis (dropdown)
+  | 'gallery'; // banyak gambar (array URL)
 
 export interface Field {
   key: string;
@@ -95,7 +96,16 @@ export const ENTITIES: Entity[] = [
         choices: ['Branding', 'Social', 'Print', '3D', 'Motion', 'UI/UX'],
       },
       { key: 'year', label: 'Tahun', type: 'text' },
+      { key: 'description', label: 'Deskripsi', type: 'textarea' },
+      { key: 'link', label: 'Link keluar (Behance/IG/live)', type: 'text' },
       { key: 'cover_url', label: 'Cover', type: 'image', imageFolder: 'projects' },
+      {
+        key: 'images',
+        label: 'Galeri (gambar tambahan)',
+        type: 'gallery',
+        imageFolder: 'projects',
+        help: 'Klik untuk menambah beberapa gambar',
+      },
       { key: 'tags', label: 'Tags', type: 'tags', help: 'Pisahkan dengan koma' },
       { key: 'featured', label: 'Featured (kartu besar)', type: 'boolean' },
       { key: 'published', label: 'Published (tampil di situs)', type: 'boolean' },
@@ -106,7 +116,10 @@ export const ENTITIES: Entity[] = [
       category: '',
       kind: '',
       year: '',
+      description: '',
+      link: '',
       cover_url: '',
+      images: [],
       tags: [],
       featured: false,
       published: true,

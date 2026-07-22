@@ -27,6 +27,7 @@ export interface Company { name: string; role: string; period: string }
 export interface Project {
   title: string; company: string; category: string; year: string;
   cover: string; tags: string[]; featured?: boolean; kind?: string;
+  description?: string; link?: string; images?: string[];
 }
 export interface Certificate { title: string; issuer: string; year: string; image: string }
 export interface ExperienceItem {

@@ -179,7 +179,7 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
           )}
           <div className="grid gap-4 sm:grid-cols-2">
             {entity.fields.map((f) => (
-              <div key={f.key} className={f.type === 'textarea' || f.type === 'list' || f.type === 'image' ? 'sm:col-span-2' : ''}>
+              <div key={f.key} className={f.type === 'textarea' || f.type === 'list' || f.type === 'image' || f.type === 'gallery' ? 'sm:col-span-2' : ''}>
                 <FieldInput
                   field={f}
                   value={editing[f.key]}

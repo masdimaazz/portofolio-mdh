@@ -143,6 +143,54 @@ export default function FieldInput({ field, value, onChange, options }: Props) {
             ))}
           </select>
         );
+      case 'gallery': {
+        const imgs = Array.isArray(value) ? (value as string[]) : [];
+        const onFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
+          const files = Array.from(e.target.files || []);
+          if (!files.length) return;
+          setUploading(true);
+          setErr(null);
+          try {
+            const urls: string[] = [];
+            for (const f of files) urls.push(await uploadImage(f, field.imageFolder || 'misc'));
+            onChange([...imgs, ...urls]);
+          } catch (e) {
+            setErr(e instanceof Error ? e.message : 'Upload gagal');
+          } finally {
+            setUploading(false);
+          }
+        };
+        return (
+          <div className="space-y-2">
+            {imgs.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {imgs.map((url, i) => (
+                  <div key={url + i} className="relative h-20 w-20">
+                    <img
+                      src={url}
+                      alt=""
+                      className="h-full w-full rounded-lg border border-base object-cover"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => onChange(imgs.filter((_, j) => j !== i))}
+                      className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-red-500 text-xs text-white"
+                      aria-label="Hapus gambar"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+            <label className="inline-block cursor-pointer rounded-lg border border-base bg-card px-3 py-2 text-sm hover:border-[hsl(var(--accent))]">
+              {uploading ? 'Mengunggah…' : '+ Tambah gambar'}
+              <input type="file" accept="image/*" multiple className="hidden" onChange={onFiles} />
+            </label>
+            {err ? <p className="text-xs text-red-400">{err}</p> : null}
+          </div>
+        );
+      }
       case 'image':
         return (
           <div className="space-y-2">
