@@ -178,7 +178,7 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
         {!entity.single && (
           <button
             onClick={() => openForm({ ...entity.defaultRow })}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-[hsl(var(--accent))] px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+            className="inline-flex items-center gap-1.5 admin-grad rounded-lg px-4 py-2 text-sm font-semibold hover:opacity-90"
           >
             <Plus className="h-4 w-4" /> Tambah
           </button>
@@ -193,7 +193,7 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
 
       {/* Form (single langsung tampil; list muncul saat editing) */}
       {editing && (
-        <div className="mb-6 rounded-xl border border-white/10 bg-card/60 p-5 shadow-lg shadow-black/20 backdrop-blur-xl">
+        <div className="mb-6 rounded-xl border border-white/10 bg-white/[0.05] p-5 shadow-lg shadow-black/20 backdrop-blur-xl">
           {!entity.single && (
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-semibold">{editing.id ? 'Edit item' : 'Item baru'}</h2>
@@ -221,7 +221,7 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
             <button
               onClick={save}
               disabled={saving}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-[hsl(var(--accent))] px-5 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-60"
+              className="inline-flex items-center gap-1.5 admin-grad rounded-lg px-5 py-2 text-sm font-semibold hover:opacity-90 disabled:opacity-60"
             >
               {saving && <Loader2 className="h-4 w-4 animate-spin" />} Simpan
             </button>
@@ -246,7 +246,7 @@ export default function EntityEditor({ entity }: { entity: Entity }) {
           {rows.map((row, i) => (
             <div
               key={String(row.id)}
-              className="flex items-center gap-3 rounded-xl border border-white/10 bg-card/50 px-4 py-3 backdrop-blur-xl transition-colors hover:border-white/20"
+              className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 backdrop-blur-xl transition-colors hover:border-white/20"
             >
               <div className="flex flex-col">
                 <button

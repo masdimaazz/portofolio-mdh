@@ -107,7 +107,7 @@ export default function AdminOverview({ onNavigate }: { onNavigate: (table: stri
       </div>
 
       {/* Pesan terbaru */}
-      <div className="mt-8 rounded-xl border border-white/10 bg-card/50 p-5 backdrop-blur-xl">
+      <div className="mt-8 rounded-xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="font-semibold">Pesan terbaru</h2>
           <button

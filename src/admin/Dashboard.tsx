@@ -19,24 +19,32 @@ export default function Dashboard({ email }: { email: string }) {
 
   const navItemCls = (on: boolean) =>
     `flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
-      on ? 'bg-[hsl(var(--accent))] font-semibold text-white' : 'hover:bg-[hsl(var(--border))]'
+      on
+        ? 'admin-grad font-semibold text-white shadow-lg shadow-blue-950/40'
+        : 'text-white/80 hover:bg-white/[0.06]'
     }`;
 
   return (
     <div className="relative min-h-screen">
-      {/* Latar ambient gelap ber-glow (gaya blur-admin) */}
+      {/* Latar navy-blue + orb melayang (samakan dengan login) */}
       <div
         aria-hidden="true"
-        className="fixed inset-0 -z-10"
-        style={{
-          background:
-            'radial-gradient(55% 45% at 15% 0%, hsl(var(--accent) / 0.16), transparent 60%), radial-gradient(50% 45% at 100% 10%, hsl(265 80% 60% / 0.14), transparent 60%), hsl(var(--page))',
-        }}
-      />
+        className="fixed inset-0 -z-10 overflow-hidden"
+        style={{ background: 'radial-gradient(120% 90% at 85% 15%, #1c2a63 0%, #0a0e2a 42%, #05061a 78%)' }}
+      >
+        <div
+          className="login-orb absolute left-[8%] top-[8%] h-80 w-80 rounded-full blur-[100px]"
+          style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.2), transparent 70%)' }}
+        />
+        <div
+          className="login-orb-2 absolute bottom-[6%] right-[6%] h-96 w-96 rounded-full blur-[110px]"
+          style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.18), transparent 70%)' }}
+        />
+      </div>
       {/* Topbar */}
-      <header className="sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-card/60 px-4 py-3 backdrop-blur-xl md:px-6">
+      <header className="sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-white/[0.05] px-4 py-3 backdrop-blur-xl md:px-6">
         <div className="flex items-center gap-2">
-          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[hsl(var(--accent))] text-xs font-bold text-white">
+          <span className="admin-grad flex h-7 w-7 items-center justify-center rounded-md text-xs font-bold text-white">
             M
           </span>
           <span className="font-semibold">Admin Portofolio</span>
@@ -92,7 +100,7 @@ export default function Dashboard({ email }: { email: string }) {
           <select
             value={active}
             onChange={(e) => setActive(e.target.value)}
-            className="w-full rounded-lg border border-base bg-card px-3 py-2.5 text-sm"
+            className="w-full rounded-lg border border-white/10 bg-white/[0.05] px-3 py-2.5 text-sm backdrop-blur-xl"
           >
             <option value="overview">📊 Overview</option>
             <optgroup label="Content">

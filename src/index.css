@@ -298,6 +298,12 @@
   .login-orb { animation: orbDrift1 14s ease-in-out infinite, huePulse 16s ease-in-out infinite; }
   .login-orb-2 { animation: orbDrift2 18s ease-in-out infinite, huePulse 20s ease-in-out infinite; }
   .login-particle { animation: particleFloat linear infinite; }
+
+  /* Admin CMS — gradient primer, samakan dengan tombol login */
+  .admin-grad {
+    background-image: linear-gradient(180deg, #3b7bf0, #2563eb);
+    color: #fff;
+  }
   .login-ripple {
     position: fixed;
     z-index: 60;

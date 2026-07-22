@@ -10,7 +10,7 @@ interface Props {
 }
 
 const inputCls =
-  'w-full rounded-lg border border-base bg-[hsl(var(--page))] px-3 py-2 text-sm outline-none focus:border-[hsl(var(--accent))]';
+  'w-full rounded-lg border border-white/12 bg-white/[0.05] px-3 py-2 text-sm text-white placeholder-white/35 outline-none transition-colors focus:border-[#2563eb] focus:bg-[rgba(37,99,235,0.08)]';
 
 export default function FieldInput({ field, value, onChange, options }: Props) {
   const [uploading, setUploading] = useState(false);
@@ -183,7 +183,7 @@ export default function FieldInput({ field, value, onChange, options }: Props) {
                 ))}
               </div>
             )}
-            <label className="inline-block cursor-pointer rounded-lg border border-base bg-card px-3 py-2 text-sm hover:border-[hsl(var(--accent))]">
+            <label className="inline-block cursor-pointer rounded-lg border border-white/12 bg-white/[0.05] px-3 py-2 text-sm hover:border-white/40">
               {uploading ? 'Mengunggah…' : '+ Tambah gambar'}
               <input type="file" accept="image/*" multiple className="hidden" onChange={onFiles} />
             </label>
@@ -202,7 +202,7 @@ export default function FieldInput({ field, value, onChange, options }: Props) {
               />
             ) : null}
             <div className="flex items-center gap-2">
-              <label className="cursor-pointer rounded-lg border border-base bg-card px-3 py-2 text-sm hover:border-[hsl(var(--accent))]">
+              <label className="cursor-pointer rounded-lg border border-white/12 bg-white/[0.05] px-3 py-2 text-sm hover:border-white/40">
                 {uploading ? 'Mengunggah…' : 'Pilih gambar'}
                 <input type="file" accept="image/*" className="hidden" onChange={onFile} />
               </label>
