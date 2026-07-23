@@ -44,24 +44,42 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="flex w-full flex-col gap-3 sm:gap-4">
       <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
-        <input
-          type="text"
-          required
-          placeholder="Your name"
-          value={form.name}
-          onChange={update('name')}
-          className={inputClass}
-        />
-        <input
-          type="email"
-          required
-          placeholder="Your email"
-          value={form.email}
-          onChange={update('email')}
-          className={inputClass}
-        />
+        <div>
+          <label htmlFor="cf-name" className="sr-only">
+            Your name
+          </label>
+          <input
+            id="cf-name"
+            type="text"
+            required
+            autoComplete="name"
+            placeholder="Your name"
+            value={form.name}
+            onChange={update('name')}
+            className={inputClass}
+          />
+        </div>
+        <div>
+          <label htmlFor="cf-email" className="sr-only">
+            Your email
+          </label>
+          <input
+            id="cf-email"
+            type="email"
+            required
+            autoComplete="email"
+            placeholder="Your email"
+            value={form.email}
+            onChange={update('email')}
+            className={inputClass}
+          />
+        </div>
       </div>
+      <label htmlFor="cf-message" className="sr-only">
+        Your message
+      </label>
       <textarea
+        id="cf-message"
         required
         rows={4}
         placeholder="Tell me about your project…"

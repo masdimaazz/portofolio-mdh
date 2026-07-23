@@ -85,8 +85,8 @@ export default function ProjectsSection() {
       className="relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-5 py-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 md:-mt-14 md:rounded-t-[60px] md:px-10"
     >
       <h2
-        className="hero-heading mb-16 text-center font-black uppercase leading-none tracking-tight sm:mb-20 md:mb-28"
-        style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+        className="hero-heading mb-12 text-center font-black uppercase leading-none tracking-tight sm:mb-16 md:mb-20"
+        style={{ fontSize: 'clamp(3rem, 11vw, 150px)' }}
       >
         Projects
       </h2>

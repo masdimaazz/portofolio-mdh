@@ -1,4 +1,8 @@
 import { useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
+import Navbar from './components/Navbar';
+import ScrollProgress from './components/ScrollProgress';
+import ScrollToTop from './components/ScrollToTop';
 import HeroSection from './components/HeroSection';
 import MarqueeSection from './components/MarqueeSection';
 import AboutSection from './components/AboutSection';
@@ -23,8 +27,11 @@ export default function App() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#0C0C0C]" style={{ overflowX: 'clip' }}>
-      <HeroSection />
+    <>
+      <ScrollProgress />
+      <Navbar />
+      <main className="min-h-screen bg-[#0C0C0C]" style={{ overflowX: 'clip' }}>
+        <HeroSection />
       <MarqueeSection />
       <AboutSection />
       <StatsSection />
@@ -33,10 +40,13 @@ export default function App() {
       <ExperienceSection />
       <BrandsSection />
       <SkillsSection />
-      <ProjectsSection />
-      <RealizingSection />
-      <PrinciplesSection />
-      <Footer />
-    </main>
+        <ProjectsSection />
+        <RealizingSection />
+        <PrinciplesSection />
+        <Footer />
+      </main>
+      <ScrollToTop />
+      <Analytics />
+    </>
   );
 }

@@ -17,6 +17,28 @@ body,
   font-family: 'Kanit', sans-serif;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Keep anchored section tops clear of the fixed navbar. */
+section[id],
+footer[id] {
+  scroll-margin-top: 72px;
+}
+
+/* Visible keyboard focus for all interactive elements. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #7621b0;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
 .hero-heading {
   background: linear-gradient(180deg, #646973 0%, #bbccd7 100%);
   -webkit-background-clip: text;
