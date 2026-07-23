@@ -20,7 +20,7 @@ export const NAV = [
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: CONTACT.whatsapp },
+  { label: 'Contact', href: '#contact' },
 ];
 
 export const SERVICES = [
@@ -83,3 +83,108 @@ export const MARQUEE = Array.from(
   { length: 16 },
   (_, i) => `/marquee/m-${String(i + 1).padStart(2, '0')}.webp`,
 );
+
+export const STATS = [
+  { value: '5+', label: 'Years in design' },
+  { value: '20+', label: 'Projects delivered' },
+  { value: '4', label: 'Brands & institutions' },
+  { value: '3.52', label: 'GPA / 4.00' },
+];
+
+export type Experience = {
+  role: string;
+  org: string;
+  period: string;
+  current?: boolean;
+  points: string[];
+};
+
+export const EXPERIENCE: Experience[] = [
+  {
+    role: 'Creative Marketing Intern',
+    org: 'PT. Delisari Nusantara',
+    period: 'May 2025 – Jul 2025',
+    points: [
+      'Produced visual promo materials — catalogs, product packaging, and social media content.',
+      'Contributed creative ideas to boost brand engagement on digital platforms.',
+      'Adapted design trends and market insight into on-target output.',
+    ],
+  },
+  {
+    role: 'Graphic Design Intern',
+    org: 'Firstpage.id',
+    period: 'Jan 2025 – Jul 2025',
+    points: [
+      'Designed Instagram feed content for Firstpage.id.',
+      'Created LinkedIn feed visuals and editorial layouts.',
+      'Delivered role-specific work with measurable engagement results.',
+    ],
+  },
+  {
+    role: 'Social Media Staff',
+    org: 'Karang Taruna',
+    period: 'Oct 2024 – Present',
+    current: true,
+    points: [
+      'Design visual content (posters, feeds, stories) for social, religious, and youth activities.',
+      'Write informative, engaging captions and copywriting.',
+      'Document activities for promotion and digital archives.',
+    ],
+  },
+  {
+    role: 'Graphic Design Intern',
+    org: 'Kementerian Sosial RI',
+    period: 'Feb 2023 – Jul 2023',
+    points: [
+      'Designed Instagram feed content for the Ministry of Social Affairs.',
+      'Managed the social media content timeline.',
+      'Rebranded the HLUN 2022 logo and Instagram feed branding.',
+    ],
+  },
+];
+
+export const SKILLS = [
+  { name: 'Illustrator', pct: 92 },
+  { name: 'Photoshop', pct: 88 },
+  { name: 'Canva', pct: 95 },
+  { name: 'After Effects', pct: 80 },
+  { name: 'Premiere Pro', pct: 82 },
+  { name: 'Blender', pct: 70 },
+];
+
+export const SOFTWARE = [
+  { label: 'Ps', name: 'Photoshop', color: '#31A8FF' },
+  { label: 'Ai', name: 'Illustrator', color: '#FF9A00' },
+  { label: 'Ae', name: 'After Effects', color: '#9999FF' },
+  { label: 'Pr', name: 'Premiere Pro', color: '#EA77FF' },
+  { label: 'Id', name: 'InDesign', color: '#FF3366' },
+  { label: 'Fig', name: 'Figma', color: '#A259FF' },
+  { label: 'Bl', name: 'Blender', color: '#EA7600' },
+  { label: 'Cv', name: 'Canva', color: '#00C4CC' },
+];
+
+export const PRINCIPLES = [
+  {
+    title: 'Clarity above excess',
+    body: 'Every element earns its place. I strip away the noise so the message lands instantly — legible, focused, and honest.',
+  },
+  {
+    title: 'Aesthetic with purpose',
+    body: 'Beauty that serves the brand, never decoration for its own sake. Each visual choice supports a clear intent.',
+  },
+  {
+    title: 'Research-driven thinking',
+    body: 'Design grounded in user insight and current visual culture — decisions backed by context, not guesswork.',
+  },
+  {
+    title: 'Built beyond trends',
+    body: 'Systems and identities made to stay relevant, not just fashionable. Work that still holds up years later.',
+  },
+];
+
+export const EDUCATION = {
+  degree: 'Applied Bachelor — Multimedia Engineering Technology',
+  school: 'Politeknik Negeri Media Kreatif Jakarta',
+  gpa: '3.52',
+  period: 'Aug 2020 – Nov 2024',
+};
