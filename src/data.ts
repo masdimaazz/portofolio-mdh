@@ -16,9 +16,7 @@ export const CONTACT = {
   whatsapp: 'https://wa.me/6288215990350',
   linkedin: 'https://www.linkedin.com/in/muhammad-dimas-hadiyanto-a53b37331/',
   location: 'Jakarta, Indonesia',
-  // Optional: paste a Formspree endpoint (https://formspree.io/f/xxxx) to make
-  // the contact form submit asynchronously. Empty = fall back to a mailto: draft.
-  formEndpoint: '',
+  cv: '/cv-muhammad-dimas-hadiyanto.pdf',
 };
 
 export const NAV = [
@@ -59,6 +57,13 @@ export type Project = {
   year: string;
   tags: string[];
   cover: string;
+  link: string;
+};
+
+const IG = {
+  delisari: 'https://www.instagram.com/dsn.idn/',
+  firstpage: 'https://www.instagram.com/firstpage.id/',
+  kemensos: 'https://www.instagram.com/kemensosri/',
 };
 
 export const PROJECTS: Project[] = [
@@ -70,6 +75,7 @@ export const PROJECTS: Project[] = [
     year: '2025',
     tags: ['Key Visual', 'Packaging', 'Campaign'],
     cover: '/projects/covers/dels-ramadhan.webp',
+    link: IG.delisari,
   },
   {
     num: '02',
@@ -79,6 +85,7 @@ export const PROJECTS: Project[] = [
     year: '2025',
     tags: ['3D', 'Blender', 'Retail POSM'],
     cover: '/projects/covers/dels-stand.webp',
+    link: IG.delisari,
   },
   {
     num: '03',
@@ -88,6 +95,7 @@ export const PROJECTS: Project[] = [
     year: '2025',
     tags: ['Print', 'Layout', 'F&B'],
     cover: '/projects/covers/dels-tentcard.webp',
+    link: IG.delisari,
   },
   {
     num: '04',
@@ -97,6 +105,7 @@ export const PROJECTS: Project[] = [
     year: '2025',
     tags: ['Greeting', 'Brand', 'Social'],
     cover: '/projects/covers/dels-iduladha.webp',
+    link: IG.delisari,
   },
   {
     num: '05',
@@ -106,6 +115,7 @@ export const PROJECTS: Project[] = [
     year: '2025',
     tags: ['Editorial', 'Social Feeds', 'Branding'],
     cover: '/projects/covers/firstpage.webp',
+    link: IG.firstpage,
   },
   {
     num: '06',
@@ -115,6 +125,7 @@ export const PROJECTS: Project[] = [
     year: '2023',
     tags: ['Government', 'Feed Design', 'Layout'],
     cover: '/projects/covers/kemensos.webp',
+    link: IG.kemensos,
   },
 ];
 

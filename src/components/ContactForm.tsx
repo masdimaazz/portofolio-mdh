@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Send, Check } from 'lucide-react';
 import { CONTACT } from '../data';
+import { getSupabase } from '../lib/supabase';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -11,31 +12,35 @@ export default function ContactForm() {
   const update = (k: keyof typeof form) => (e: { target: { value: string } }) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
+  const openMailDraft = () => {
+    const body = `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`;
+    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
+      `Project inquiry from ${form.name || 'website'}`,
+    )}&body=${encodeURIComponent(body)}`;
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
-    // No async endpoint configured → open a pre-filled email draft instead.
-    if (!CONTACT.formEndpoint) {
-      const body = `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`;
-      window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
-        `Project inquiry from ${form.name || 'website'}`,
-      )}&body=${encodeURIComponent(body)}`;
-      return;
-    }
-
     setStatus('sending');
-    try {
-      const res = await fetch(CONTACT.formEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) throw new Error('failed');
-      setStatus('sent');
-      setForm({ name: '', email: '', message: '' });
-    } catch {
-      setStatus('error');
+
+    // Preferred path: store in the shared `messages` table so it lands in the
+    // same admin inbox as the main portfolio. If Supabase isn't reachable or
+    // its RLS rejects the insert, fall back to a pre-filled email draft so the
+    // visitor is never blocked.
+    const supabase = await getSupabase().catch(() => null);
+    if (supabase) {
+      const { error } = await supabase
+        .from('messages')
+        .insert({ name: form.name, email: form.email, message: form.message });
+      if (!error) {
+        setStatus('sent');
+        setForm({ name: '', email: '', message: '' });
+        return;
+      }
     }
+
+    openMailDraft();
+    setStatus('idle');
   };
 
   const inputClass =

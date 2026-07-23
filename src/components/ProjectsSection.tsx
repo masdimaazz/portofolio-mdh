@@ -48,7 +48,7 @@ function ProjectCard({
               <span className="text-sm font-light text-[#D7E2EA]/60">{project.company}</span>
             </div>
           </div>
-          <LiveProjectButton />
+          <LiveProjectButton href={project.link} />
         </div>
 
         {/* Tags */}

@@ -1,4 +1,4 @@
-import { Mail, MessageCircle, Linkedin, MapPin, GraduationCap } from 'lucide-react';
+import { Mail, MessageCircle, Linkedin, MapPin, GraduationCap, Download } from 'lucide-react';
 import FadeIn from './FadeIn';
 import ContactForm from './ContactForm';
 import { CONTACT, PROFILE, EDUCATION } from '../data';
@@ -47,6 +47,14 @@ export default function Footer() {
                   {label}
                 </a>
               ))}
+              <a
+                href={CONTACT.cv}
+                download
+                className="flex items-center gap-2.5 rounded-full bg-[#D7E2EA] px-5 py-2.5 text-sm font-semibold text-[#0C0C0C] transition-transform duration-200 hover:scale-105 sm:px-6 sm:py-3"
+              >
+                <Download size={18} strokeWidth={2} />
+                Download CV
+              </a>
             </div>
           </FadeIn>
 

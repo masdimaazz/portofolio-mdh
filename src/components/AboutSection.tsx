@@ -1,7 +1,8 @@
+import { Download } from 'lucide-react';
 import FadeIn from './FadeIn';
 import AnimatedText from './AnimatedText';
 import ContactButton from './ContactButton';
-import { PROFILE } from '../data';
+import { PROFILE, CONTACT } from '../data';
 
 const ABOUT_TEXT = PROFILE.about;
 
@@ -76,8 +77,19 @@ export default function AboutSection() {
           </div>
         </div>
 
-        <ContactButton />
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <ContactButton />
+          <a
+            href={CONTACT.cv}
+            download
+            className="inline-flex items-center gap-2.5 rounded-full border-2 border-[#D7E2EA]/40 px-8 py-3 text-xs font-medium uppercase tracking-widest text-[#D7E2EA] transition-colors duration-200 hover:bg-[#D7E2EA]/10 sm:px-10 sm:py-3.5 sm:text-sm md:px-11 md:py-4 md:text-base"
+          >
+            <Download size={18} strokeWidth={1.75} />
+            Download CV
+          </a>
+        </div>
       </div>
     </section>
   );
 }
+
