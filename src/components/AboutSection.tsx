@@ -62,11 +62,18 @@ export default function AboutSection() {
             About me
           </FadeIn>
 
-          <AnimatedText
-            text={ABOUT_TEXT}
-            className="max-w-[560px] text-center font-medium leading-relaxed text-[#D7E2EA]"
-            style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}
-          />
+          <div className="flex flex-col items-center gap-6 sm:gap-8">
+            <AnimatedText
+              text={ABOUT_TEXT}
+              className="max-w-[560px] text-center font-medium leading-relaxed text-[#D7E2EA]"
+              style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}
+            />
+            <AnimatedText
+              text={PROFILE.about2}
+              className="max-w-[560px] text-center font-light leading-relaxed text-[#D7E2EA]/80"
+              style={{ fontSize: 'clamp(0.9rem, 1.7vw, 1.15rem)' }}
+            />
+          </div>
         </div>
 
         <ContactButton />

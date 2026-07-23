@@ -7,6 +7,8 @@ export const PROFILE = {
   tagline: 'a graphic designer crafting striking, memorable brand, social & 3d motion visuals',
   about:
     "I'm Muhammad Dimas Hadiyanto, a graphic designer and Multimedia Engineering graduate. I focus on branding, social campaigns, and UI/UX, grounded in research and current design trends. Let's build something memorable together!",
+  about2:
+    'My final project was an Augmented Reality mobile app introducing traditional West Javanese musical instruments — combining education, technology, and design into one experience.',
 };
 
 export const CONTACT = {
@@ -14,6 +16,9 @@ export const CONTACT = {
   whatsapp: 'https://wa.me/6288215990350',
   linkedin: 'https://www.linkedin.com/in/muhammad-dimas-hadiyanto-a53b37331/',
   location: 'Jakarta, Indonesia',
+  // Optional: paste a Formspree endpoint (https://formspree.io/f/xxxx) to make
+  // the contact form submit asynchronously. Empty = fall back to a mailto: draft.
+  formEndpoint: '',
 };
 
 export const NAV = [
@@ -48,34 +53,76 @@ export const SERVICES = [
 
 export type Project = {
   num: string;
-  category: string;
   name: string;
-  col1: [string, string];
-  col2: string;
+  company: string;
+  category: string;
+  year: string;
+  tags: string[];
+  cover: string;
 };
 
 export const PROJECTS: Project[] = [
   {
     num: '01',
-    category: 'Client · F&B',
-    name: 'Delisari Nusantara',
-    col1: ['/projects/del-1.webp', '/projects/del-2.webp'],
-    col2: '/projects/del-3.webp',
+    name: "Del's Ramadhan Campaign",
+    company: 'Delisari Nusantara',
+    category: 'Social Media Key Visual',
+    year: '2025',
+    tags: ['Key Visual', 'Packaging', 'Campaign'],
+    cover: '/projects/covers/dels-ramadhan.webp',
   },
   {
     num: '02',
-    category: 'Client · Editorial',
-    name: 'Firstpage.id',
-    col1: ['/projects/fp-1.webp', '/projects/fp-2.webp'],
-    col2: '/projects/fp-3.webp',
+    name: "Del's Nocciola Display Stand",
+    company: 'Delisari Nusantara',
+    category: '3D POSM Design',
+    year: '2025',
+    tags: ['3D', 'Blender', 'Retail POSM'],
+    cover: '/projects/covers/dels-stand.webp',
   },
   {
     num: '03',
-    category: 'Government',
-    name: 'Kementerian Sosial RI',
-    col1: ['/projects/km-1.webp', '/projects/km-2.webp'],
-    col2: '/projects/km-3.webp',
+    name: "Del's Recipe Tent Card",
+    company: 'Delisari Nusantara',
+    category: 'Print Collateral',
+    year: '2025',
+    tags: ['Print', 'Layout', 'F&B'],
+    cover: '/projects/covers/dels-tentcard.webp',
   },
+  {
+    num: '04',
+    name: "Del's Idul Adha Greeting",
+    company: 'Delisari Nusantara',
+    category: 'Social Media Greeting',
+    year: '2025',
+    tags: ['Greeting', 'Brand', 'Social'],
+    cover: '/projects/covers/dels-iduladha.webp',
+  },
+  {
+    num: '05',
+    name: 'Firstpage.id Content Series',
+    company: 'Firstpage.id',
+    category: 'LinkedIn & Instagram Feeds',
+    year: '2025',
+    tags: ['Editorial', 'Social Feeds', 'Branding'],
+    cover: '/projects/covers/firstpage.webp',
+  },
+  {
+    num: '06',
+    name: 'Hari Anak Nasional 2023',
+    company: 'Kementerian Sosial RI',
+    category: 'Government Campaign',
+    year: '2023',
+    tags: ['Government', 'Feed Design', 'Layout'],
+    cover: '/projects/covers/kemensos.webp',
+  },
+];
+
+// Brands & institutions worked with (dark logos → shown on the light block).
+export const COMPANIES = [
+  { name: 'Delisari Nusantara', logo: '/logos/companies/delisari-dark.png' },
+  { name: 'Firstpage.id', logo: '/logos/companies/firstpage-dark.png' },
+  { name: 'Kementerian Sosial RI', logo: '/logos/companies/kemensos.png' },
 ];
 
 // Self-hosted marquee tiles (real work). 16 images split across two rows.
@@ -83,6 +130,13 @@ export const MARQUEE = Array.from(
   { length: 16 },
   (_, i) => `/marquee/m-${String(i + 1).padStart(2, '0')}.webp`,
 );
+
+// "Realizing" gallery — a curated grid of real work (reuses marquee stills).
+export const REALIZING = [
+  '/marquee/m-01.webp', '/marquee/m-07.webp', '/marquee/m-12.webp',
+  '/marquee/m-03.webp', '/marquee/m-09.webp', '/marquee/m-14.webp',
+  '/marquee/m-05.webp', '/marquee/m-11.webp',
+];
 
 export const STATS = [
   { value: '5+', label: 'Years in design' },
@@ -153,14 +207,14 @@ export const SKILLS = [
 ];
 
 export const SOFTWARE = [
-  { label: 'Ps', name: 'Photoshop', color: '#31A8FF' },
-  { label: 'Ai', name: 'Illustrator', color: '#FF9A00' },
-  { label: 'Ae', name: 'After Effects', color: '#9999FF' },
-  { label: 'Pr', name: 'Premiere Pro', color: '#EA77FF' },
-  { label: 'Id', name: 'InDesign', color: '#FF3366' },
-  { label: 'Fig', name: 'Figma', color: '#A259FF' },
-  { label: 'Bl', name: 'Blender', color: '#EA7600' },
-  { label: 'Cv', name: 'Canva', color: '#00C4CC' },
+  { name: 'Photoshop', logo: '/logos/tools/photoshop.svg' },
+  { name: 'Illustrator', logo: '/logos/tools/illustrator.svg' },
+  { name: 'After Effects', logo: '/logos/tools/after-effects.svg' },
+  { name: 'Premiere Pro', logo: '/logos/tools/premiere.svg' },
+  { name: 'InDesign', logo: '/logos/tools/indesign.svg' },
+  { name: 'Figma', logo: '/logos/tools/figma.svg' },
+  { name: 'Blender', logo: '/logos/tools/blender.svg' },
+  { name: 'Canva', logo: '/logos/tools/canva.svg' },
 ];
 
 export const PRINCIPLES = [

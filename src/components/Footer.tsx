@@ -1,5 +1,6 @@
 import { Mail, MessageCircle, Linkedin, MapPin, GraduationCap } from 'lucide-react';
 import FadeIn from './FadeIn';
+import ContactForm from './ContactForm';
 import { CONTACT, PROFILE, EDUCATION } from '../data';
 
 const LINKS = [
@@ -27,20 +28,32 @@ export default function Footer() {
           </h2>
         </FadeIn>
 
-        <FadeIn delay={0.1} className="mt-10 flex flex-wrap gap-3 sm:gap-4">
-          {LINKS.map(({ icon: Icon, label, href }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2.5 rounded-full border-2 border-[#D7E2EA]/40 px-5 py-2.5 text-sm font-medium text-[#D7E2EA] transition-colors duration-200 hover:bg-[#D7E2EA]/10 sm:px-6 sm:py-3"
-            >
-              <Icon size={18} strokeWidth={1.75} />
-              {label}
-            </a>
-          ))}
-        </FadeIn>
+        <div className="mt-10 grid gap-12 md:grid-cols-[1fr_1.1fr] md:gap-16">
+          <FadeIn delay={0.1} className="flex flex-col gap-4">
+            <p className="max-w-sm font-light leading-relaxed text-[#D7E2EA]/60">
+              Have a project in mind or just want to say hello? Drop a message or
+              reach me directly.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {LINKS.map(({ icon: Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 rounded-full border-2 border-[#D7E2EA]/40 px-5 py-2.5 text-sm font-medium text-[#D7E2EA] transition-colors duration-200 hover:bg-[#D7E2EA]/10 sm:px-6 sm:py-3"
+                >
+                  <Icon size={18} strokeWidth={1.75} />
+                  {label}
+                </a>
+              ))}
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.15}>
+            <ContactForm />
+          </FadeIn>
+        </div>
 
         <FadeIn
           delay={0.15}
@@ -62,8 +75,11 @@ export default function Footer() {
           </div>
         </FadeIn>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-2 border-t border-[#D7E2EA]/15 pt-6 text-xs uppercase tracking-widest text-[#D7E2EA]/40 sm:flex-row">
-          <span>© {new Date().getFullYear()} {PROFILE.name}</span>
+        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-[#D7E2EA]/15 pt-6 text-xs uppercase tracking-widest text-[#D7E2EA]/40 sm:flex-row">
+          <span className="flex items-center gap-3">
+            <img src="/logo-mdh.png" alt="" className="h-6 w-auto opacity-80" />
+            © {new Date().getFullYear()} {PROFILE.name}
+          </span>
           <span>Graphic · 3D · Motion · UI/UX</span>
         </div>
       </div>

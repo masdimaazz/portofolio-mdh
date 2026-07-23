@@ -49,12 +49,14 @@ export default function SkillsSection() {
           </h3>
           <div className="grid grid-cols-4 gap-3 sm:gap-4">
             {SOFTWARE.map((sw, i) => (
-              <FadeIn key={sw.label} delay={i * 0.05} className="flex flex-col items-center gap-2">
-                <div
-                  className="flex aspect-square w-full items-center justify-center rounded-2xl text-lg font-black text-white sm:text-xl"
-                  style={{ backgroundColor: sw.color }}
-                >
-                  {sw.label}
+              <FadeIn key={sw.name} delay={i * 0.05} className="flex flex-col items-center gap-2">
+                <div className="flex aspect-square w-full items-center justify-center rounded-2xl border border-[#0C0C0C]/10 bg-[#0C0C0C]/[0.03] p-3 transition-transform duration-200 hover:scale-105 sm:p-4">
+                  <img
+                    src={sw.logo}
+                    alt={sw.name}
+                    className="h-full w-full object-contain"
+                    loading="lazy"
+                  />
                 </div>
                 <span className="text-center text-[0.65rem] font-light uppercase tracking-wide text-[#0C0C0C]/50">
                   {sw.name}

@@ -5,8 +5,10 @@ import AboutSection from './components/AboutSection';
 import StatsSection from './components/StatsSection';
 import ServicesSection from './components/ServicesSection';
 import ExperienceSection from './components/ExperienceSection';
+import BrandsSection from './components/BrandsSection';
 import SkillsSection from './components/SkillsSection';
 import ProjectsSection from './components/ProjectsSection';
+import RealizingSection from './components/RealizingSection';
 import PrinciplesSection from './components/PrinciplesSection';
 import Footer from './components/Footer';
 
@@ -26,11 +28,13 @@ export default function App() {
       <MarqueeSection />
       <AboutSection />
       <StatsSection />
-      {/* Continuous white block: Services → Experience → Skills */}
+      {/* Continuous white block: Services → Experience → Brands → Skills */}
       <ServicesSection />
       <ExperienceSection />
+      <BrandsSection />
       <SkillsSection />
       <ProjectsSection />
+      <RealizingSection />
       <PrinciplesSection />
       <Footer />
     </main>
