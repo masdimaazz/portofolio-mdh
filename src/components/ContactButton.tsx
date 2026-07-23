@@ -1,10 +1,12 @@
 import { CONTACT } from '../data';
+import { useI18n } from '../i18n';
 
 type ContactButtonProps = {
   className?: string;
 };
 
 export default function ContactButton({ className = '' }: ContactButtonProps) {
+  const { t } = useI18n();
   return (
     <a
       href={CONTACT.whatsapp}
@@ -20,7 +22,7 @@ export default function ContactButton({ className = '' }: ContactButtonProps) {
         outlineOffset: '-3px',
       }}
     >
-      Contact Me
+      {t.about.contactBtn}
     </a>
   );
 }

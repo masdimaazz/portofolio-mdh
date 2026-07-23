@@ -20,11 +20,11 @@ export const CONTACT = {
 };
 
 export const NAV = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
-];
+  { key: 'about', href: '#about' },
+  { key: 'services', href: '#services' },
+  { key: 'projects', href: '#projects' },
+  { key: 'contact', href: '#contact' },
+] as const;
 
 export const SERVICES = [
   {
@@ -54,9 +54,12 @@ export type Project = {
   name: string;
   company: string;
   category: string;
+  group: 'Branding' | 'Social' | '3D' | 'Print';
   year: string;
   tags: string[];
   cover: string;
+  images: string[];
+  description: string;
   link: string;
 };
 
@@ -72,9 +75,13 @@ export const PROJECTS: Project[] = [
     name: "Del's Ramadhan Campaign",
     company: 'Delisari Nusantara',
     category: 'Social Media Key Visual',
+    group: 'Social',
     year: '2025',
     tags: ['Key Visual', 'Packaging', 'Campaign'],
     cover: '/projects/covers/dels-ramadhan.webp',
+    images: ['/projects/covers/dels-ramadhan.webp', '/projects/del-1.webp'],
+    description:
+      'A warm Ramadhan key visual for Del’s Official Store — festive product hero shots, lantern and crescent motifs, and a clear call to shop the seasonal line-up.',
     link: IG.delisari,
   },
   {
@@ -82,9 +89,13 @@ export const PROJECTS: Project[] = [
     name: "Del's Nocciola Display Stand",
     company: 'Delisari Nusantara',
     category: '3D POSM Design',
+    group: '3D',
     year: '2025',
     tags: ['3D', 'Blender', 'Retail POSM'],
     cover: '/projects/covers/dels-stand.webp',
+    images: ['/projects/covers/dels-stand.webp', '/projects/del-3.webp'],
+    description:
+      'A retail point-of-sale display stand for Del’s Nocciola spread, modelled and rendered in 3D to visualise the unit before production.',
     link: IG.delisari,
   },
   {
@@ -92,9 +103,13 @@ export const PROJECTS: Project[] = [
     name: "Del's Recipe Tent Card",
     company: 'Delisari Nusantara',
     category: 'Print Collateral',
+    group: 'Print',
     year: '2025',
     tags: ['Print', 'Layout', 'F&B'],
     cover: '/projects/covers/dels-tentcard.webp',
+    images: ['/projects/covers/dels-tentcard.webp'],
+    description:
+      'A table tent card featuring Del’s recipe inspiration — appetising food photography paired with clean, appetite-driven layout.',
     link: IG.delisari,
   },
   {
@@ -102,9 +117,13 @@ export const PROJECTS: Project[] = [
     name: "Del's Idul Adha Greeting",
     company: 'Delisari Nusantara',
     category: 'Social Media Greeting',
+    group: 'Social',
     year: '2025',
     tags: ['Greeting', 'Brand', 'Social'],
     cover: '/projects/covers/dels-iduladha.webp',
+    images: ['/projects/covers/dels-iduladha.webp', '/projects/del-2.webp'],
+    description:
+      'An Idul Adha greeting for Del’s — elegant, on-brand typography and ornament celebrating the moment with the audience.',
     link: IG.delisari,
   },
   {
@@ -112,9 +131,18 @@ export const PROJECTS: Project[] = [
     name: 'Firstpage.id Content Series',
     company: 'Firstpage.id',
     category: 'LinkedIn & Instagram Feeds',
+    group: 'Branding',
     year: '2025',
     tags: ['Editorial', 'Social Feeds', 'Branding'],
     cover: '/projects/covers/firstpage.webp',
+    images: [
+      '/projects/covers/firstpage.webp',
+      '/projects/fp-1.webp',
+      '/projects/fp-2.webp',
+      '/projects/fp-3.webp',
+    ],
+    description:
+      'An editorial content series for Firstpage.id across LinkedIn and Instagram — a consistent visual system that turns marketing insights into scroll-stopping feeds.',
     link: IG.firstpage,
   },
   {
@@ -122,12 +150,23 @@ export const PROJECTS: Project[] = [
     name: 'Hari Anak Nasional 2023',
     company: 'Kementerian Sosial RI',
     category: 'Government Campaign',
+    group: 'Social',
     year: '2023',
     tags: ['Government', 'Feed Design', 'Layout'],
     cover: '/projects/covers/kemensos.webp',
+    images: [
+      '/projects/covers/kemensos.webp',
+      '/projects/km-1.webp',
+      '/projects/km-2.webp',
+      '/projects/km-3.webp',
+    ],
+    description:
+      'Instagram feed content for the Ministry of Social Affairs’ National Children’s Day 2023 — informative, child-friendly layouts within government brand guidelines.',
     link: IG.kemensos,
   },
 ];
+
+export const PROJECT_GROUPS = ['All', 'Branding', 'Social', '3D', 'Print'] as const;
 
 // Brands & institutions worked with (dark logos → shown on the light block).
 export const COMPANIES = [
@@ -150,10 +189,20 @@ export const REALIZING = [
 ];
 
 export const STATS = [
-  { value: '5+', label: 'Years in design' },
-  { value: '20+', label: 'Projects delivered' },
-  { value: '4', label: 'Brands & institutions' },
-  { value: '3.52', label: 'GPA / 4.00' },
+  { value: 5, decimals: 0, suffix: '+', label: 'Years in design' },
+  { value: 20, decimals: 0, suffix: '+', label: 'Projects delivered' },
+  { value: 4, decimals: 0, suffix: '', label: 'Brands & institutions' },
+  { value: 3.52, decimals: 2, suffix: '', label: 'GPA / 4.00' },
+];
+
+export const TICKER = [
+  'Available for Freelance',
+  'Branding',
+  'Social Campaigns',
+  '3D & Motion',
+  'UI/UX Design',
+  'Packaging',
+  'Editorial Layout',
 ];
 
 export type Experience = {

@@ -1,4 +1,5 @@
 import { CONTACT } from '../data';
+import { useI18n } from '../i18n';
 
 type LiveProjectButtonProps = {
   href?: string;
@@ -9,6 +10,7 @@ export default function LiveProjectButton({
   href = CONTACT.linkedin,
   className = '',
 }: LiveProjectButtonProps) {
+  const { t } = useI18n();
   return (
     <a
       href={href}
@@ -16,7 +18,7 @@ export default function LiveProjectButton({
       rel="noopener noreferrer"
       className={`inline-block rounded-full border-2 border-[#D7E2EA] px-8 py-3 text-sm font-medium uppercase tracking-widest text-[#D7E2EA] transition-colors duration-200 hover:bg-[#D7E2EA]/10 sm:px-10 sm:py-3.5 sm:text-base ${className}`}
     >
-      Live Project
+      {t.projects.live}
     </a>
   );
 }

@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import FadeIn from './FadeIn';
 import { SKILLS, SOFTWARE } from '../data';
+import { useI18n } from '../i18n';
 
 export default function SkillsSection() {
+  const { t } = useI18n();
   return (
     <section
       id="skills"
@@ -12,7 +14,7 @@ export default function SkillsSection() {
         className="mb-12 text-center font-black uppercase text-[#0C0C0C] sm:mb-16 md:mb-20"
         style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
       >
-        Skills
+        {t.skills.title}
       </h2>
 
       <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2 md:gap-16">
@@ -45,7 +47,7 @@ export default function SkillsSection() {
         {/* Software toolkit */}
         <div>
           <h3 className="mb-6 text-sm font-medium uppercase tracking-widest text-[#0C0C0C]/50">
-            Tools
+            {t.skills.tools}
           </h3>
           <div className="grid grid-cols-4 gap-3 sm:gap-4">
             {SOFTWARE.map((sw, i) => (

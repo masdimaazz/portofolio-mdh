@@ -1,7 +1,9 @@
 import FadeIn from './FadeIn';
 import { SERVICES } from '../data';
+import { useI18n } from '../i18n';
 
 export default function ServicesSection() {
+  const { t } = useI18n();
   return (
     <section
       id="services"
@@ -11,7 +13,7 @@ export default function ServicesSection() {
         className="mb-12 text-center font-black uppercase text-[#0C0C0C] sm:mb-16 md:mb-20"
         style={{ fontSize: 'clamp(3rem, 11vw, 150px)' }}
       >
-        Services
+        {t.services.title}
       </h2>
 
       <div className="mx-auto max-w-5xl">
@@ -33,13 +35,13 @@ export default function ServicesSection() {
                 className="font-medium uppercase text-[#0C0C0C]"
                 style={{ fontSize: 'clamp(1rem, 2.2vw, 2.1rem)' }}
               >
-                {service.name}
+                {t.services.items[i].name}
               </h3>
               <p
                 className="max-w-2xl font-light leading-relaxed text-[#0C0C0C]"
                 style={{ fontSize: 'clamp(0.85rem, 1.6vw, 1.25rem)', opacity: 0.6 }}
               >
-                {service.desc}
+                {t.services.items[i].desc}
               </p>
             </div>
           </FadeIn>

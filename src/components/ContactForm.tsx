@@ -2,10 +2,12 @@ import { useState, type FormEvent } from 'react';
 import { Send, Check } from 'lucide-react';
 import { CONTACT } from '../data';
 import { getSupabase } from '../lib/supabase';
+import { useI18n } from '../i18n';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 export default function ContactForm() {
+  const { t } = useI18n();
   const [status, setStatus] = useState<Status>('idle');
   const [form, setForm] = useState({ name: '', email: '', message: '' });
 
@@ -51,14 +53,14 @@ export default function ContactForm() {
       <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
         <div>
           <label htmlFor="cf-name" className="sr-only">
-            Your name
+            {t.form.name}
           </label>
           <input
             id="cf-name"
             type="text"
             required
             autoComplete="name"
-            placeholder="Your name"
+            placeholder={t.form.name}
             value={form.name}
             onChange={update('name')}
             className={inputClass}
@@ -66,14 +68,14 @@ export default function ContactForm() {
         </div>
         <div>
           <label htmlFor="cf-email" className="sr-only">
-            Your email
+            {t.form.email}
           </label>
           <input
             id="cf-email"
             type="email"
             required
             autoComplete="email"
-            placeholder="Your email"
+            placeholder={t.form.email}
             value={form.email}
             onChange={update('email')}
             className={inputClass}
@@ -81,13 +83,13 @@ export default function ContactForm() {
         </div>
       </div>
       <label htmlFor="cf-message" className="sr-only">
-        Your message
+        {t.form.message}
       </label>
       <textarea
         id="cf-message"
         required
         rows={4}
-        placeholder="Tell me about your project…"
+        placeholder={t.form.message}
         value={form.message}
         onChange={update('message')}
         className={`${inputClass} resize-none`}
@@ -100,17 +102,17 @@ export default function ContactForm() {
         >
           {status === 'sent' ? (
             <>
-              <Check size={18} strokeWidth={2.25} /> Sent
+              <Check size={18} strokeWidth={2.25} /> {t.form.sent}
             </>
           ) : (
             <>
               <Send size={18} strokeWidth={2} />
-              {status === 'sending' ? 'Sending…' : 'Send message'}
+              {status === 'sending' ? t.form.sending : t.form.send}
             </>
           )}
         </button>
         {status === 'sent' && (
-          <span className="text-sm text-[#D7E2EA]/70">Thanks — I&apos;ll get back to you soon.</span>
+          <span className="text-sm text-[#D7E2EA]/70">{t.form.thanks}</span>
         )}
         {status === 'error' && (
           <span className="text-sm text-red-400">

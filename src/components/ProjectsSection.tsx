@@ -1,17 +1,23 @@
-import { useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Maximize2 } from 'lucide-react';
 import LiveProjectButton from './LiveProjectButton';
-import { PROJECTS, type Project } from '../data';
+import ProjectModal from './ProjectModal';
+import { PROJECTS, PROJECT_GROUPS, type Project } from '../data';
+import { useI18n } from '../i18n';
 
 function ProjectCard({
   project,
   index,
   total,
+  onOpen,
 }: {
   project: Project;
   index: number;
   total: number;
+  onOpen: (p: Project) => void;
 }) {
+  const { t } = useI18n();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -26,7 +32,6 @@ function ProjectCard({
         style={{ scale, top: `${index * 22}px` }}
         className="relative overflow-hidden rounded-[40px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8"
       >
-        {/* Top row */}
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex items-center gap-4 sm:gap-6">
             <span
@@ -51,7 +56,6 @@ function ProjectCard({
           <LiveProjectButton href={project.link} />
         </div>
 
-        {/* Tags */}
         <div className="mt-4 flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span
@@ -63,44 +67,87 @@ function ProjectCard({
           ))}
         </div>
 
-        {/* Cover */}
-        <div className="mt-5 overflow-hidden rounded-[28px] sm:rounded-[38px] md:rounded-[46px]">
-          <img
-            src={project.cover}
-            alt={project.name}
-            loading="lazy"
-            className="w-full object-cover"
-            style={{ height: 'clamp(240px, 42vh, 460px)' }}
-          />
-        </div>
+        {/* Cover — click to open the detail lightbox */}
+        <button
+          type="button"
+          onClick={() => onOpen(project)}
+          aria-label={`Open ${project.name}`}
+          className="group mt-5 block w-full overflow-hidden rounded-[28px] sm:rounded-[38px] md:rounded-[46px]"
+        >
+          <span className="relative block">
+            <img
+              src={project.cover}
+              alt={project.name}
+              loading="lazy"
+              className="w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              style={{ height: 'clamp(240px, 42vh, 460px)' }}
+            />
+            <span className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-black/40 group-hover:opacity-100">
+              <span className="flex items-center gap-2 rounded-full border-2 border-[#D7E2EA] bg-[#0C0C0C]/60 px-6 py-3 text-sm font-medium uppercase tracking-widest text-[#D7E2EA] backdrop-blur-sm">
+                <Maximize2 size={16} /> {t.projects.view}
+              </span>
+            </span>
+          </span>
+        </button>
       </motion.article>
     </div>
   );
 }
 
 export default function ProjectsSection() {
+  const { t } = useI18n();
+  const [filter, setFilter] = useState<(typeof PROJECT_GROUPS)[number]>('All');
+  const [selected, setSelected] = useState<Project | null>(null);
+
+  const filtered = useMemo(
+    () => (filter === 'All' ? PROJECTS : PROJECTS.filter((p) => p.group === filter)),
+    [filter],
+  );
+
   return (
     <section
       id="projects"
       className="relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-5 py-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 md:-mt-14 md:rounded-t-[60px] md:px-10"
     >
       <h2
-        className="hero-heading mb-12 text-center font-black uppercase leading-none tracking-tight sm:mb-16 md:mb-20"
+        className="hero-heading mb-8 text-center font-black uppercase leading-none tracking-tight sm:mb-10 md:mb-12"
         style={{ fontSize: 'clamp(3rem, 11vw, 150px)' }}
       >
-        Projects
+        {t.projects.title}
       </h2>
 
+      {/* Category filter */}
+      <div className="mb-14 flex flex-wrap items-center justify-center gap-2 sm:mb-20 sm:gap-3">
+        {PROJECT_GROUPS.map((g) => (
+          <button
+            key={g}
+            type="button"
+            onClick={() => setFilter(g)}
+            aria-pressed={filter === g}
+            className={`rounded-full border-2 px-5 py-2 text-xs font-medium uppercase tracking-widest transition-colors duration-200 sm:text-sm ${
+              filter === g
+                ? 'border-[#D7E2EA] bg-[#D7E2EA] text-[#0C0C0C]'
+                : 'border-[#D7E2EA]/30 text-[#D7E2EA]/70 hover:border-[#D7E2EA]/60 hover:text-[#D7E2EA]'
+            }`}
+          >
+            {t.projects.filters[g]}
+          </button>
+        ))}
+      </div>
+
       <div className="mx-auto max-w-5xl">
-        {PROJECTS.map((project, i) => (
+        {filtered.map((project, i) => (
           <ProjectCard
             key={project.num}
             project={project}
             index={i}
-            total={PROJECTS.length}
+            total={filtered.length}
+            onOpen={setSelected}
           />
         ))}
       </div>
+
+      <ProjectModal project={selected} onClose={() => setSelected(null)} />
     </section>
   );
 }

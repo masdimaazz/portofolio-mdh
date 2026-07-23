@@ -46,3 +46,21 @@ textarea:focus-visible {
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
+
+/* Infinite keyword ticker. */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ticker-track {
+  animation: ticker 28s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}

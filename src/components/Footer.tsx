@@ -1,15 +1,17 @@
-import { Mail, MessageCircle, Linkedin, MapPin, GraduationCap, Download } from 'lucide-react';
+import { MessageCircle, Linkedin, MapPin, GraduationCap, Download } from 'lucide-react';
 import FadeIn from './FadeIn';
 import ContactForm from './ContactForm';
+import CopyEmail from './CopyEmail';
 import { CONTACT, PROFILE, EDUCATION } from '../data';
+import { useI18n } from '../i18n';
 
 const LINKS = [
-  { icon: Mail, label: CONTACT.email, href: `mailto:${CONTACT.email}` },
   { icon: MessageCircle, label: 'WhatsApp', href: CONTACT.whatsapp },
   { icon: Linkedin, label: 'LinkedIn', href: CONTACT.linkedin },
 ];
 
 export default function Footer() {
+  const { t } = useI18n();
   return (
     <footer
       id="contact"
@@ -18,23 +20,23 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl">
         <FadeIn>
           <p className="text-sm font-light uppercase tracking-widest text-[#D7E2EA]/50">
-            Let&apos;s work together
+            {t.footer.work}
           </p>
           <h2
             className="hero-heading mt-4 font-black uppercase leading-[0.95] tracking-tight"
             style={{ fontSize: 'clamp(2.5rem, 9vw, 8rem)' }}
           >
-            Get in touch
+            {t.footer.getInTouch}
           </h2>
         </FadeIn>
 
         <div className="mt-10 grid gap-12 md:grid-cols-[1fr_1.1fr] md:gap-16">
           <FadeIn delay={0.1} className="flex flex-col gap-4">
             <p className="max-w-sm font-light leading-relaxed text-[#D7E2EA]/60">
-              Have a project in mind or just want to say hello? Drop a message or
-              reach me directly.
+              {t.footer.intro}
             </p>
             <div className="flex flex-wrap gap-3">
+              <CopyEmail />
               {LINKS.map(({ icon: Icon, label, href }) => (
                 <a
                   key={label}
@@ -53,7 +55,7 @@ export default function Footer() {
                 className="flex items-center gap-2.5 rounded-full bg-[#D7E2EA] px-5 py-2.5 text-sm font-semibold text-[#0C0C0C] transition-transform duration-200 hover:scale-105 sm:px-6 sm:py-3"
               >
                 <Download size={18} strokeWidth={2} />
-                Download CV
+                {t.footer.downloadCV}
               </a>
             </div>
           </FadeIn>

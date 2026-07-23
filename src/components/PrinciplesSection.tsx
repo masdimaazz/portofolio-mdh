@@ -1,20 +1,22 @@
 import FadeIn from './FadeIn';
 import { PRINCIPLES } from '../data';
+import { useI18n } from '../i18n';
 
 export default function PrinciplesSection() {
+  const { t } = useI18n();
   return (
     <section className="bg-[#0C0C0C] px-5 py-20 sm:px-8 sm:py-24 md:px-10 md:py-28">
       <h2
         className="hero-heading mb-12 text-center font-black uppercase leading-none tracking-tight sm:mb-16 md:mb-20"
         style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
       >
-        Principles
+        {t.principles.title}
       </h2>
 
       <div className="mx-auto grid max-w-6xl gap-4 sm:gap-6 md:grid-cols-2">
-        {PRINCIPLES.map((p, i) => (
+        {PRINCIPLES.map((_, i) => (
           <FadeIn
-            key={p.title}
+            key={i}
             delay={i * 0.1}
             className="flex flex-col gap-4 rounded-[32px] border-2 border-[#D7E2EA]/30 p-7 sm:rounded-[40px] sm:p-9 md:p-10"
           >
@@ -28,13 +30,13 @@ export default function PrinciplesSection() {
               className="font-medium uppercase text-[#D7E2EA]"
               style={{ fontSize: 'clamp(1.1rem, 2vw, 1.6rem)' }}
             >
-              {p.title}
+              {t.principles.items[i].title}
             </h3>
             <p
               className="font-light leading-relaxed text-[#D7E2EA]/60"
               style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.15rem)' }}
             >
-              {p.body}
+              {t.principles.items[i].body}
             </p>
           </FadeIn>
         ))}

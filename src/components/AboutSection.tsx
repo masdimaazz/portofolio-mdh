@@ -2,11 +2,11 @@ import { Download } from 'lucide-react';
 import FadeIn from './FadeIn';
 import AnimatedText from './AnimatedText';
 import ContactButton from './ContactButton';
-import { PROFILE, CONTACT } from '../data';
-
-const ABOUT_TEXT = PROFILE.about;
+import { CONTACT } from '../data';
+import { useI18n } from '../i18n';
 
 export default function AboutSection() {
+  const { t } = useI18n();
   return (
     <section
       id="about"
@@ -60,17 +60,19 @@ export default function AboutSection() {
             className="hero-heading text-center font-black uppercase leading-none tracking-tight"
             style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
           >
-            About me
+            {t.about.title}
           </FadeIn>
 
           <div className="flex flex-col items-center gap-6 sm:gap-8">
             <AnimatedText
-              text={ABOUT_TEXT}
+              key={t.about.p1}
+              text={t.about.p1}
               className="max-w-[560px] text-center font-medium leading-relaxed text-[#D7E2EA]"
               style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}
             />
             <AnimatedText
-              text={PROFILE.about2}
+              key={t.about.p2}
+              text={t.about.p2}
               className="max-w-[560px] text-center font-light leading-relaxed text-[#D7E2EA]/80"
               style={{ fontSize: 'clamp(0.9rem, 1.7vw, 1.15rem)' }}
             />
@@ -85,7 +87,7 @@ export default function AboutSection() {
             className="inline-flex items-center gap-2.5 rounded-full border-2 border-[#D7E2EA]/40 px-8 py-3 text-xs font-medium uppercase tracking-widest text-[#D7E2EA] transition-colors duration-200 hover:bg-[#D7E2EA]/10 sm:px-10 sm:py-3.5 sm:text-sm md:px-11 md:py-4 md:text-base"
           >
             <Download size={18} strokeWidth={1.75} />
-            Download CV
+            {t.about.cvBtn}
           </a>
         </div>
       </div>

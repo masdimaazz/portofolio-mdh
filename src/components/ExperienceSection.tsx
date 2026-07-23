@@ -1,7 +1,9 @@
 import FadeIn from './FadeIn';
 import { EXPERIENCE } from '../data';
+import { useI18n } from '../i18n';
 
 export default function ExperienceSection() {
+  const { t } = useI18n();
   return (
     <section
       id="experience"
@@ -11,7 +13,7 @@ export default function ExperienceSection() {
         className="mb-12 text-center font-black uppercase text-[#0C0C0C] sm:mb-16 md:mb-20"
         style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
       >
-        Experience
+        {t.experience.title}
       </h2>
 
       <div className="mx-auto max-w-5xl">
@@ -32,7 +34,7 @@ export default function ExperienceSection() {
                 </span>
                 {exp.current && (
                   <span className="rounded-full bg-[#0C0C0C] px-2.5 py-0.5 text-[0.65rem] font-medium uppercase tracking-wider text-white">
-                    Now
+                    {t.experience.now}
                   </span>
                 )}
               </div>

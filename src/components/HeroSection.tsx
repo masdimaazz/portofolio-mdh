@@ -2,8 +2,10 @@ import FadeIn from './FadeIn';
 import Magnet from './Magnet';
 import ContactButton from './ContactButton';
 import { NAV, PROFILE } from '../data';
+import { useI18n } from '../i18n';
 
 export default function HeroSection() {
+  const { t } = useI18n();
   return (
     <section
       className="relative flex h-screen flex-col"
@@ -18,14 +20,11 @@ export default function HeroSection() {
       >
         {NAV.map((link) => (
           <a
-            key={link.label}
+            key={link.key}
             href={link.href}
-            {...(link.href.startsWith('http')
-              ? { target: '_blank', rel: 'noopener noreferrer' }
-              : {})}
             className="text-sm font-medium uppercase tracking-wider text-[#D7E2EA] transition-opacity duration-200 hover:opacity-70 md:text-lg lg:text-[1.4rem]"
           >
-            {link.label}
+            {t.nav[link.key]}
           </a>
         ))}
       </FadeIn>
@@ -44,18 +43,31 @@ export default function HeroSection() {
 
       {/* Bottom bar */}
       <div className="mt-auto flex items-end justify-between px-6 pb-7 sm:pb-8 md:px-10 md:pb-10">
-        <FadeIn
-          as="p"
-          delay={0.35}
-          y={20}
-          className="max-w-[160px] font-light uppercase leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[220px] md:max-w-[260px]"
-          style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}
-        >
-          {PROFILE.tagline}
-        </FadeIn>
+        <div className="flex flex-col gap-3">
+          <FadeIn delay={0.3} y={20}>
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#D7E2EA]/25 bg-[#D7E2EA]/[0.06] px-3 py-1.5 text-[0.7rem] font-medium uppercase tracking-widest text-[#D7E2EA] sm:text-xs">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+              </span>
+              {t.hero.available}
+            </span>
+          </FadeIn>
+          <FadeIn
+            as="p"
+            delay={0.35}
+            y={20}
+            className="max-w-[160px] font-light uppercase leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[220px] md:max-w-[260px]"
+            style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}
+          >
+            {t.hero.tagline}
+          </FadeIn>
+        </div>
 
         <FadeIn delay={0.5} y={20}>
-          <ContactButton />
+          <Magnet padding={70} strength={4}>
+            <ContactButton />
+          </Magnet>
         </FadeIn>
       </div>
 
