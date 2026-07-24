@@ -2,16 +2,16 @@ import { MessageCircle, Linkedin, MapPin, GraduationCap, Download } from 'lucide
 import FadeIn from './FadeIn';
 import ContactForm from './ContactForm';
 import CopyEmail from './CopyEmail';
-import { CONTACT, PROFILE, EDUCATION } from '../data';
 import { useI18n } from '../i18n';
-
-const LINKS = [
-  { icon: MessageCircle, label: 'WhatsApp', href: CONTACT.whatsapp },
-  { icon: Linkedin, label: 'LinkedIn', href: CONTACT.linkedin },
-];
+import { useContent } from '../content';
 
 export default function Footer() {
   const { t } = useI18n();
+  const { contact, education } = useContent();
+  const LINKS = [
+    { icon: MessageCircle, label: 'WhatsApp', href: contact.whatsapp },
+    { icon: Linkedin, label: 'LinkedIn', href: contact.linkedin },
+  ];
   return (
     <footer
       id="contact"
@@ -50,7 +50,7 @@ export default function Footer() {
                 </a>
               ))}
               <a
-                href={CONTACT.cv}
+                href={contact.cv}
                 download
                 className="flex items-center gap-2.5 rounded-full bg-[#D7E2EA] px-5 py-2.5 text-sm font-semibold text-[#0C0C0C] transition-transform duration-200 hover:scale-105 sm:px-6 sm:py-3"
               >
@@ -71,15 +71,15 @@ export default function Footer() {
         >
           <div className="flex items-start gap-3">
             <MapPin size={18} strokeWidth={1.75} className="mt-0.5 shrink-0" />
-            <span className="text-sm sm:text-base">{CONTACT.location}</span>
+            <span className="text-sm sm:text-base">{contact.location}</span>
           </div>
           <div className="flex items-start gap-3">
             <GraduationCap size={18} strokeWidth={1.75} className="mt-0.5 shrink-0" />
             <span className="text-sm sm:text-base">
-              {EDUCATION.degree}
+              {education.degree}
               <br />
               <span className="text-[#D7E2EA]/40">
-                {EDUCATION.school} · GPA {EDUCATION.gpa} · {EDUCATION.period}
+                {education.school} · GPA {education.gpa} · {education.period}
               </span>
             </span>
           </div>
@@ -88,7 +88,7 @@ export default function Footer() {
         <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-[#D7E2EA]/15 pt-6 text-xs uppercase tracking-widest text-[#D7E2EA]/40 sm:flex-row">
           <span className="flex items-center gap-3">
             <img src="/logo-mdh.png" alt="" className="h-6 w-auto opacity-80" />
-            © {new Date().getFullYear()} {PROFILE.name}
+            © {new Date().getFullYear()} {contact.name}
           </span>
           <span>Graphic · 3D · Motion · UI/UX</span>
         </div>

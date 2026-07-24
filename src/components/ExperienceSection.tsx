@@ -1,9 +1,10 @@
 import FadeIn from './FadeIn';
-import { EXPERIENCE } from '../data';
 import { useI18n } from '../i18n';
+import { useContent } from '../content';
 
 export default function ExperienceSection() {
   const { t } = useI18n();
+  const { experience: EXPERIENCE } = useContent();
   return (
     <section
       id="experience"

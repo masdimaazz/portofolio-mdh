@@ -4,9 +4,11 @@ import ContactButton from './ContactButton';
 import Hero3D from './Hero3D';
 import { NAV, PROFILE } from '../data';
 import { useI18n } from '../i18n';
+import { useContent } from '../content';
 
 export default function HeroSection() {
   const { t } = useI18n();
+  const { contact } = useContent();
   return (
     <section
       className="relative flex h-screen flex-col"
@@ -84,8 +86,8 @@ export default function HeroSection() {
             inactiveTransition="transform 0.6s ease-in-out"
           >
             <img
-              src="/portrait.png"
-              alt={`${PROFILE.name}, ${PROFILE.role}`}
+              src={contact.portrait}
+              alt={`${contact.name}, ${PROFILE.role}`}
               className="h-auto w-full select-none"
               draggable={false}
             />

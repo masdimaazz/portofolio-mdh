@@ -54,7 +54,7 @@ export type Project = {
   name: string;
   company: string;
   category: string;
-  group: 'Branding' | 'Social' | '3D' | 'Print';
+  group: string;
   year: string;
   tags: string[];
   cover: string;

@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import FadeIn from './FadeIn';
-import { REALIZING, CONTACT } from '../data';
+import { REALIZING } from '../data';
 import { useI18n } from '../i18n';
+import { useContent } from '../content';
 
 export default function RealizingSection() {
   const { t } = useI18n();
+  const { contact } = useContent();
   const [open, setOpen] = useState<number | null>(null);
 
   useEffect(() => {
@@ -73,7 +75,7 @@ export default function RealizingSection() {
 
         <FadeIn delay={0.2} className="mt-12 flex justify-center">
           <a
-            href={CONTACT.linkedin}
+            href={contact.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full border-2 border-[#D7E2EA]/40 px-8 py-3 text-sm font-medium uppercase tracking-widest text-[#D7E2EA] transition-colors duration-200 hover:bg-[#D7E2EA]/10"

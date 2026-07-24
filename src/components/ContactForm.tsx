@@ -1,13 +1,14 @@
 import { useState, type FormEvent } from 'react';
 import { Send, Check } from 'lucide-react';
-import { CONTACT } from '../data';
 import { getSupabase } from '../lib/supabase';
 import { useI18n } from '../i18n';
+import { useContent } from '../content';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 export default function ContactForm() {
   const { t } = useI18n();
+  const { contact } = useContent();
   const [status, setStatus] = useState<Status>('idle');
   const [form, setForm] = useState({ name: '', email: '', message: '' });
 
@@ -16,7 +17,7 @@ export default function ContactForm() {
 
   const openMailDraft = () => {
     const body = `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`;
-    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
+    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(
       `Project inquiry from ${form.name || 'website'}`,
     )}&body=${encodeURIComponent(body)}`;
   };
@@ -116,7 +117,7 @@ export default function ContactForm() {
         )}
         {status === 'error' && (
           <span className="text-sm text-red-400">
-            Something went wrong. Email me at {CONTACT.email}.
+            Something went wrong. Email me at {contact.email}.
           </span>
         )}
       </div>

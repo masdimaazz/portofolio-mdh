@@ -1,5 +1,5 @@
-import { CONTACT } from '../data';
 import { useI18n } from '../i18n';
+import { useContent } from '../content';
 
 type ContactButtonProps = {
   className?: string;
@@ -7,9 +7,10 @@ type ContactButtonProps = {
 
 export default function ContactButton({ className = '' }: ContactButtonProps) {
   const { t } = useI18n();
+  const { contact } = useContent();
   return (
     <a
-      href={CONTACT.whatsapp}
+      href={contact.whatsapp}
       target="_blank"
       rel="noopener noreferrer"
       className={`inline-block rounded-full px-8 py-3 text-xs font-medium uppercase tracking-widest text-white transition-transform duration-200 hover:scale-105 sm:px-10 sm:py-3.5 sm:text-sm md:px-12 md:py-4 md:text-base ${className}`}

@@ -119,9 +119,11 @@ export default function ProjectModal({ project, onClose }: Props) {
                   </a>
                 </div>
 
-                <p className="max-w-2xl font-light leading-relaxed text-[#D7E2EA]/75">
-                  {project.description}
-                </p>
+                {project.description && (
+                  <p className="max-w-2xl font-light leading-relaxed text-[#D7E2EA]/75">
+                    {project.description}
+                  </p>
+                )}
 
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (

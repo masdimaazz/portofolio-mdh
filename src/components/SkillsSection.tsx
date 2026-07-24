@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import FadeIn from './FadeIn';
-import { SKILLS, SOFTWARE } from '../data';
+import { SOFTWARE } from '../data';
 import { useI18n } from '../i18n';
+import { useContent } from '../content';
 
 export default function SkillsSection() {
   const { t } = useI18n();
+  const { skills: SKILLS } = useContent();
   return (
     <section
       id="skills"

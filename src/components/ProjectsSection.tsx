@@ -3,8 +3,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Maximize2 } from 'lucide-react';
 import LiveProjectButton from './LiveProjectButton';
 import ProjectModal from './ProjectModal';
-import { PROJECTS, PROJECT_GROUPS, type Project } from '../data';
+import { type Project } from '../data';
 import { useI18n } from '../i18n';
+import { useContent } from '../content';
 
 function ProjectCard({
   project,
@@ -96,12 +97,22 @@ function ProjectCard({
 
 export default function ProjectsSection() {
   const { t } = useI18n();
-  const [filter, setFilter] = useState<(typeof PROJECT_GROUPS)[number]>('All');
+  const { projects } = useContent();
+  const [filter, setFilter] = useState('All');
   const [selected, setSelected] = useState<Project | null>(null);
 
+  // Filter tabs derive from whichever categories the (live) projects use.
+  const groups = useMemo(() => {
+    const seen: string[] = [];
+    projects.forEach((p) => {
+      if (p.group && !seen.includes(p.group)) seen.push(p.group);
+    });
+    return ['All', ...seen];
+  }, [projects]);
+
   const filtered = useMemo(
-    () => (filter === 'All' ? PROJECTS : PROJECTS.filter((p) => p.group === filter)),
-    [filter],
+    () => (filter === 'All' ? projects : projects.filter((p) => p.group === filter)),
+    [filter, projects],
   );
 
   return (
@@ -118,7 +129,7 @@ export default function ProjectsSection() {
 
       {/* Category filter */}
       <div className="mb-14 flex flex-wrap items-center justify-center gap-2 sm:mb-20 sm:gap-3">
-        {PROJECT_GROUPS.map((g) => (
+        {groups.map((g) => (
           <button
             key={g}
             type="button"
@@ -130,7 +141,7 @@ export default function ProjectsSection() {
                 : 'border-[#D7E2EA]/30 text-[#D7E2EA]/70 hover:border-[#D7E2EA]/60 hover:text-[#D7E2EA]'
             }`}
           >
-            {t.projects.filters[g]}
+            {t.projects.filters[g] ?? g}
           </button>
         ))}
       </div>

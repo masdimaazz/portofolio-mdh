@@ -82,7 +82,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     skills: { title: 'Skills', tools: 'Tools' },
     projects: {
       title: 'Projects',
-      filters: { All: 'All', Branding: 'Branding', Social: 'Social', '3D': '3D', Print: 'Print' },
+      filters: { All: 'All', Branding: 'Branding', Social: 'Social', '3D': '3D', Print: 'Print', Motion: 'Motion', 'UI/UX': 'UI/UX' },
       view: 'View project',
       live: 'Live Project',
     },
@@ -177,7 +177,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     skills: { title: 'Keahlian', tools: 'Perangkat' },
     projects: {
       title: 'Proyek',
-      filters: { All: 'Semua', Branding: 'Branding', Social: 'Sosial', '3D': '3D', Print: 'Cetak' },
+      filters: { All: 'Semua', Branding: 'Branding', Social: 'Sosial', '3D': '3D', Print: 'Cetak', Motion: 'Motion', 'UI/UX': 'UI/UX' },
       view: 'Lihat proyek',
       live: 'Live Project',
     },
