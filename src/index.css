@@ -47,6 +47,25 @@ textarea:focus-visible {
   color: transparent;
 }
 
+/* Floating hero 3D objects. */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(4deg);
+  }
+}
+.float-obj {
+  animation: float-y 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .float-obj {
+    animation: none;
+  }
+}
+
 /* Infinite keyword ticker. */
 @keyframes ticker {
   from {

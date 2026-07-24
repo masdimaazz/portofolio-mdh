@@ -1,6 +1,7 @@
 import FadeIn from './FadeIn';
 import Magnet from './Magnet';
 import ContactButton from './ContactButton';
+import Hero3D from './Hero3D';
 import { NAV, PROFILE } from '../data';
 import { useI18n } from '../i18n';
 
@@ -11,6 +12,7 @@ export default function HeroSection() {
       className="relative flex h-screen flex-col"
       style={{ overflowX: 'clip' }}
     >
+      <Hero3D />
       {/* Navbar */}
       <FadeIn
         as="nav"
